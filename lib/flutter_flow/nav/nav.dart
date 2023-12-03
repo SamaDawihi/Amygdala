@@ -140,11 +140,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const EditAccountWidget(),
         ),
         FFRoute(
-          name: 'HistoryHover',
-          path: '/historyHover',
-          builder: (context, params) => const HistoryHoverWidget(),
-        ),
-        FFRoute(
           name: 'HistoryRecord',
           path: '/historyRecord',
           builder: (context, params) => const HistoryRecordWidget(),

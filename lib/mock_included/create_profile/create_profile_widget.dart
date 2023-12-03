@@ -201,20 +201,20 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    fontSize: 60.0,
+                                    fontSize: 50.0,
                                   ),
                               colors: const [Color(0xFF1D1753), Color(0xFF4036A4)],
                               gradientType: GradientType.radial,
                               radius: 1.0,
                             ),
                             GradientText(
-                              'By giving us more information about the person whom emotions will be translated, we will optimize the Generated Art to match his/her real looks',
+                              'By giving us more information about the person whom emotions will be \ntranslated, we will optimize the Generated Art to match his/her real looks',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    fontSize: 18.0,
+                                    fontSize: 20.0,
                                     fontWeight: FontWeight.w300,
                                   ),
                               colors: const [Color(0xFF1D1753), Color(0xFF4036A4)],

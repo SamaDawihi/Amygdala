@@ -1,3 +1,4 @@
+import '/components/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'edit_account_widget.dart' show EditAccountWidget;
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ class EditAccountModel extends FlutterFlowModel<EditAccountWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Model for sideNav component.
+  late SideNavModel sideNavModel;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -26,11 +29,14 @@ class EditAccountModel extends FlutterFlowModel<EditAccountWidget> {
   /// Initialization and disposal methods.
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    sideNavModel = createModel(context, () => SideNavModel());
+  }
 
   @override
   void dispose() {
     unfocusNode.dispose();
+    sideNavModel.dispose();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 

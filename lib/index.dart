@@ -17,7 +17,5 @@ export '/mock_included/edit_profile/edit_profile_widget.dart'
     show EditProfileWidget;
 export '/mock_included/edit_account/edit_account_widget.dart'
     show EditAccountWidget;
-export '/mock_included/history_hover/history_hover_widget.dart'
-    show HistoryHoverWidget;
 export '/mock_included/history_record/history_record_widget.dart'
     show HistoryRecordWidget;

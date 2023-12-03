@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -6,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'create_account_model.dart';
 export 'create_account_model.dart';
@@ -66,17 +66,17 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
     super.initState();
     _model = createModel(context, () => CreateAccountModel());
 
-    _model.emailAddressController1 ??= TextEditingController();
-    _model.emailAddressFocusNode1 ??= FocusNode();
+    _model.nameController ??= TextEditingController();
+    _model.nameFocusNode ??= FocusNode();
 
-    _model.emailAddressController2 ??= TextEditingController();
-    _model.emailAddressFocusNode2 ??= FocusNode();
+    _model.emailAddressController ??= TextEditingController();
+    _model.emailAddressFocusNode ??= FocusNode();
 
-    _model.passwordController1 ??= TextEditingController();
-    _model.passwordFocusNode1 ??= FocusNode();
+    _model.passwordController ??= TextEditingController();
+    _model.passwordFocusNode ??= FocusNode();
 
-    _model.passwordController2 ??= TextEditingController();
-    _model.passwordFocusNode2 ??= FocusNode();
+    _model.resetPasswordController ??= TextEditingController();
+    _model.resetPasswordFocusNode ??= FocusNode();
   }
 
   @override
@@ -216,12 +216,12 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                     child: SizedBox(
                                       width: double.infinity,
                                       child: TextFormField(
-                                        controller:
-                                            _model.emailAddressController1,
-                                        focusNode:
-                                            _model.emailAddressFocusNode1,
+                                        controller: _model.nameController,
+                                        focusNode: _model.nameFocusNode,
                                         autofocus: true,
                                         autofillHints: const [AutofillHints.email],
+                                        textCapitalization:
+                                            TextCapitalization.words,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Name',
@@ -276,10 +276,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge,
-                                        keyboardType:
-                                            TextInputType.emailAddress,
+                                        keyboardType: TextInputType.name,
                                         validator: _model
-                                            .emailAddressController1Validator
+                                            .nameControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -291,9 +290,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       width: double.infinity,
                                       child: TextFormField(
                                         controller:
-                                            _model.emailAddressController2,
-                                        focusNode:
-                                            _model.emailAddressFocusNode2,
+                                            _model.emailAddressController,
+                                        focusNode: _model.emailAddressFocusNode,
                                         autofocus: true,
                                         autofillHints: const [AutofillHints.email],
                                         obscureText: false,
@@ -353,7 +351,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         validator: _model
-                                            .emailAddressController2Validator
+                                            .emailAddressControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -364,12 +362,11 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                     child: SizedBox(
                                       width: double.infinity,
                                       child: TextFormField(
-                                        controller: _model.passwordController1,
-                                        focusNode: _model.passwordFocusNode1,
+                                        controller: _model.passwordController,
+                                        focusNode: _model.passwordFocusNode,
                                         autofocus: true,
                                         autofillHints: const [AutofillHints.password],
-                                        obscureText:
-                                            !_model.passwordVisibility1,
+                                        obscureText: !_model.passwordVisibility,
                                         decoration: InputDecoration(
                                           labelText: 'Password',
                                           labelStyle:
@@ -422,13 +419,13 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                                   .primaryBackground,
                                           suffixIcon: InkWell(
                                             onTap: () => setState(
-                                              () => _model.passwordVisibility1 =
-                                                  !_model.passwordVisibility1,
+                                              () => _model.passwordVisibility =
+                                                  !_model.passwordVisibility,
                                             ),
                                             focusNode:
                                                 FocusNode(skipTraversal: true),
                                             child: Icon(
-                                              _model.passwordVisibility1
+                                              _model.passwordVisibility
                                                   ? Icons.visibility_outlined
                                                   : Icons
                                                       .visibility_off_outlined,
@@ -442,7 +439,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge,
                                         validator: _model
-                                            .passwordController1Validator
+                                            .passwordControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -453,12 +450,14 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                     child: SizedBox(
                                       width: double.infinity,
                                       child: TextFormField(
-                                        controller: _model.passwordController2,
-                                        focusNode: _model.passwordFocusNode2,
+                                        controller:
+                                            _model.resetPasswordController,
+                                        focusNode:
+                                            _model.resetPasswordFocusNode,
                                         autofocus: true,
                                         autofillHints: const [AutofillHints.password],
                                         obscureText:
-                                            !_model.passwordVisibility2,
+                                            !_model.resetPasswordVisibility,
                                         decoration: InputDecoration(
                                           labelText: 'Repeat Password',
                                           labelStyle:
@@ -511,13 +510,15 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                                   .primaryBackground,
                                           suffixIcon: InkWell(
                                             onTap: () => setState(
-                                              () => _model.passwordVisibility2 =
-                                                  !_model.passwordVisibility2,
+                                              () => _model
+                                                      .resetPasswordVisibility =
+                                                  !_model
+                                                      .resetPasswordVisibility,
                                             ),
                                             focusNode:
                                                 FocusNode(skipTraversal: true),
                                             child: Icon(
-                                              _model.passwordVisibility2
+                                              _model.resetPasswordVisibility
                                                   ? Icons.visibility_outlined
                                                   : Icons
                                                       .visibility_off_outlined,
@@ -531,7 +532,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge,
                                         validator: _model
-                                            .passwordController2Validator
+                                            .resetPasswordControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -542,16 +543,39 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         GoRouter.of(context).prepareAuthEvent();
+                                        if (_model.passwordController.text !=
+                                            _model
+                                                .resetPasswordController.text) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                'Passwords don\'t match!',
+                                              ),
+                                            ),
+                                          );
+                                          return;
+                                        }
 
-                                        final user =
-                                            await authManager.signInWithEmail(
+                                        final user = await authManager
+                                            .createAccountWithEmail(
                                           context,
-                                          _model.emailAddressController1.text,
-                                          _model.passwordController1.text,
+                                          _model.emailAddressController.text,
+                                          _model.passwordController.text,
                                         );
                                         if (user == null) {
                                           return;
                                         }
+
+                                        await UsersRecord.collection
+                                            .doc(user.uid)
+                                            .update(createUsersRecordData(
+                                              email: _model
+                                                  .emailAddressController.text,
+                                              displayName:
+                                                  _model.nameController.text,
+                                              createdTime: getCurrentTimestamp,
+                                            ));
 
                                         context.goNamedAuth(
                                             'Home', context.mounted);
@@ -582,67 +606,6 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 24.0),
-                                    child: Text(
-                                      'Or sign up with',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelLarge,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        GoRouter.of(context).prepareAuthEvent();
-                                        final user = await authManager
-                                            .signInWithGoogle(context);
-                                        if (user == null) {
-                                          return;
-                                        }
-
-                                        context.goNamedAuth(
-                                            'Home', context.mounted);
-                                      },
-                                      text: 'Continue with Google',
-                                      icon: const FaIcon(
-                                        FontAwesomeIcons.google,
-                                        size: 20.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        width: double.infinity,
-                                        height: 44.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
-                                        elevation: 0.0,
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        hoverColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                    ),
-                                  ),
 
                                   // You will have to add an action on this rich text to go to your login page.
                                   Padding(
@@ -654,11 +617,11 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       text: TextSpan(
                                         children: [
                                           const TextSpan(
-                                            text: 'Don\'t have an account?  ',
+                                            text: 'Already have an account?  ',
                                             style: TextStyle(),
                                           ),
                                           TextSpan(
-                                            text: 'Sign Up here',
+                                            text: 'Sign In here',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(

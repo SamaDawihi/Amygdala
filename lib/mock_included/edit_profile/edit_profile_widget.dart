@@ -232,6 +232,41 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                             ),
                           ],
                         ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 20.0, 12.0),
+                          child: FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: '',
+                            icon: const Icon(
+                              Icons.home,
+                              size: 20.0,
+                            ),
+                            options: FFButtonOptions(
+                              width: 50.0,
+                              height: 48.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: const Color(0xFF4036A4),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                              elevation: 4.0,
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     Row(
@@ -428,48 +463,13 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   onPressed: () {
                                     print('Button pressed ...');
                                   },
-                                  text: '',
+                                  text: 'Remove Account',
                                   icon: const Icon(
-                                    Icons.home,
-                                    size: 20.0,
+                                    Icons.remove_circle_outline_sharp,
+                                    size: 15.0,
                                   ),
                                   options: FFButtonOptions(
-                                    width: 50.0,
-                                    height: 48.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: const Color(0xFF4036A4),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: Colors.white,
-                                        ),
-                                    elevation: 4.0,
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 24.0, 0.0, 12.0),
-                                child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
-                                  },
-                                  text: '',
-                                  icon: const Icon(
-                                    Icons.highlight_off,
-                                    size: 30.0,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: 50.0,
+                                    width: 200.0,
                                     height: 48.0,
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
