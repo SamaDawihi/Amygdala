@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1065945532417",
+    "project_id": "amygdala-dev",
+    "storage_bucket": "amygdala-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065945532417:android:f185b3725e58307f72d800",
+        "android_client_info": {
+          "package_name": "com.amygdala.amygdala"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeMS43gA8UZVYyLgRSR-B5mOcPlnJ-9jc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
