@@ -75,7 +75,7 @@ class _SessionPicWidgetState extends State<SessionPicWidget> {
                     end: const AlignmentDirectional(-0.87, 1.0),
                   ),
                 ),
-                alignment: const AlignmentDirectional(0.00, -1.00),
+                alignment: const AlignmentDirectional(0.0, -1.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -125,7 +125,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                     end: const AlignmentDirectional(-0.87, 1.0),
                   ),
                 ),
-                alignment: const AlignmentDirectional(0.00, -1.00),
+                alignment: const AlignmentDirectional(0.0, -1.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -153,7 +153,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16.0),
                           ),
-                          alignment: const AlignmentDirectional(0.00, 0.00),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Text(
                             'Amygdala',
                             style: FlutterFlowTheme.of(context)
@@ -166,8 +166,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 16.0, 16.0, 16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Container(
                           width: double.infinity,
                           constraints: const BoxConstraints(
@@ -186,10 +185,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           child: Align(
-                            alignment: const AlignmentDirectional(0.00, 0.00),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  32.0, 32.0, 32.0, 32.0),
+                              padding: const EdgeInsets.all(32.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.center,

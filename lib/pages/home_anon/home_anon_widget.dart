@@ -340,7 +340,7 @@ class _HomeAnonWidgetState extends State<HomeAnonWidget> {
                         ),
                         if (FFAppState().isLightMode)
                           Align(
-                            alignment: const AlignmentDirectional(0.00, -1.00),
+                            alignment: const AlignmentDirectional(0.0, -1.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 8.0, 0.0, 16.0),
@@ -360,8 +360,7 @@ class _HomeAnonWidgetState extends State<HomeAnonWidget> {
                                 child: Visibility(
                                   visible: FFAppState().isLightMode,
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        4.0, 4.0, 4.0, 4.0),
+                                    padding: const EdgeInsets.all(4.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -581,8 +580,7 @@ class _HomeAnonWidgetState extends State<HomeAnonWidget> {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      2.0, 2.0, 2.0, 2.0),
+                                  padding: const EdgeInsets.all(2.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: CachedNetworkImage(

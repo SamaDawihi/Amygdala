@@ -111,8 +111,7 @@ class _FormCompWidgetState extends State<FormCompWidget> {
                       ),
                       filled: true,
                       fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                          24.0, 24.0, 24.0, 24.0),
+                      contentPadding: const EdgeInsets.all(24.0),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Plus Jakarta Sans',
@@ -407,8 +406,7 @@ class _FormCompWidgetState extends State<FormCompWidget> {
                       ),
                       filled: true,
                       fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                          24.0, 24.0, 24.0, 24.0),
+                      contentPadding: const EdgeInsets.all(24.0),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Plus Jakarta Sans',

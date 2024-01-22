@@ -101,7 +101,7 @@ class _HistoryWidgetState extends State<HistoryWidget> {
               ),
               Expanded(
                 child: Align(
-                  alignment: const AlignmentDirectional(0.00, -1.00),
+                  alignment: const AlignmentDirectional(0.0, -1.0),
                   child: Container(
                     width: double.infinity,
                     constraints: const BoxConstraints(

@@ -258,66 +258,90 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (responsiveVisibility(
-                              context: context,
-                              phone: false,
-                              tablet: false,
-                            ))
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 12.0, 0.0, 12.0),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 2.0, 0.0, 2.0),
-                                        child: FlutterFlowIconButton(
-                                          borderColor: Colors.transparent,
-                                          borderRadius: 30.0,
-                                          borderWidth: 1.0,
-                                          buttonSize: 40.0,
-                                          icon: Icon(
-                                            Icons.home_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 22.0,
-                                          ),
-                                          onPressed: () {
-                                            print('IconButton pressed ...');
-                                          },
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 8.0, 0.0),
-                                        child: Icon(
-                                          Icons.chevron_right_rounded,
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 12.0, 0.0, 12.0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 2.0, 0.0, 2.0),
+                                      child: FlutterFlowIconButton(
+                                        borderColor: Colors.transparent,
+                                        borderRadius: 30.0,
+                                        borderWidth: 1.0,
+                                        buttonSize: 40.0,
+                                        icon: Icon(
+                                          Icons.home_rounded,
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryText,
-                                          size: 16.0,
+                                          size: 22.0,
+                                        ),
+                                        onPressed: () {
+                                          print('IconButton pressed ...');
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 8.0, 0.0),
+                                      child: Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 16.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 8.0, 16.0, 8.0),
+                                      child: Container(
+                                        height: 32.0,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0x734036A4),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  12.0, 4.0, 12.0, 4.0),
+                                          child: Text(
+                                            'Session Details',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                ),
+                                          ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 8.0, 16.0, 8.0),
-                                        child: Container(
-                                          height: 32.0,
-                                          decoration: BoxDecoration(
-                                            color: const Color(0x734036A4),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          770.0, 0.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          const Icon(
+                                            Icons.circle_sharp,
+                                            color: Color(0xFF1FA595),
+                                            size: 24.0,
                                           ),
-                                          alignment:
-                                              const AlignmentDirectional(0.00, 0.00),
-                                          child: Padding(
+                                          Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
-                                                    12.0, 4.0, 12.0, 4.0),
+                                                    4.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Session Details',
+                                              'BCI Connected',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -325,49 +349,18 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                     fontFamily: 'Readex Pro',
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primary,
+                                                        .secondaryText,
+                                                    fontWeight: FontWeight.w800,
                                                   ),
                                             ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            770.0, 0.0, 0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            const Icon(
-                                              Icons.circle_sharp,
-                                              color: Color(0xFF1FA595),
-                                              size: 24.0,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(4.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                'BCI Connected',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                    ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
+                            ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 0.0, 0.0),
@@ -389,10 +382,9 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                         ),
                       ),
                       Align(
-                        alignment: const AlignmentDirectional(0.00, -1.00),
+                        alignment: const AlignmentDirectional(0.0, -1.0),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Container(
                             width: double.infinity,
                             constraints: const BoxConstraints(
@@ -646,7 +638,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                 ),
                                                                               ),
                                                                               Align(
-                                                                                alignment: const AlignmentDirectional(0.00, 0.00),
+                                                                                alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                 child: Stack(
                                                                                   alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                   children: [
@@ -768,7 +760,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                 ),
                                                                               ),
                                                                               Align(
-                                                                                alignment: const AlignmentDirectional(0.00, 0.00),
+                                                                                alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                 child: Stack(
                                                                                   alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                   children: [
@@ -830,7 +822,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                   ),
                                                                                 ),
                                                                                 Align(
-                                                                                  alignment: const AlignmentDirectional(0.00, 0.00),
+                                                                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                   child: Stack(
                                                                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                     children: [
@@ -901,7 +893,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                 ),
                                                                               ),
                                                                               Align(
-                                                                                alignment: const AlignmentDirectional(0.00, 0.00),
+                                                                                alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                 child: Stack(
                                                                                   alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                   children: [
@@ -1024,11 +1016,8 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                           children: [
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          12.0,
-                                                                          12.0,
-                                                                          12.0,
+                                                                  const EdgeInsets
+                                                                      .all(
                                                                           12.0),
                                                               child: Row(
                                                                 mainAxisSize:
@@ -1056,11 +1045,9 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                     ),
                                                                     child:
                                                                         Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                          2.0,
-                                                                          2.0,
-                                                                          2.0,
-                                                                          2.0),
+                                                                      padding:
+                                                                          const EdgeInsets.all(
+                                                                              2.0),
                                                                       child:
                                                                           ClipRRect(
                                                                         borderRadius:
@@ -1336,13 +1323,8 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                             .start,
                                                     children: [
                                                       Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    12.0,
-                                                                    12.0,
-                                                                    12.0),
+                                                        padding: const EdgeInsets.all(
+                                                            12.0),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -1427,7 +1409,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                             ),
                                             Align(
                                               alignment: const AlignmentDirectional(
-                                                  0.00, 0.00),
+                                                  0.0, 0.0),
                                               child: Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -1465,7 +1447,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                             ),
                                             Align(
                                               alignment: const AlignmentDirectional(
-                                                  0.00, 0.00),
+                                                  0.0, 0.0),
                                               child: Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(

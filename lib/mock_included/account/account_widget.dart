@@ -166,7 +166,7 @@ class _AccountWidgetState extends State<AccountWidget>
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(-1.00, 1.00),
+                            alignment: const AlignmentDirectional(-1.0, 1.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 0.0, 16.0),
@@ -182,8 +182,7 @@ class _AccountWidgetState extends State<AccountWidget>
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      4.0, 4.0, 4.0, 4.0),
+                                  padding: const EdgeInsets.all(4.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(50.0),
                                     child: CachedNetworkImage(
@@ -266,8 +265,7 @@ class _AccountWidgetState extends State<AccountWidget>
                           shape: BoxShape.rectangle,
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              12.0, 12.0, 12.0, 12.0),
+                          padding: const EdgeInsets.all(12.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -293,7 +291,7 @@ class _AccountWidgetState extends State<AccountWidget>
                               ),
                               const Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.90, 0.00),
+                                  alignment: AlignmentDirectional(0.9, 0.0),
                                   child: Icon(
                                     Icons.arrow_forward_ios,
                                     color: Color(0xFF57636C),
@@ -325,8 +323,7 @@ class _AccountWidgetState extends State<AccountWidget>
                           shape: BoxShape.rectangle,
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              12.0, 12.0, 12.0, 12.0),
+                          padding: const EdgeInsets.all(12.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -352,7 +349,7 @@ class _AccountWidgetState extends State<AccountWidget>
                               ),
                               const Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.90, 0.00),
+                                  alignment: AlignmentDirectional(0.9, 0.0),
                                   child: Icon(
                                     Icons.arrow_forward_ios,
                                     color: Color(0xFF57636C),
@@ -398,8 +395,7 @@ class _AccountWidgetState extends State<AccountWidget>
                           shape: BoxShape.rectangle,
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              12.0, 12.0, 12.0, 12.0),
+                          padding: const EdgeInsets.all(12.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -425,7 +421,7 @@ class _AccountWidgetState extends State<AccountWidget>
                               ),
                               const Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.90, 0.00),
+                                  alignment: AlignmentDirectional(0.9, 0.0),
                                   child: Icon(
                                     Icons.arrow_forward_ios,
                                     color: Color(0xFF57636C),
@@ -457,8 +453,7 @@ class _AccountWidgetState extends State<AccountWidget>
                           shape: BoxShape.rectangle,
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              12.0, 12.0, 12.0, 12.0),
+                          padding: const EdgeInsets.all(12.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -484,7 +479,7 @@ class _AccountWidgetState extends State<AccountWidget>
                               ),
                               const Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.90, 0.00),
+                                  alignment: AlignmentDirectional(0.9, 0.0),
                                   child: Icon(
                                     Icons.arrow_forward_ios,
                                     color: Color(0xFF57636C),
@@ -498,7 +493,7 @@ class _AccountWidgetState extends State<AccountWidget>
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(0.00, 0.00),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             500.0, 16.0, 0.0, 0.0),

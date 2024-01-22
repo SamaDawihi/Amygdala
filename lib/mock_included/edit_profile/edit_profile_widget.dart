@@ -124,7 +124,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                     end: const AlignmentDirectional(-0.87, 1.0),
                   ),
                 ),
-                alignment: const AlignmentDirectional(0.00, -1.00),
+                alignment: const AlignmentDirectional(0.0, -1.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,8 +247,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                             options: FFButtonOptions(
                               width: 50.0,
                               height: 48.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
+                              padding: const EdgeInsets.all(0.0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: const Color(0xFF4036A4),
@@ -403,7 +402,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Align(
-                                  alignment: const AlignmentDirectional(0.00, 0.00),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: wrapWithModel(
                                     model: _model.formCompModel,
                                     updateCallback: () => setState(() {}),
@@ -436,8 +435,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   options: FFButtonOptions(
                                     width: 200.0,
                                     height: 48.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                    padding: const EdgeInsets.all(0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: const Color(0xFF4036A4),
@@ -471,8 +469,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   options: FFButtonOptions(
                                     width: 200.0,
                                     height: 48.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                    padding: const EdgeInsets.all(0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).error,

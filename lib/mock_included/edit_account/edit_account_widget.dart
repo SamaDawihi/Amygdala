@@ -110,7 +110,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                 child: const SideNavWidget(),
               ),
               Align(
-                alignment: const AlignmentDirectional(-1.00, -1.00),
+                alignment: const AlignmentDirectional(-1.0, -1.0),
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 100.0, 0.0),
                   child: Container(
@@ -166,7 +166,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Align(
-                                  alignment: const AlignmentDirectional(-1.00, 1.00),
+                                  alignment: const AlignmentDirectional(-1.0, 1.0),
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 0.0, 16.0),
@@ -183,8 +183,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                         ),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            4.0, 4.0, 4.0, 4.0),
+                                        padding: const EdgeInsets.all(4.0),
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(50.0),

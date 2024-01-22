@@ -318,7 +318,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
               ),
               if (FFAppState().isLightMode)
                 Align(
-                  alignment: const AlignmentDirectional(0.00, -1.00),
+                  alignment: const AlignmentDirectional(0.0, -1.0),
                   child: Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 16.0),
@@ -336,8 +336,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                       child: Visibility(
                         visible: FFAppState().isLightMode,
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              4.0, 4.0, 4.0, 4.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -524,8 +523,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                         ),
                       ),
                       child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(2.0, 2.0, 2.0, 2.0),
+                        padding: const EdgeInsets.all(2.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(80.0),
                           child: CachedNetworkImage(
