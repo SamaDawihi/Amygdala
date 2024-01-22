@@ -1,26 +1,26 @@
-import '/components/form_comp_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/profile_pages/form_comp/form_comp_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
-import 'edit_profile_model.dart';
-export 'edit_profile_model.dart';
+import 'create_profile_model.dart';
+export 'create_profile_model.dart';
 
-class EditProfileWidget extends StatefulWidget {
-  const EditProfileWidget({super.key});
+class CreateProfileWidget extends StatefulWidget {
+  const CreateProfileWidget({super.key});
 
   @override
-  _EditProfileWidgetState createState() => _EditProfileWidgetState();
+  _CreateProfileWidgetState createState() => _CreateProfileWidgetState();
 }
 
-class _EditProfileWidgetState extends State<EditProfileWidget>
+class _CreateProfileWidgetState extends State<CreateProfileWidget>
     with TickerProviderStateMixin {
-  late EditProfileModel _model;
+  late CreateProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -68,7 +68,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EditProfileModel());
+    _model = createModel(context, () => CreateProfileModel());
 
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -191,82 +191,39 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Column(
                           mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  100.0, 50.0, 0.0, 0.0),
-                              child: GradientText(
-                                'Edit Profile',
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 30.0,
-                                    ),
-                                colors: const [Color(0xFF1D1753), Color(0xFF4036A4)],
-                                gradientType: GradientType.radial,
-                                radius: 1.0,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  100.0, 0.0, 0.0, 0.0),
-                              child: GradientText(
-                                'By giving us precise information about the person whom emotions will be translated, we will optimize the Generated Art to match his/her real looks',
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                colors: const [Color(0xFF1D1753), Color(0xFF4036A4)],
-                                gradientType: GradientType.radial,
-                                radius: 1.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 24.0, 20.0, 12.0),
-                          child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
-                            },
-                            text: '',
-                            icon: const Icon(
-                              Icons.home,
-                              size: 20.0,
-                            ),
-                            options: FFButtonOptions(
-                              width: 50.0,
-                              height: 48.0,
-                              padding: const EdgeInsets.all(0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: const Color(0xFF4036A4),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
+                            GradientText(
+                              'Tell Us More',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color: Colors.white,
+                                    fontSize: 50.0,
                                   ),
-                              elevation: 4.0,
-                              borderSide: const BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(15.0),
+                              colors: const [Color(0xFF1D1753), Color(0xFF4036A4)],
+                              gradientType: GradientType.radial,
+                              radius: 1.0,
                             ),
-                          ),
+                            GradientText(
+                              'By giving us more information about the person whom emotions will be \ntranslated, we will optimize the Generated Art to match his/her real looks',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                              colors: const [Color(0xFF1D1753), Color(0xFF4036A4)],
+                              gradientType: GradientType.radial,
+                              radius: 1.0,
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -338,15 +295,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                 maxHeight: 100.0,
                               ),
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0xFF4036A4),
-                                    FlutterFlowTheme.of(context).accent1
-                                  ],
-                                  stops: const [0.0, 1.0],
-                                  begin: const AlignmentDirectional(0.0, -1.0),
-                                  end: const AlignmentDirectional(0, 1.0),
-                                ),
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                                 borderRadius: BorderRadius.circular(12.0),
                                 border: Border.all(
                                   color: FlutterFlowTheme.of(context).alternate,
@@ -361,10 +311,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.male_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
+                                      color: Color(0xFF4036A4),
                                       size: 36.0,
                                     ),
                                     Padding(
@@ -374,13 +323,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                         'Male',
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                            ),
+                                            .bodyMedium,
                                       ),
                                     ),
                                   ],
@@ -429,7 +372,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   onPressed: () {
                                     print('Button pressed ...');
                                   },
-                                  text: 'Save Changes',
+                                  text: 'Save Profile',
                                   icon: const Icon(
                                     Icons.face,
                                     size: 15.0,
@@ -458,15 +401,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 24.0, 20.0, 12.0),
+                                    0.0, 24.0, 0.0, 12.0),
                                 child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed('Home');
                                   },
-                                  text: 'Remove Account',
+                                  text: 'Home',
                                   icon: const Icon(
-                                    Icons.remove_circle_outline_sharp,
-                                    size: 15.0,
+                                    Icons.home,
+                                    size: 20.0,
                                   ),
                                   options: FFButtonOptions(
                                     width: 200.0,
@@ -474,7 +417,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                     padding: const EdgeInsets.all(0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).error,
+                                    color: const Color(0xFF4036A4),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(

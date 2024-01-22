@@ -55,6 +55,11 @@ class UsersRecord extends FirestoreRecord {
   String get clientSecret => _clientSecret ?? '';
   bool hasClientSecret() => _clientSecret != null;
 
+  // "license" field.
+  String? _license;
+  String get license => _license ?? '';
+  bool hasLicense() => _license != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -64,6 +69,7 @@ class UsersRecord extends FirestoreRecord {
     _phoneNumber = snapshotData['phone_number'] as String?;
     _clientId = snapshotData['clientId'] as String?;
     _clientSecret = snapshotData['clientSecret'] as String?;
+    _license = snapshotData['license'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -108,6 +114,7 @@ Map<String, dynamic> createUsersRecordData({
   String? phoneNumber,
   String? clientId,
   String? clientSecret,
+  String? license,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -119,6 +126,7 @@ Map<String, dynamic> createUsersRecordData({
       'phone_number': phoneNumber,
       'clientId': clientId,
       'clientSecret': clientSecret,
+      'license': license,
     }.withoutNulls,
   );
 
@@ -137,7 +145,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.clientId == e2?.clientId &&
-        e1?.clientSecret == e2?.clientSecret;
+        e1?.clientSecret == e2?.clientSecret &&
+        e1?.license == e2?.license;
   }
 
   @override
@@ -149,7 +158,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.createdTime,
         e?.phoneNumber,
         e?.clientId,
-        e?.clientSecret
+        e?.clientSecret,
+        e?.license
       ]);
 
   @override

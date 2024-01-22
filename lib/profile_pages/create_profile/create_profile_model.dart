@@ -1,26 +1,26 @@
-import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'account_widget.dart' show AccountWidget;
+import '/profile_pages/form_comp/form_comp_widget.dart';
+import 'create_profile_widget.dart' show CreateProfileWidget;
 import 'package:flutter/material.dart';
 
-class AccountModel extends FlutterFlowModel<AccountWidget> {
+class CreateProfileModel extends FlutterFlowModel<CreateProfileWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Model for sideNav component.
-  late SideNavModel sideNavModel;
+  // Model for formComp component.
+  late FormCompModel formCompModel;
 
   /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
-    sideNavModel = createModel(context, () => SideNavModel());
+    formCompModel = createModel(context, () => FormCompModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    sideNavModel.dispose();
+    formCompModel.dispose();
   }
 
   /// Action blocks are added here.

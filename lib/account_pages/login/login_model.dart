@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'log_in_widget.dart' show LogInWidget;
+import 'login_widget.dart' show LoginWidget;
 import 'package:flutter/material.dart';
 
-class LogInModel extends FlutterFlowModel<LogInWidget> {
+class LoginModel extends FlutterFlowModel<LoginWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

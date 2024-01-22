@@ -1,7 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -99,22 +99,15 @@ class _AccountWidgetState extends State<AccountWidget>
             style: FlutterFlowTheme.of(context).headlineMedium,
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 8.0, 16.0, 8.0),
-              child: FlutterFlowIconButton(
-                borderColor: FlutterFlowTheme.of(context).alternate,
-                borderRadius: 12.0,
-                borderWidth: 2.0,
-                buttonSize: 40.0,
-                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                icon: Icon(
-                  Icons.manage_search_rounded,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 24.0,
+            Container(
+              decoration: const BoxDecoration(),
+              child: SizedBox(
+                width: 200.0,
+                child: wrapWithModel(
+                  model: _model.connectionStatusModel,
+                  updateCallback: () => setState(() {}),
+                  child: const ConnectionStatusWidget(),
                 ),
-                onPressed: () {
-                  print('IconButton pressed ...');
-                },
               ),
             ),
           ],
@@ -505,7 +498,7 @@ class _AccountWidgetState extends State<AccountWidget>
                             await authManager.signOut();
                             GoRouter.of(context).clearRedirectLocation();
 
-                            context.goNamedAuth('LogIn', context.mounted);
+                            context.goNamedAuth('Login', context.mounted);
                           },
                           text: 'Log Out',
                           options: FFButtonOptions(

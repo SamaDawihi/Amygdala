@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -548,12 +549,14 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Sarah',
-                              style: FlutterFlowTheme.of(context).bodyLarge,
+                            AuthUserStreamWidget(
+                              builder: (context) => Text(
+                                currentUserDisplayName,
+                                style: FlutterFlowTheme.of(context).bodyLarge,
+                              ),
                             ),
                             Text(
-                              'sarah@gmail.com',
+                              currentUserEmail,
                               style: FlutterFlowTheme.of(context).labelMedium,
                             ),
                           ],
