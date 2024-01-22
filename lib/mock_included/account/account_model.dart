@@ -1,4 +1,4 @@
-import '/components/side_nav_widget.dart';
+import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'account_widget.dart' show AccountWidget;
 import 'package:flutter/material.dart';

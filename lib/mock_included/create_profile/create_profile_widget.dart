@@ -76,6 +76,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

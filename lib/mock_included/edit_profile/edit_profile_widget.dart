@@ -76,6 +76,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

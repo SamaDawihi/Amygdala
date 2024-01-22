@@ -26,6 +26,8 @@ class _SideNavWidgetState extends State<SideNavWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SideNavModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

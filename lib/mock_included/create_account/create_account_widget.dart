@@ -77,6 +77,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
 
     _model.resetPasswordController ??= TextEditingController();
     _model.resetPasswordFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

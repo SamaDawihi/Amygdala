@@ -33,6 +33,8 @@ class _FormCompWidgetState extends State<FormCompWidget> {
 
     _model.emailAddressController2 ??= TextEditingController();
     _model.emailAddressFocusNode2 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

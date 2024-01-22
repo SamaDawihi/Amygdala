@@ -1,4 +1,4 @@
-import '/components/side_nav_widget.dart';
+import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'history_record_widget.dart' show HistoryRecordWidget;
 import 'package:flutter/material.dart';
