@@ -203,7 +203,7 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              _model.output,
+                              _model.counter.toString(),
                               style: FlutterFlowTheme.of(context).bodyMedium,
                             ),
                             Stack(
@@ -276,6 +276,12 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                                         await ReplicateImageCall.call(
                                       prompt: 'Sad Boy',
                                     );
+                                    while (!(_model.apiResultID?.succeeded ??
+                                        true)) {
+                                      setState(() {
+                                        _model.counter = _model.counter + 1;
+                                      });
+                                    }
                                     if ((_model.apiResultID?.succeeded ??
                                         true)) {
                                       setState(() {
