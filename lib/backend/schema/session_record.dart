@@ -26,17 +26,41 @@ class SessionRecord extends FirestoreRecord {
   DateTime? get endAt => _endAt;
   bool hasEndAt() => _endAt != null;
 
-  // "duration" field.
-  int? _duration;
-  int get duration => _duration ?? 0;
-  bool hasDuration() => _duration != null;
+  // "happy" field.
+  int? _happy;
+  int get happy => _happy ?? 0;
+  bool hasHappy() => _happy != null;
+
+  // "sad" field.
+  int? _sad;
+  int get sad => _sad ?? 0;
+  bool hasSad() => _sad != null;
+
+  // "angry" field.
+  int? _angry;
+  int get angry => _angry ?? 0;
+  bool hasAngry() => _angry != null;
+
+  // "bored" field.
+  int? _bored;
+  int get bored => _bored ?? 0;
+  bool hasBored() => _bored != null;
+
+  // "natural" field.
+  int? _natural;
+  int get natural => _natural ?? 0;
+  bool hasNatural() => _natural != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _startAt = snapshotData['startAt'] as DateTime?;
     _endAt = snapshotData['endAt'] as DateTime?;
-    _duration = castToType<int>(snapshotData['duration']);
+    _happy = castToType<int>(snapshotData['happy']);
+    _sad = castToType<int>(snapshotData['sad']);
+    _angry = castToType<int>(snapshotData['angry']);
+    _bored = castToType<int>(snapshotData['bored']);
+    _natural = castToType<int>(snapshotData['natural']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -81,13 +105,21 @@ class SessionRecord extends FirestoreRecord {
 Map<String, dynamic> createSessionRecordData({
   DateTime? startAt,
   DateTime? endAt,
-  int? duration,
+  int? happy,
+  int? sad,
+  int? angry,
+  int? bored,
+  int? natural,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'startAt': startAt,
       'endAt': endAt,
-      'duration': duration,
+      'happy': happy,
+      'sad': sad,
+      'angry': angry,
+      'bored': bored,
+      'natural': natural,
     }.withoutNulls,
   );
 
@@ -101,12 +133,16 @@ class SessionRecordDocumentEquality implements Equality<SessionRecord> {
   bool equals(SessionRecord? e1, SessionRecord? e2) {
     return e1?.startAt == e2?.startAt &&
         e1?.endAt == e2?.endAt &&
-        e1?.duration == e2?.duration;
+        e1?.happy == e2?.happy &&
+        e1?.sad == e2?.sad &&
+        e1?.angry == e2?.angry &&
+        e1?.bored == e2?.bored &&
+        e1?.natural == e2?.natural;
   }
 
   @override
-  int hash(SessionRecord? e) =>
-      const ListEquality().hash([e?.startAt, e?.endAt, e?.duration]);
+  int hash(SessionRecord? e) => const ListEquality().hash(
+      [e?.startAt, e?.endAt, e?.happy, e?.sad, e?.angry, e?.bored, e?.natural]);
 
   @override
   bool isValidKey(Object? o) => o is SessionRecord;

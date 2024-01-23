@@ -100,11 +100,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HistoryWidget(),
         ),
         FFRoute(
-          name: 'HomeAnon',
-          path: '/homeAnon',
-          builder: (context, params) => const HomeAnonWidget(),
-        ),
-        FFRoute(
           name: 'Session',
           path: '/session',
           builder: (context, params) => const SessionWidget(),
@@ -143,6 +138,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HistoryRecord',
           path: '/historyRecord',
           builder: (context, params) => const HistoryRecordWidget(),
+        ),
+        FFRoute(
+          name: 'SessionPicCopy',
+          path: '/sessionPicCustom',
+          builder: (context, params) => const SessionPicCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
