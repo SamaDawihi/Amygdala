@@ -208,7 +208,7 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                             ),
                             Stack(
                               children: [
-                                if (_model.imagePath != '')
+                                if (false)
                                   Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: ClipRRect(
