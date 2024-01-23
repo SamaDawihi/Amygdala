@@ -208,14 +208,13 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                             ),
                             Stack(
                               children: [
-                                if (_model.imagePath != null &&
-                                    _model.imagePath != '')
+                                if (_model.imagePath != '')
                                   Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(20.0),
                                       child: Image.network(
-                                        _model.imagePath!,
+                                        _model.imagePath,
                                         width: 500.0,
                                         height: 500.0,
                                         fit: BoxFit.cover,
@@ -276,8 +275,6 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                                         await ReplicateImageCall.call(
                                       prompt: 'Sad Boy',
                                     );
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 10000));
                                     if ((_model.apiResultID?.succeeded ??
                                         true)) {
                                       setState(() {
@@ -298,7 +295,8 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                                               GetImageCall.imagePath(
                                             (_model.apiResultImage?.jsonBody ??
                                                 ''),
-                                          )?.first;
+                                          )!
+                                                  .first;
                                         });
                                       } else {
                                         setState(() {

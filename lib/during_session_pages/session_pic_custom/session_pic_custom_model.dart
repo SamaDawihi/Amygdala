@@ -11,7 +11,7 @@ class SessionPicCustomModel extends FlutterFlowModel<SessionPicCustomWidget> {
 
   String output = 'output';
 
-  String? imagePath = 'false';
+  String imagePath = 'false';
 
   int counter = 0;
 
