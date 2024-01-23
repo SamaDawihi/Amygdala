@@ -203,7 +203,7 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              _model.counter.toString(),
+                              _model.output,
                               style: FlutterFlowTheme.of(context).bodyMedium,
                             ),
                             Stack(
