@@ -276,12 +276,8 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                                         await ReplicateImageCall.call(
                                       prompt: 'Sad Boy',
                                     );
-                                    while (!(_model.apiResultID?.succeeded ??
-                                        true)) {
-                                      setState(() {
-                                        _model.counter = _model.counter + 1;
-                                      });
-                                    }
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 10000));
                                     if ((_model.apiResultID?.succeeded ??
                                         true)) {
                                       setState(() {
