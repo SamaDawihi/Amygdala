@@ -18,5 +18,5 @@ export '/account_pages/edit_account/edit_account_widget.dart'
     show EditAccountWidget;
 export '/history_pages/history_record/history_record_widget.dart'
     show HistoryRecordWidget;
-export '/during_session_pages/session_pic_copy/session_pic_copy_widget.dart'
-    show SessionPicCopyWidget;
+export '/during_session_pages/session_pic_custom/session_pic_custom_widget.dart'
+    show SessionPicCustomWidget;

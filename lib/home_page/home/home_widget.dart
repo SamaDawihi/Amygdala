@@ -98,7 +98,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('SessionPicCopy');
+                        context.pushNamed('SessionPicCustom');
                       },
                       text: 'Start a Session ',
                       options: FFButtonOptions(

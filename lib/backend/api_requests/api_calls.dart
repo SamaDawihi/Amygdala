@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -35,6 +36,43 @@ class ReplicateImageCall {
       alwaysAllowBody: false,
     );
   }
+
+  static String? id(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.id''',
+      ));
+}
+
+class GetImageCall {
+  static Future<ApiCallResponse> call({
+    String? id = 'dlxoyidbofi5xlxq5jzxfoqpzq',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'get image',
+      apiUrl: 'https://api.replicate.com/v1/predictions/$id',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Token r8_P6zE7tUbMcDT8NkdhwLdZQaWtC747e71cTc1t',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<String>? imagePath(dynamic response) => (getJsonField(
+        response,
+        r'''$.output''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 class ApiPagingParams {

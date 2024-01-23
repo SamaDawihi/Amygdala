@@ -140,9 +140,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HistoryRecordWidget(),
         ),
         FFRoute(
-          name: 'SessionPicCopy',
+          name: 'SessionPicCustom',
           path: '/sessionPicCustom',
-          builder: (context, params) => const SessionPicCopyWidget(),
+          builder: (context, params) => const SessionPicCustomWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

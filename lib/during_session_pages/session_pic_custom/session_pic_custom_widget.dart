@@ -9,25 +9,25 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'session_pic_copy_model.dart';
-export 'session_pic_copy_model.dart';
+import 'session_pic_custom_model.dart';
+export 'session_pic_custom_model.dart';
 
-class SessionPicCopyWidget extends StatefulWidget {
-  const SessionPicCopyWidget({super.key});
+class SessionPicCustomWidget extends StatefulWidget {
+  const SessionPicCustomWidget({super.key});
 
   @override
-  _SessionPicCopyWidgetState createState() => _SessionPicCopyWidgetState();
+  _SessionPicCustomWidgetState createState() => _SessionPicCustomWidgetState();
 }
 
-class _SessionPicCopyWidgetState extends State<SessionPicCopyWidget> {
-  late SessionPicCopyModel _model;
+class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
+  late SessionPicCustomModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SessionPicCopyModel());
+    _model = createModel(context, () => SessionPicCustomModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -208,18 +208,20 @@ class _SessionPicCopyWidgetState extends State<SessionPicCopyWidget> {
                             ),
                             Stack(
                               children: [
-                                Align(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    child: Image.asset(
-                                      'assets/images/Screenshot_2023-11-28_150737.png',
-                                      width: 500.0,
-                                      height: 500.0,
-                                      fit: BoxFit.cover,
+                                if (_model.imagePath != null &&
+                                    _model.imagePath != '')
+                                  Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      child: Image.network(
+                                        _model.imagePath!,
+                                        width: 500.0,
+                                        height: 500.0,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                             Column(
@@ -270,18 +272,37 @@ class _SessionPicCopyWidgetState extends State<SessionPicCopyWidget> {
                                                 .secondary,
                                       ),
                                     );
-                                    _model.apiResultdjh =
+                                    _model.apiResultID =
                                         await ReplicateImageCall.call(
                                       prompt: 'Sad Boy',
                                     );
-                                    if ((_model.apiResultdjh?.succeeded ??
+                                    if ((_model.apiResultID?.succeeded ??
                                         true)) {
                                       setState(() {
-                                        _model.output =
-                                            (_model.apiResultdjh?.jsonBody ??
-                                                    '')
-                                                .toString();
+                                        _model.output = ReplicateImageCall.id(
+                                          (_model.apiResultID?.jsonBody ?? ''),
+                                        )!;
                                       });
+                                      _model.apiResultImage =
+                                          await GetImageCall.call(
+                                        id: ReplicateImageCall.id(
+                                          (_model.apiResultID?.jsonBody ?? ''),
+                                        ),
+                                      );
+                                      if ((_model.apiResultImage?.succeeded ??
+                                          true)) {
+                                        setState(() {
+                                          _model.imagePath =
+                                              GetImageCall.imagePath(
+                                            (_model.apiResultImage?.jsonBody ??
+                                                ''),
+                                          )?.first;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          _model.output = 'image failed';
+                                        });
+                                      }
                                     } else {
                                       setState(() {
                                         _model.output = 'No Success';

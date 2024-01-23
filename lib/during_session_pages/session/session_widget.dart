@@ -193,54 +193,99 @@ class _SessionWidgetState extends State<SessionWidget> {
                         ],
                       ),
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 50.0),
-                              child: Lottie.network(
-                                'https://lottie.host/41f11af0-b4b1-4446-af42-78c509770079/PCX2v5gJny.json',
-                                width: 300.0,
-                                height: 130.0,
-                                fit: BoxFit.cover,
-                                animate: true,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 100.0, 0.0, 10.0),
-                          child: Text(
-                            'Processing ...',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 30.0,
-                                  fontWeight: FontWeight.w800,
+                    Expanded(
+                      child: Builder(
+                        builder: (context) {
+                          if (!(_model.image.isNotEmpty)) {
+                            return Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 50.0),
+                                      child: Lottie.network(
+                                        'https://lottie.host/41f11af0-b4b1-4446-af42-78c509770079/PCX2v5gJny.json',
+                                        width: 300.0,
+                                        height: 130.0,
+                                        fit: BoxFit.cover,
+                                        animate: true,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 300.0),
-                          child: Text(
-                            'Thank you for your patience',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 18.0,
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 100.0, 0.0, 10.0),
+                                  child: Text(
+                                    'Processing ...',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 30.0,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                  ),
                                 ),
-                          ),
-                        ),
-                      ],
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 300.0),
+                                  child: Text(
+                                    'Thank you for your patience',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 18.0,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Stack(
+                                  children: [
+                                    if (_model.image.length > 1)
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        child: Image.asset(
+                                          'assets/images/Screenshot_2023-11-28_150737.png',
+                                          width: 500.0,
+                                          height: 500.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    if (_model.image.isNotEmpty)
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            30.0, 30.0, 0.0, 0.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          child: Image.asset(
+                                            'assets/images/Screenshot_2023-11-28_150600.png',
+                                            width: 500.0,
+                                            height: 500.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),

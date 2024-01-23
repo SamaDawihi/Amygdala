@@ -3,13 +3,15 @@ import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'session_pic_copy_widget.dart' show SessionPicCopyWidget;
+import 'session_pic_custom_widget.dart' show SessionPicCustomWidget;
 import 'package:flutter/material.dart';
 
-class SessionPicCopyModel extends FlutterFlowModel<SessionPicCopyWidget> {
+class SessionPicCustomModel extends FlutterFlowModel<SessionPicCustomWidget> {
   ///  Local state fields for this page.
 
   String output = 'output';
+
+  String? imagePath = 'false';
 
   ///  State fields for stateful widgets in this page.
 
@@ -27,7 +29,9 @@ class SessionPicCopyModel extends FlutterFlowModel<SessionPicCopyWidget> {
   // State field(s) for RadioButton widget.
   FormFieldController<String>? radioButtonValueController;
   // Stores action output result for [Backend Call - API (Replicate Image)] action in Button widget.
-  ApiCallResponse? apiResultdjh;
+  ApiCallResponse? apiResultID;
+  // Stores action output result for [Backend Call - API (get image)] action in Button widget.
+  ApiCallResponse? apiResultImage;
 
   /// Initialization and disposal methods.
 
