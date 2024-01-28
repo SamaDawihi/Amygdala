@@ -9,7 +9,7 @@ class ConnectionStatusWidget extends StatefulWidget {
   const ConnectionStatusWidget({super.key});
 
   @override
-  _ConnectionStatusWidgetState createState() => _ConnectionStatusWidgetState();
+  State<ConnectionStatusWidget> createState() => _ConnectionStatusWidgetState();
 }
 
 class _ConnectionStatusWidgetState extends State<ConnectionStatusWidget> {

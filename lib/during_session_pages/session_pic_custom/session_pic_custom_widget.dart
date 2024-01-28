@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_radio_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
@@ -13,10 +14,31 @@ import 'session_pic_custom_model.dart';
 export 'session_pic_custom_model.dart';
 
 class SessionPicCustomWidget extends StatefulWidget {
-  const SessionPicCustomWidget({super.key});
+  const SessionPicCustomWidget({
+    super.key,
+    required this.age,
+    required this.ethnicity,
+    required this.isMale,
+    required this.skinColor,
+    required this.hairColor,
+    required this.eyeColor,
+    required this.isSessionCreated,
+    required this.sessionRef,
+    String? facialhair,
+  }) : facialhair = facialhair ?? 'none';
+
+  final int? age;
+  final String? ethnicity;
+  final bool? isMale;
+  final String? skinColor;
+  final String? hairColor;
+  final String? eyeColor;
+  final bool? isSessionCreated;
+  final DocumentReference? sessionRef;
+  final String facialhair;
 
   @override
-  _SessionPicCustomWidgetState createState() => _SessionPicCustomWidgetState();
+  State<SessionPicCustomWidget> createState() => _SessionPicCustomWidgetState();
 }
 
 class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
@@ -161,8 +183,21 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       20.0, 20.0, 30.0, 0.0),
                                   child: FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      if (widget.sessionRef != null) {
+                                        await widget.sessionRef!.update({
+                                          ...mapToFirestore(
+                                            {
+                                              'endAt':
+                                                  FieldValue.serverTimestamp(),
+                                            },
+                                          ),
+                                        });
+
+                                        context.pushNamed('Home');
+                                      } else {
+                                        context.pushNamed('Home');
+                                      }
                                     },
                                     text: 'Terminate Session',
                                     options: FFButtonOptions(
@@ -202,25 +237,35 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              _model.output,
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'ID: ${_model.id}',
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
+                                Text(
+                                  'image Reuest Body: ${_model.imageReuestStatus}',
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
+                              ],
                             ),
                             Stack(
                               children: [
-                                if (false)
-                                  Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      child: Image.network(
-                                        _model.imagePath,
-                                        width: 500.0,
-                                        height: 500.0,
-                                        fit: BoxFit.cover,
-                                      ),
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: Image.network(
+                                      _model.imagePath,
+                                      width: 500.0,
+                                      height: 500.0,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
+                                ),
                               ],
                             ),
                             Column(
@@ -273,45 +318,135 @@ class _SessionPicCustomWidgetState extends State<SessionPicCustomWidget> {
                                     );
                                     _model.apiResultID =
                                         await ReplicateImageCall.call(
-                                      prompt: 'Sad Boy',
+                                      prompt:
+                                          'a${widget.age?.toString()}years old${widget.ethnicity}${valueOrDefault<String>(
+                                        widget.isMale! ? 'male' : 'female',
+                                        'male',
+                                      )}, with ${widget.skinColor}skin color, ${widget.hairColor} hair and ${widget.eyeColor} eyes ${widget.isMale! ? ' he has' : ''}${widget.isMale! ? widget.facialhair : ''}, who seems to be feeling ${_model.radioButtonValue}',
                                     );
                                     if ((_model.apiResultID?.succeeded ??
                                         true)) {
                                       setState(() {
-                                        _model.output = ReplicateImageCall.id(
+                                        _model.id = ReplicateImageCall.id(
                                           (_model.apiResultID?.jsonBody ?? ''),
                                         )!;
                                       });
-                                      _model.apiResultImage =
-                                          await GetImageCall.call(
-                                        id: ReplicateImageCall.id(
-                                          (_model.apiResultID?.jsonBody ?? ''),
-                                        ),
-                                      );
-                                      if ((_model.apiResultImage?.succeeded ??
-                                          true)) {
-                                        setState(() {
-                                          _model.imagePath =
-                                              GetImageCall.imagePath(
-                                            (_model.apiResultImage?.jsonBody ??
-                                                ''),
-                                          )!
-                                                  .first;
-                                        });
-                                      } else {
-                                        setState(() {
-                                          _model.output = 'image failed';
-                                        });
+                                      if (widget.sessionRef != null) {
+                                        if (_model.radioButtonValue ==
+                                            'Happy') {
+                                          await widget.sessionRef!.update({
+                                            ...mapToFirestore(
+                                              {
+                                                'happy':
+                                                    FieldValue.increment(1),
+                                              },
+                                            ),
+                                          });
+                                        } else {
+                                          if (_model.radioButtonValue ==
+                                              'Angry') {
+                                            await widget.sessionRef!.update({
+                                              ...mapToFirestore(
+                                                {
+                                                  'angry':
+                                                      FieldValue.increment(1),
+                                                },
+                                              ),
+                                            });
+                                          } else {
+                                            if (_model.radioButtonValue ==
+                                                'Natural') {
+                                              await widget.sessionRef!.update({
+                                                ...mapToFirestore(
+                                                  {
+                                                    'natural':
+                                                        FieldValue.increment(1),
+                                                  },
+                                                ),
+                                              });
+                                            }
+                                          }
+                                        }
                                       }
                                     } else {
                                       setState(() {
-                                        _model.output = 'No Success';
+                                        _model.id = 'No Success ';
                                       });
                                     }
 
                                     setState(() {});
                                   },
                                   text: 'Generate',
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.apiResultImage =
+                                        await GetImageCall.call(
+                                      id: ReplicateImageCall.id(
+                                        (_model.apiResultID?.jsonBody ?? ''),
+                                      ),
+                                    );
+                                    setState(() {
+                                      _model.imageReuestStatus =
+                                          'image Reuest started';
+                                    });
+                                    setState(() {
+                                      _model.imageReuestStatus =
+                                          (_model.apiResultImage?.statusCode ??
+                                                  200)
+                                              .toString();
+                                    });
+                                    if ((_model.apiResultImage?.succeeded ??
+                                        true)) {
+                                      setState(() {
+                                        _model.imagePath =
+                                            GetImageCall.imagePath(
+                                          (_model.apiResultImage?.jsonBody ??
+                                              ''),
+                                        )!
+                                                .first;
+                                        _model.imageReuestStatus = (_model
+                                                    .apiResultImage
+                                                    ?.statusCode ??
+                                                200)
+                                            .toString();
+                                        _model.id = ReplicateImageCall.id(
+                                          (_model.apiResultID?.jsonBody ?? ''),
+                                        )!;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        _model.imageReuestStatus =
+                                            'image Reuest Failed';
+                                        _model.id = ReplicateImageCall.id(
+                                          (_model.apiResultID?.jsonBody ?? ''),
+                                        )!;
+                                      });
+                                    }
+
+                                    setState(() {});
+                                  },
+                                  text: 'Get image',
                                   options: FFButtonOptions(
                                     height: 40.0,
                                     padding: const EdgeInsetsDirectional.fromSTEB(

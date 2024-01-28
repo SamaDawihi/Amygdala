@@ -13,7 +13,7 @@ class SessionPicWidget extends StatefulWidget {
   const SessionPicWidget({super.key});
 
   @override
-  _SessionPicWidgetState createState() => _SessionPicWidgetState();
+  State<SessionPicWidget> createState() => _SessionPicWidgetState();
 }
 
 class _SessionPicWidgetState extends State<SessionPicWidget> {

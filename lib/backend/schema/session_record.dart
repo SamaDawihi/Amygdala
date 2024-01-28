@@ -68,8 +68,8 @@ class SessionRecord extends FirestoreRecord {
           ? parent.collection('Session')
           : FirebaseFirestore.instance.collectionGroup('Session');
 
-  static DocumentReference createDoc(DocumentReference parent) =>
-      parent.collection('Session').doc();
+  static DocumentReference createDoc(DocumentReference parent, {String? id}) =>
+      parent.collection('Session').doc(id);
 
   static Stream<SessionRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map((s) => SessionRecord.fromSnapshot(s));

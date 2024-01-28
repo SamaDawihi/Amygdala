@@ -1,8 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +16,7 @@ class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
 
   @override
-  _HomeWidgetState createState() => _HomeWidgetState();
+  State<HomeWidget> createState() => _HomeWidgetState();
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
@@ -98,7 +101,134 @@ class _HomeWidgetState extends State<HomeWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('SessionPicCustom');
+                        _model.disabledprofileExist =
+                            await queryDisabledProfileRecordOnce(
+                          queryBuilder: (disabledProfileRecord) =>
+                              disabledProfileRecord.where(
+                            'caregiverID',
+                            isEqualTo: currentUserReference,
+                          ),
+                          singleRecord: true,
+                        ).then((s) => s.firstOrNull);
+                        if (_model.disabledprofileExist?.reference != null) {
+                          var sessionRecordReference = SessionRecord.createDoc(
+                              _model.disabledprofileExist!.reference);
+                          await sessionRecordReference.set({
+                            ...createSessionRecordData(
+                              happy: 0,
+                              sad: 0,
+                              angry: 0,
+                              bored: 0,
+                              natural: 0,
+                            ),
+                            ...mapToFirestore(
+                              {
+                                'startAt': FieldValue.serverTimestamp(),
+                              },
+                            ),
+                          });
+                          _model.sessionCreated =
+                              SessionRecord.getDocumentFromData({
+                            ...createSessionRecordData(
+                              happy: 0,
+                              sad: 0,
+                              angry: 0,
+                              bored: 0,
+                              natural: 0,
+                            ),
+                            ...mapToFirestore(
+                              {
+                                'startAt': DateTime.now(),
+                              },
+                            ),
+                          }, sessionRecordReference);
+
+                          context.pushNamed(
+                            'SessionPicCustom',
+                            queryParameters: {
+                              'age': serializeParam(
+                                _model.disabledprofileExist?.age,
+                                ParamType.int,
+                              ),
+                              'ethnicity': serializeParam(
+                                _model.disabledprofileExist?.ethnicity,
+                                ParamType.String,
+                              ),
+                              'isMale': serializeParam(
+                                _model.disabledprofileExist?.isMale,
+                                ParamType.bool,
+                              ),
+                              'skinColor': serializeParam(
+                                _model.disabledprofileExist?.skinColor,
+                                ParamType.String,
+                              ),
+                              'hairColor': serializeParam(
+                                _model.disabledprofileExist?.hairColor,
+                                ParamType.String,
+                              ),
+                              'eyeColor': serializeParam(
+                                _model.disabledprofileExist?.eyeColor,
+                                ParamType.String,
+                              ),
+                              'isSessionCreated': serializeParam(
+                                true,
+                                ParamType.bool,
+                              ),
+                              'sessionRef': serializeParam(
+                                _model.sessionCreated?.reference,
+                                ParamType.DocumentReference,
+                              ),
+                              'facialhair': serializeParam(
+                                _model.disabledprofileExist?.facialHair,
+                                ParamType.String,
+                              ),
+                            }.withoutNulls,
+                          );
+                        } else {
+                          context.pushNamed(
+                            'SessionPicCustom',
+                            queryParameters: {
+                              'age': serializeParam(
+                                30,
+                                ParamType.int,
+                              ),
+                              'ethnicity': serializeParam(
+                                'european',
+                                ParamType.String,
+                              ),
+                              'isMale': serializeParam(
+                                true,
+                                ParamType.bool,
+                              ),
+                              'skinColor': serializeParam(
+                                'medium',
+                                ParamType.String,
+                              ),
+                              'hairColor': serializeParam(
+                                'black',
+                                ParamType.String,
+                              ),
+                              'eyeColor': serializeParam(
+                                'black',
+                                ParamType.String,
+                              ),
+                              'isSessionCreated': serializeParam(
+                                false,
+                                ParamType.bool,
+                              ),
+                              'sessionRef': serializeParam(
+                                null,
+                                ParamType.DocumentReference,
+                              ),
+                              'facialhair': serializeParam(
+                                'clean-shaven',
+                                ParamType.String,
+                              ),
+                            }.withoutNulls,
+                          );
+                        }
+
+                        setState(() {});
                       },
                       text: 'Start a Session ',
                       options: FFButtonOptions(

@@ -15,7 +15,7 @@ class CreateAccountWidget extends StatefulWidget {
   const CreateAccountWidget({super.key});
 
   @override
-  _CreateAccountWidgetState createState() => _CreateAccountWidgetState();
+  State<CreateAccountWidget> createState() => _CreateAccountWidgetState();
 }
 
 class _CreateAccountWidgetState extends State<CreateAccountWidget>

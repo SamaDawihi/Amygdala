@@ -11,7 +11,7 @@ class FormCompWidget extends StatefulWidget {
   const FormCompWidget({super.key});
 
   @override
-  _FormCompWidgetState createState() => _FormCompWidgetState();
+  State<FormCompWidget> createState() => _FormCompWidgetState();
 }
 
 class _FormCompWidgetState extends State<FormCompWidget> {

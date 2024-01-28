@@ -10,7 +10,7 @@ class SideNavWidget extends StatefulWidget {
   const SideNavWidget({super.key});
 
   @override
-  _SideNavWidgetState createState() => _SideNavWidgetState();
+  State<SideNavWidget> createState() => _SideNavWidgetState();
 }
 
 class _SideNavWidgetState extends State<SideNavWidget> {

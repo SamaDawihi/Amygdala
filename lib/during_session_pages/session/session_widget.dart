@@ -14,7 +14,7 @@ class SessionWidget extends StatefulWidget {
   const SessionWidget({super.key});
 
   @override
-  _SessionWidgetState createState() => _SessionWidgetState();
+  State<SessionWidget> createState() => _SessionWidgetState();
 }
 
 class _SessionWidgetState extends State<SessionWidget> {

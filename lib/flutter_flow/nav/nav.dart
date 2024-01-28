@@ -142,7 +142,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'SessionPicCustom',
           path: '/sessionPicCustom',
-          builder: (context, params) => const SessionPicCustomWidget(),
+          builder: (context, params) => SessionPicCustomWidget(
+            age: params.getParam('age', ParamType.int),
+            ethnicity: params.getParam('ethnicity', ParamType.String),
+            isMale: params.getParam('isMale', ParamType.bool),
+            skinColor: params.getParam('skinColor', ParamType.String),
+            hairColor: params.getParam('hairColor', ParamType.String),
+            eyeColor: params.getParam('eyeColor', ParamType.String),
+            isSessionCreated:
+                params.getParam('isSessionCreated', ParamType.bool),
+            sessionRef: params.getParam(
+                'sessionRef',
+                ParamType.DocumentReference,
+                false,
+                ['DisabledProfile', 'Session']),
+            facialhair: params.getParam('facialhair', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

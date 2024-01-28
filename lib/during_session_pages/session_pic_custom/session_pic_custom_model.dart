@@ -9,11 +9,13 @@ import 'package:flutter/material.dart';
 class SessionPicCustomModel extends FlutterFlowModel<SessionPicCustomWidget> {
   ///  Local state fields for this page.
 
-  String output = 'output';
+  String id = 'output';
 
   String imagePath = 'false';
 
   int counter = 0;
+
+  String imageReuestStatus = 'Not Ready Yet';
 
   ///  State fields for stateful widgets in this page.
 

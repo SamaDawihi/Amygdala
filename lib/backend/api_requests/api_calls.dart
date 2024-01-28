@@ -9,7 +9,8 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 class ReplicateImageCall {
   static Future<ApiCallResponse> call({
-    String? prompt = 'Happy Boy',
+    String? prompt =
+        'a 21 year old arabian female, with medium skin color, black hair and black eyes, who seems to be feeling sad.',
   }) async {
     final ffApiRequestBody = '''
 {

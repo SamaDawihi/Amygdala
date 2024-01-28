@@ -16,7 +16,7 @@ class HistoryRecordWidget extends StatefulWidget {
   const HistoryRecordWidget({super.key});
 
   @override
-  _HistoryRecordWidgetState createState() => _HistoryRecordWidgetState();
+  State<HistoryRecordWidget> createState() => _HistoryRecordWidgetState();
 }
 
 class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
@@ -1301,6 +1301,9 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                       0.0, 0.0, 0.0, 12.0),
                                               child: Container(
                                                 width: double.infinity,
+                                                constraints: const BoxConstraints(
+                                                  minHeight: 400.0,
+                                                ),
                                                 decoration: BoxDecoration(
                                                   color: const Color(0xFF1FA595),
                                                   borderRadius:

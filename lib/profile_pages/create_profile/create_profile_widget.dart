@@ -15,7 +15,7 @@ class CreateProfileWidget extends StatefulWidget {
   const CreateProfileWidget({super.key});
 
   @override
-  _CreateProfileWidgetState createState() => _CreateProfileWidgetState();
+  State<CreateProfileWidget> createState() => _CreateProfileWidgetState();
 }
 
 class _CreateProfileWidgetState extends State<CreateProfileWidget>
