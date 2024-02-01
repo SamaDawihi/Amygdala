@@ -30,7 +30,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
     _model.textController1 ??= TextEditingController(text: 'Sarah Mohammad');
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController(text: 'sara@gmail.com');
+    _model.textController2 ??= TextEditingController(text: 'sara@gmail.com ');
     _model.textFieldFocusNode2 ??= FocusNode();
 
     _model.textController3 ??= TextEditingController(text: 'Saudi Arabia');

@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -218,6 +220,25 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       child: TextFormField(
                                         controller: _model.nameController,
                                         focusNode: _model.nameFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.nameController',
+                                          const Duration(milliseconds: 2000),
+                                          () async {
+                                            if (_model.nameController.text !=
+                                                    '') {
+                                              setState(() {
+                                                _model.nameErr = '';
+                                              });
+                                              return;
+                                            } else {
+                                              setState(() {
+                                                _model.nameErr =
+                                                    'name must not be empty';
+                                              });
+                                              return;
+                                            }
+                                          },
+                                        ),
                                         autofocus: true,
                                         autofillHints: const [AutofillHints.email],
                                         textCapitalization:
@@ -283,6 +304,28 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       ),
                                     ),
                                   ),
+                                  if (_model.nameErr != null &&
+                                      _model.nameErr != '')
+                                    Align(
+                                      alignment:
+                                          const AlignmentDirectional(-1.0, 0.0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 7.0),
+                                        child: Text(
+                                          _model.nameErr!,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                fontSize: 12.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 16.0),
@@ -292,6 +335,26 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                         controller:
                                             _model.emailAddressController,
                                         focusNode: _model.emailAddressFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.emailAddressController',
+                                          const Duration(milliseconds: 2000),
+                                          () async {
+                                            if (functions.checkIfTextMatchRegExp(
+                                                _model.emailAddressController
+                                                    .text,
+                                                '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$')) {
+                                              setState(() {
+                                                _model.emailErr = null;
+                                              });
+                                              return;
+                                            } else {
+                                              setState(() {
+                                                _model.emailErr = 'emailerror';
+                                              });
+                                              return;
+                                            }
+                                          },
+                                        ),
                                         autofocus: true,
                                         autofillHints: const [AutofillHints.email],
                                         obscureText: false,
@@ -356,6 +419,28 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       ),
                                     ),
                                   ),
+                                  if (_model.nameErr != null &&
+                                      _model.nameErr != '')
+                                    Align(
+                                      alignment:
+                                          const AlignmentDirectional(-1.0, 0.0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 7.0),
+                                        child: Text(
+                                          _model.emailErr!,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                fontSize: 12.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 16.0),
@@ -364,6 +449,25 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       child: TextFormField(
                                         controller: _model.passwordController,
                                         focusNode: _model.passwordFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.passwordController',
+                                          const Duration(milliseconds: 2000),
+                                          () async {
+                                            if (_model.passwordController
+                                                        .text !=
+                                                    '') {
+                                              setState(() {
+                                                _model.passwordErr = null;
+                                              });
+                                              return;
+                                            } else {
+                                              setState(() {
+                                                _model.passwordErr = 'passs er';
+                                              });
+                                              return;
+                                            }
+                                          },
+                                        ),
                                         autofocus: true,
                                         autofillHints: const [AutofillHints.password],
                                         obscureText: !_model.passwordVisibility,
@@ -444,6 +548,28 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       ),
                                     ),
                                   ),
+                                  if (_model.passwordErr != null &&
+                                      _model.passwordErr != '')
+                                    Align(
+                                      alignment:
+                                          const AlignmentDirectional(-1.0, 0.0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 7.0),
+                                        child: Text(
+                                          _model.passwordErr!,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                fontSize: 12.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 16.0),
@@ -454,6 +580,25 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             _model.resetPasswordController,
                                         focusNode:
                                             _model.resetPasswordFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.resetPasswordController',
+                                          const Duration(milliseconds: 2000),
+                                          () async {
+                                            if (_model
+                                                    .passwordController.text ==
+                                                _model.resetPasswordController
+                                                    .text) {
+                                              setState(() {
+                                                _model.repasserror = null;
+                                              });
+                                            } else {
+                                              setState(() {
+                                                _model.repasserror =
+                                                    'pass not match';
+                                              });
+                                            }
+                                          },
+                                        ),
                                         autofocus: true,
                                         autofillHints: const [AutofillHints.password],
                                         obscureText:
@@ -537,6 +682,28 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       ),
                                     ),
                                   ),
+                                  if (_model.nameErr != null &&
+                                      _model.nameErr != '')
+                                    Align(
+                                      alignment:
+                                          const AlignmentDirectional(-1.0, 0.0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 7.0),
+                                        child: Text(
+                                          _model.emailErr!,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                fontSize: 12.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 16.0),

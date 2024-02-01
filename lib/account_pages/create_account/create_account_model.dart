@@ -3,6 +3,16 @@ import 'create_account_widget.dart' show CreateAccountWidget;
 import 'package:flutter/material.dart';
 
 class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
+  ///  Local state fields for this page.
+
+  String? nameErr = '';
+
+  String? emailErr;
+
+  String? passwordErr;
+
+  String? repasserror;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

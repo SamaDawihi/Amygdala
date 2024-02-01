@@ -1,5 +1,7 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'session_record_model.dart';
@@ -11,7 +13,7 @@ class SessionRecordWidget extends StatefulWidget {
     required this.session,
   });
 
-  final DocumentReference? session;
+  final SessionRecord? session;
 
   @override
   State<SessionRecordWidget> createState() => _SessionRecordWidgetState();
@@ -53,123 +55,172 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+      child: StreamBuilder<SessionRecord>(
+        stream: SessionRecord.getDocument(widget.session!.reference),
+        builder: (context, snapshot) {
+          // Customize what your widget looks like when it's loading.
+          if (!snapshot.hasData) {
+            return const Center(
+              child: SizedBox(
+                width: 50.0,
+                height: 50.0,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Color(0xFF4036A4),
+                  ),
+                ),
+              ),
+            );
+          }
+          final columnSessionRecord = snapshot.data!;
+          return Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 32.0,
-                height: 32.0,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFAAE76D),
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: FlutterFlowTheme.of(context).primary,
-                    width: 2.0,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 32.0,
+                    height: 32.0,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFAAE76D),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: FlutterFlowTheme.of(context).primary,
+                        width: 2.0,
+                      ),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100.0),
+                      child: Image.asset(
+                        'assets/images/Screenshot_2023-11-30_143639.png',
+                        width: 50.0,
+                        height: 50.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100.0),
-                  child: Image.asset(
-                    'assets/images/Screenshot_2023-11-30_143639.png',
-                    width: 50.0,
-                    height: 50.0,
-                    fit: BoxFit.cover,
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        functions.getMaxEmotion(widget.session!.happy),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ),
                   ),
-                ),
+                  Text(
+                    dateTimeFormat('relative', columnSessionRecord.startAt!),
+                    style: FlutterFlowTheme.of(context).labelSmall,
+                  ),
+                ],
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                  child: Text(
-                    'Mosty Happy',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 0.0, 0.0),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 0.0,
+                        color: FlutterFlowTheme.of(context).primary,
+                        offset: const Offset(-2.0, 0.0),
+                      )
+                    ],
+                    border: Border.all(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(26.0, 0.0, 0.0, 0.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 4.0),
+                          child: RichText(
+                            textScaleFactor:
+                                MediaQuery.of(context).textScaleFactor,
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: 'Date | ',
+                                  style: TextStyle(),
+                                ),
+                                TextSpan(
+                                  text: dateTimeFormat(
+                                      'd-M-y', columnSessionRecord.startAt!),
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                )
+                              ],
+                              style: FlutterFlowTheme.of(context).labelMedium,
+                            ),
+                          ),
                         ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 12.0),
+                          child: RichText(
+                            textScaleFactor:
+                                MediaQuery.of(context).textScaleFactor,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Start : ',
+                                  style:
+                                      FlutterFlowTheme.of(context).labelSmall,
+                                ),
+                                TextSpan(
+                                  text: dateTimeFormat(
+                                      'jm', columnSessionRecord.startAt!),
+                                  style: const TextStyle(),
+                                ),
+                                const TextSpan(
+                                  text: ' | End : ',
+                                  style: TextStyle(),
+                                ),
+                                TextSpan(
+                                  text: dateTimeFormat(
+                                      'jm', columnSessionRecord.endAt!),
+                                  style: const TextStyle(),
+                                )
+                              ],
+                              style: FlutterFlowTheme.of(context).labelSmall,
+                            ),
+                          ),
+                        ),
+                        Divider(
+                          height: 1.0,
+                          thickness: 1.0,
+                          indent: 0.0,
+                          color: FlutterFlowTheme.of(context).alternate,
+                        ),
+                      ].addToEnd(const SizedBox(height: 12.0)),
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                '4m ago',
-                style: FlutterFlowTheme.of(context).labelSmall,
               ),
             ],
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 0.0, 0.0),
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 0.0,
-                    color: FlutterFlowTheme.of(context).primary,
-                    offset: const Offset(-2.0, 0.0),
-                  )
-                ],
-                border: Border.all(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  width: 1.0,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(26.0, 0.0, 0.0, 0.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
-                      child: RichText(
-                        textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                        text: TextSpan(
-                          children: [
-                            const TextSpan(
-                              text: 'Date | ',
-                              style: TextStyle(),
-                            ),
-                            TextSpan(
-                              text: '29-11-2024',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            )
-                          ],
-                          style: FlutterFlowTheme.of(context).labelMedium,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
-                      child: Text(
-                        'Start : 5:00 | End : 5:11',
-                        style: FlutterFlowTheme.of(context).labelSmall,
-                      ),
-                    ),
-                    Divider(
-                      height: 1.0,
-                      thickness: 1.0,
-                      indent: 0.0,
-                      color: FlutterFlowTheme.of(context).alternate,
-                    ),
-                  ].addToEnd(const SizedBox(height: 12.0)),
-                ),
-              ),
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

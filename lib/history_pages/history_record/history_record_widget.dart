@@ -13,7 +13,12 @@ import 'history_record_model.dart';
 export 'history_record_model.dart';
 
 class HistoryRecordWidget extends StatefulWidget {
-  const HistoryRecordWidget({super.key});
+  const HistoryRecordWidget({
+    super.key,
+    required this.sessionId,
+  });
+
+  final DocumentReference? sessionId;
 
   @override
   State<HistoryRecordWidget> createState() => _HistoryRecordWidgetState();

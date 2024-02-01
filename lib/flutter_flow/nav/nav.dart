@@ -137,7 +137,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'HistoryRecord',
           path: '/historyRecord',
-          builder: (context, params) => const HistoryRecordWidget(),
+          builder: (context, params) => HistoryRecordWidget(
+            sessionId: params.getParam('sessionId', ParamType.DocumentReference,
+                false, ['DisabledProfile', 'Session']),
+          ),
         ),
         FFRoute(
           name: 'SessionPicCustom',

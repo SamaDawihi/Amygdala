@@ -1,10 +1,9 @@
 import '/backend/backend.dart';
 import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
-import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
+import '/history_pages/emo_filter/emo_filter_widget.dart';
 import '/history_pages/session_record/session_record_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -138,81 +137,10 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                               style: FlutterFlowTheme.of(context).labelMedium,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 8.0, 0.0, 8.0),
-                                  child: FlutterFlowChoiceChips(
-                                    options: const [
-                                      ChipData('All'),
-                                      ChipData('Happy'),
-                                      ChipData('Calm'),
-                                      ChipData('Nuetural'),
-                                      ChipData('Fatigue'),
-                                      ChipData('Tense')
-                                    ],
-                                    onChanged: (val) => setState(() =>
-                                        _model.choiceChipsValue = val?.first),
-                                    selectedChipStyle: ChipStyle(
-                                      backgroundColor: const Color(0xFF4036A4),
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .info,
-                                          ),
-                                      iconColor:
-                                          FlutterFlowTheme.of(context).info,
-                                      iconSize: 18.0,
-                                      elevation: 2.0,
-                                      borderColor:
-                                          FlutterFlowTheme.of(context).accent1,
-                                      borderWidth: 1.0,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    unselectedChipStyle: ChipStyle(
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                          ),
-                                      iconColor: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      iconSize: 18.0,
-                                      elevation: 0.0,
-                                      borderColor: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      borderWidth: 1.0,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    chipSpacing: 8.0,
-                                    rowSpacing: 12.0,
-                                    multiselect: false,
-                                    initialized:
-                                        _model.choiceChipsValue != null,
-                                    alignment: WrapAlignment.start,
-                                    controller:
-                                        _model.choiceChipsValueController ??=
-                                            FormFieldController<List<String>>(
-                                      ['All'],
-                                    ),
-                                    wrapped: true,
-                                  ),
-                                ),
-                              ],
-                            ),
+                          wrapWithModel(
+                            model: _model.emoFilterModel,
+                            updateCallback: () => setState(() {}),
+                            child: const EmoFilterWidget(),
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -253,47 +181,36 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                                     final listViewSessionRecord =
                                         listViewSessionRecordList[
                                             listViewIndex];
-                                    return StreamBuilder<List<SessionRecord>>(
-                                      stream: querySessionRecord(
-                                        singleRecord: true,
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return const Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: CircularProgressIndicator(
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                        Color>(
-                                                  Color(0xFF4036A4),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        List<SessionRecord>
-                                            sessionRecordSessionRecordList =
-                                            snapshot.data!;
-                                        // Return an empty Container when the item does not exist.
-                                        if (snapshot.data!.isEmpty) {
-                                          return Container();
-                                        }
-                                        final sessionRecordSessionRecord =
-                                            sessionRecordSessionRecordList
-                                                    .isNotEmpty
-                                                ? sessionRecordSessionRecordList
-                                                    .first
-                                                : null;
-                                        return SessionRecordWidget(
-                                          key: Key(
-                                              'Keyuo7_${listViewIndex}_of_${listViewSessionRecordList.length}'),
-                                          session:
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'HistoryRecord',
+                                          queryParameters: {
+                                            'sessionId': serializeParam(
                                               listViewSessionRecord.reference,
+                                              ParamType.DocumentReference,
+                                            ),
+                                          }.withoutNulls,
                                         );
                                       },
+                                      child: wrapWithModel(
+                                        model:
+                                            _model.sessionRecordModels.getModel(
+                                          listViewIndex.toString(),
+                                          listViewIndex,
+                                        ),
+                                        updateCallback: () => setState(() {}),
+                                        child: SessionRecordWidget(
+                                          key: Key(
+                                            'Keyuo7_${listViewIndex.toString()}',
+                                          ),
+                                          session: listViewSessionRecord,
+                                        ),
+                                      ),
                                     );
                                   },
                                 );
