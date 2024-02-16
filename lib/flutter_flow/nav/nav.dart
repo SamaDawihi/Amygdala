@@ -170,6 +170,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'BciSetttings',
           path: '/BciSetttings',
+          requireAuth: true,
           builder: (context, params) => const BciSetttingsWidget(),
         ),
         FFRoute(
