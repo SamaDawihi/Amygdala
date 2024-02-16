@@ -26,10 +26,12 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
     super.initState();
     _model = createModel(context, () => BciSetttingsModel());
 
-    _model.textController1 ??= TextEditingController();
+    _model.textController1 ??=
+        TextEditingController(text: FFAppState().clientId);
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.textController2 ??=
+        TextEditingController(text: FFAppState().clientSecret);
     _model.textFieldFocusNode2 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -153,10 +155,10 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                       autofocus: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Clint ID',
+                                        labelText: 'Client ID',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .labelMedium,
-                                        hintText: '[clintId]',
+                                        hintText: '[clientId]',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .labelMedium,
                                         enabledBorder: OutlineInputBorder(
@@ -217,10 +219,10 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                     autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'Clint Secret',
+                                      labelText: 'Client Secret',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
-                                      hintText: '[clintSecret]',
+                                      hintText: '[clientSecret]',
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       enabledBorder: OutlineInputBorder(
@@ -268,36 +270,45 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 0.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                },
-                                text: 'Update',
-                                options: FFButtonOptions(
-                                  height: 40.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: Colors.white,
-                                      ),
-                                  elevation: 3.0,
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
+                            if ((FFAppState().clientId !=
+                                    _model.textController1.text) ||
+                                (FFAppState().clientSecret !=
+                                    _model.textController2.text))
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    20.0, 0.0, 0.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    setState(() {
+                                      FFAppState().clientId =
+                                          _model.textController1.text;
+                                      FFAppState().clientSecret =
+                                          _model.textController2.text;
+                                    });
+                                  },
+                                  text: 'Update',
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                       ),
