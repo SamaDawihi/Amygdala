@@ -4,6 +4,7 @@ import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/history_pages/emotion_filter/emotion_filter_widget.dart';
+import '/history_pages/empty_sessions_component/empty_sessions_component_widget.dart';
 import '/history_pages/session_record/session_record_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -142,6 +143,9 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                             }
                             List<SessionRecord> listViewSessionRecordList =
                                 snapshot.data!;
+                            if (listViewSessionRecordList.isEmpty) {
+                              return const EmptySessionsComponentWidget();
+                            }
                             return ListView.separated(
                               padding: const EdgeInsets.fromLTRB(
                                 0,
