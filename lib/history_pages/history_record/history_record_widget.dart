@@ -426,7 +426,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                               child: Container(
                                 width: double.infinity,
                                 constraints: const BoxConstraints(
-                                  maxWidth: 1170.0,
+                                  maxWidth: 1140.0,
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -1512,7 +1512,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                     children: [
                                                                       Padding(
                                                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            25.0,
+                                                                            40.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),

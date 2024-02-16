@@ -59,7 +59,7 @@ class _EmptySessionsComponentWidgetState
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: Text(
-                'you have no Sessions yet.',
+                'you have no sessions yet.',
                 style: FlutterFlowTheme.of(context).labelMedium.override(
                       fontFamily: 'Readex Pro',
                       fontWeight: FontWeight.normal,
