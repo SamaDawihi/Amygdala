@@ -120,6 +120,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                               angry: 0,
                               natural: 0,
                               relaxed: 0,
+                              disabledProfile:
+                                  _model.disabledprofileExist?.reference,
                             ),
                             ...mapToFirestore(
                               {
@@ -135,6 +137,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                               angry: 0,
                               natural: 0,
                               relaxed: 0,
+                              disabledProfile:
+                                  _model.disabledprofileExist?.reference,
                             ),
                             ...mapToFirestore(
                               {

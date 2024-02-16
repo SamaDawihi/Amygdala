@@ -401,7 +401,8 @@ class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 30.0, 0.0, 0.0),
-                                child: Text(
+                                child: SelectionArea(
+                                    child: Text(
                                   'Status:${_model.imageApiStatus}',
                                   style: FlutterFlowTheme.of(context)
                                       .bodySmall
@@ -409,7 +410,7 @@ class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
                                         fontFamily: 'Readex Pro',
                                         fontSize: 18.0,
                                       ),
-                                ),
+                                )),
                               ),
                             ].divide(const SizedBox(height: 15.0)),
                           ),
