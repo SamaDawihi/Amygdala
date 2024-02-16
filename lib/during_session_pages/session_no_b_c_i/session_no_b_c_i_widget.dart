@@ -53,6 +53,7 @@ class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
           await widget.createdSession!.update({
             ...createSessionRecordData(
               angry: _model.predictedEmotion == 'Angry' ? 1 : 0,
+              endAt: getCurrentTimestamp,
             ),
             ...mapToFirestore(
               {

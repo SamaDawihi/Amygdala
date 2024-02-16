@@ -426,7 +426,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                               child: Container(
                                 width: double.infinity,
                                 constraints: const BoxConstraints(
-                                  maxWidth: 1140.0,
+                                  maxWidth: 1170.0,
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -907,91 +907,91 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                             context: context,
                                                                                             tabletLandscape: false,
                                                                                           ))
-                                                                                            Padding(
-                                                                                              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 7.0, 0.0),
-                                                                                              child: CircularPercentIndicator(
-                                                                                                percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'natural'),
-                                                                                                radius: 30.0,
-                                                                                                lineWidth: 8.0,
-                                                                                                animation: true,
-                                                                                                animateFromLastPercent: true,
-                                                                                                progressColor: const Color(0xFFF895C6),
-                                                                                                backgroundColor: const Color(0xFFFFC3E1),
-                                                                                                center: Text(
-                                                                                                  formatNumber(
-                                                                                                    functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'natural'),
-                                                                                                    formatType: FormatType.percent,
-                                                                                                  ),
-                                                                                                  style: FlutterFlowTheme.of(context).headlineMedium,
+                                                                                            CircularPercentIndicator(
+                                                                                              percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'natural'),
+                                                                                              radius: 30.0,
+                                                                                              lineWidth: 8.0,
+                                                                                              animation: true,
+                                                                                              animateFromLastPercent: true,
+                                                                                              progressColor: const Color(0xFFF895C6),
+                                                                                              backgroundColor: const Color(0xFFFFC3E1),
+                                                                                              center: Text(
+                                                                                                formatNumber(
+                                                                                                  functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'natural'),
+                                                                                                  formatType: FormatType.percent,
                                                                                                 ),
-                                                                                              ).animateOnPageLoad(animationsMap['progressBarOnPageLoadAnimation3']!),
-                                                                                            ),
+                                                                                                style: FlutterFlowTheme.of(context).headlineMedium,
+                                                                                              ),
+                                                                                            ).animateOnPageLoad(animationsMap['progressBarOnPageLoadAnimation3']!),
                                                                                         ],
                                                                                       ),
                                                                                     ),
                                                                                   ],
                                                                                 ),
                                                                               ),
-                                                                              Row(
-                                                                                mainAxisSize: MainAxisSize.min,
-                                                                                children: [
-                                                                                  Padding(
-                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(50.0, 4.0, 4.0, 0.0),
-                                                                                    child: Text(
-                                                                                      'Sad,Fatigue',
-                                                                                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                                                                                            fontFamily: 'Outfit',
-                                                                                            fontSize: 26.0,
-                                                                                          ),
-                                                                                    ),
-                                                                                  ),
-                                                                                  Padding(
-                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                                                                                    child: ClipRRect(
-                                                                                      borderRadius: BorderRadius.circular(100.0),
-                                                                                      child: Image.asset(
-                                                                                        'assets/images/Screenshot_2023-11-30_143343.png',
-                                                                                        width: 40.0,
-                                                                                        height: 40.0,
-                                                                                        fit: BoxFit.cover,
+                                                                              Padding(
+                                                                                padding: const EdgeInsetsDirectional.fromSTEB(7.0, 0.0, 0.0, 0.0),
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.min,
+                                                                                  children: [
+                                                                                    Padding(
+                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(50.0, 4.0, 4.0, 0.0),
+                                                                                      child: Text(
+                                                                                        'Sad,Fatigue',
+                                                                                        style: FlutterFlowTheme.of(context).displaySmall.override(
+                                                                                              fontFamily: 'Outfit',
+                                                                                              fontSize: 26.0,
+                                                                                            ),
                                                                                       ),
                                                                                     ),
-                                                                                  ),
-                                                                                  Align(
-                                                                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                    child: Stack(
-                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                      children: [
-                                                                                        if (responsiveVisibility(
-                                                                                          context: context,
-                                                                                          tabletLandscape: false,
-                                                                                        ))
-                                                                                          Align(
-                                                                                            alignment: const AlignmentDirectional(-1.0, 0.0),
-                                                                                            child: Padding(
-                                                                                              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                                                                                              child: CircularPercentIndicator(
-                                                                                                percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'sad'),
-                                                                                                radius: 30.0,
-                                                                                                lineWidth: 8.0,
-                                                                                                animation: true,
-                                                                                                animateFromLastPercent: true,
-                                                                                                progressColor: FlutterFlowTheme.of(context).primary,
-                                                                                                backgroundColor: const Color(0x8B4036A4),
-                                                                                                center: Text(
-                                                                                                  formatNumber(
-                                                                                                    functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'sad'),
-                                                                                                    formatType: FormatType.percent,
-                                                                                                  ),
-                                                                                                  style: FlutterFlowTheme.of(context).headlineMedium,
-                                                                                                ),
-                                                                                              ).animateOnPageLoad(animationsMap['progressBarOnPageLoadAnimation4']!),
-                                                                                            ),
-                                                                                          ),
-                                                                                      ],
+                                                                                    Padding(
+                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                                                                                      child: ClipRRect(
+                                                                                        borderRadius: BorderRadius.circular(100.0),
+                                                                                        child: Image.asset(
+                                                                                          'assets/images/Screenshot_2023-11-30_143343.png',
+                                                                                          width: 40.0,
+                                                                                          height: 40.0,
+                                                                                          fit: BoxFit.cover,
+                                                                                        ),
+                                                                                      ),
                                                                                     ),
-                                                                                  ),
-                                                                                ],
+                                                                                    Align(
+                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                      child: Stack(
+                                                                                        alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                        children: [
+                                                                                          if (responsiveVisibility(
+                                                                                            context: context,
+                                                                                            tabletLandscape: false,
+                                                                                          ))
+                                                                                            Align(
+                                                                                              alignment: const AlignmentDirectional(-1.0, 0.0),
+                                                                                              child: Padding(
+                                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                                                                                                child: CircularPercentIndicator(
+                                                                                                  percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'sad'),
+                                                                                                  radius: 30.0,
+                                                                                                  lineWidth: 8.0,
+                                                                                                  animation: true,
+                                                                                                  animateFromLastPercent: true,
+                                                                                                  progressColor: FlutterFlowTheme.of(context).primary,
+                                                                                                  backgroundColor: const Color(0x8B4036A4),
+                                                                                                  center: Text(
+                                                                                                    formatNumber(
+                                                                                                      functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'sad'),
+                                                                                                      formatType: FormatType.percent,
+                                                                                                    ),
+                                                                                                    style: FlutterFlowTheme.of(context).headlineMedium,
+                                                                                                  ),
+                                                                                                ).animateOnPageLoad(animationsMap['progressBarOnPageLoadAnimation4']!),
+                                                                                              ),
+                                                                                            ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
                                                                               ),
                                                                             ],
                                                                           ),
@@ -1512,7 +1512,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                     children: [
                                                                       Padding(
                                                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            40.0,
+                                                                            50.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),

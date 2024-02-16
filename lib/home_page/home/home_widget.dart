@@ -275,12 +275,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                               .set(createSessionRecordData(
                             disabledProfile: _model.queredDisabled?.reference,
                             startAt: getCurrentTimestamp,
+                            endAt: getCurrentTimestamp,
                           ));
                           _model.sessionId = SessionRecord.getDocumentFromData(
                               createSessionRecordData(
                                 disabledProfile:
                                     _model.queredDisabled?.reference,
                                 startAt: getCurrentTimestamp,
+                                endAt: getCurrentTimestamp,
                               ),
                               sessionRecordReference);
 

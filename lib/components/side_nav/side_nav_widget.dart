@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -51,7 +52,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
         tablet: false,
       ),
       child: Container(
-        width: 270.0,
+        width: 200.0,
         height: double.infinity,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
@@ -410,7 +411,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                                         context, ThemeMode.light);
                                   },
                                   child: Container(
-                                    width: 115.0,
+                                    width: 70.0,
                                     height: 100.0,
                                     decoration: BoxDecoration(
                                       color: Theme.of(context).brightness ==
@@ -434,44 +435,15 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                                         width: 1.0,
                                       ),
                                     ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.wb_sunny_rounded,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.light
-                                              ? FlutterFlowTheme.of(context)
-                                                  .primaryText
-                                              : FlutterFlowTheme.of(context)
-                                                  .secondaryText,
-                                          size: 16.0,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  4.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Light Mode',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: Theme.of(context)
-                                                              .brightness ==
-                                                          Brightness.light
-                                                      ? FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText
-                                                      : FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondaryText,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
+                                    child: Icon(
+                                      Icons.wb_sunny_rounded,
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.light
+                                          ? FlutterFlowTheme.of(context)
+                                              .primaryText
+                                          : FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                      size: 16.0,
                                     ),
                                   ),
                                 ),
@@ -486,7 +458,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                                     setDarkModeSetting(context, ThemeMode.dark);
                                   },
                                   child: Container(
-                                    width: 115.0,
+                                    width: 70.0,
                                     height: 100.0,
                                     decoration: BoxDecoration(
                                       color: Theme.of(context).brightness ==
@@ -510,44 +482,15 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                                         width: 1.0,
                                       ),
                                     ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.nightlight_round,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? FlutterFlowTheme.of(context)
-                                                  .primaryText
-                                              : FlutterFlowTheme.of(context)
-                                                  .secondaryText,
-                                          size: 16.0,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  4.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Dark Mode',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: Theme.of(context)
-                                                              .brightness ==
-                                                          Brightness.dark
-                                                      ? FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText
-                                                      : FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondaryText,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
+                                    child: Icon(
+                                      Icons.nightlight_round,
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? FlutterFlowTheme.of(context)
+                                              .primaryText
+                                          : FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                      size: 16.0,
                                     ),
                                   ),
                                 ),
@@ -578,32 +521,20 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AuthUserStreamWidget(
-                              builder: (context) => Text(
+                              builder: (context) => AutoSizeText(
                                 currentUserDisplayName,
                                 style: FlutterFlowTheme.of(context).bodyLarge,
+                                minFontSize: 10.0,
                               ),
                             ),
-                            Text(
+                            AutoSizeText(
                               currentUserEmail,
                               style: FlutterFlowTheme.of(context).labelMedium,
+                              minFontSize: 8.0,
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.menu_open_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 24.0,
                     ),
                   ],
                 ),

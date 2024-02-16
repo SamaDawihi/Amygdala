@@ -100,6 +100,8 @@ double getEmotionPercentage(
   double result;
   int all = happy + sad + angry + relaxed + natural;
 
+  if (all == 0) return 0;
+
   if (wanted == "happy")
     result = happy / all;
   else if (wanted == "sad")
