@@ -3,6 +3,14 @@ import 'login_widget.dart' show LoginWidget;
 import 'package:flutter/material.dart';
 
 class LoginModel extends FlutterFlowModel<LoginWidget> {
+  ///  Local state fields for this page.
+
+  String? loginEmailErr;
+
+  String? loginErr;
+
+  String? loginPasswordErr;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

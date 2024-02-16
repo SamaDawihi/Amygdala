@@ -118,8 +118,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                               happy: 0,
                               sad: 0,
                               angry: 0,
-                              bored: 0,
                               natural: 0,
+                              relaxed: 0,
                             ),
                             ...mapToFirestore(
                               {
@@ -133,8 +133,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                               happy: 0,
                               sad: 0,
                               angry: 0,
-                              bored: 0,
                               natural: 0,
+                              relaxed: 0,
                             ),
                             ...mapToFirestore(
                               {
@@ -231,6 +231,33 @@ class _HomeWidgetState extends State<HomeWidget> {
                         setState(() {});
                       },
                       text: 'Start a Session ',
+                      options: FFButtonOptions(
+                        width: 400.0,
+                        height: 100.0,
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: const Color(0x8B4036A4),
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.white,
+                                  fontSize: 30.0,
+                                ),
+                        elevation: 3.0,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    FFButtonWidget(
+                      onPressed: () async {
+                        context.goNamed('SessionNoBCI');
+                      },
+                      text: 'No BCI Session ',
                       options: FFButtonOptions(
                         width: 400.0,
                         height: 100.0,

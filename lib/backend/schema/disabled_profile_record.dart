@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -56,6 +55,11 @@ class DisabledProfileRecord extends FirestoreRecord {
   String get facialHair => _facialHair ?? '';
   bool hasFacialHair() => _facialHair != null;
 
+  // "name" field.
+  String? _name;
+  String get name => _name ?? '';
+  bool hasName() => _name != null;
+
   void _initializeFields() {
     _caregiverID = snapshotData['caregiverID'] as DocumentReference?;
     _isMale = snapshotData['isMale'] as bool?;
@@ -65,6 +69,7 @@ class DisabledProfileRecord extends FirestoreRecord {
     _eyeColor = snapshotData['eyeColor'] as String?;
     _skinColor = snapshotData['skinColor'] as String?;
     _facialHair = snapshotData['facialHair'] as String?;
+    _name = snapshotData['name'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -110,6 +115,7 @@ Map<String, dynamic> createDisabledProfileRecordData({
   String? eyeColor,
   String? skinColor,
   String? facialHair,
+  String? name,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -121,6 +127,7 @@ Map<String, dynamic> createDisabledProfileRecordData({
       'eyeColor': eyeColor,
       'skinColor': skinColor,
       'facialHair': facialHair,
+      'name': name,
     }.withoutNulls,
   );
 
@@ -140,7 +147,8 @@ class DisabledProfileRecordDocumentEquality
         e1?.hairColor == e2?.hairColor &&
         e1?.eyeColor == e2?.eyeColor &&
         e1?.skinColor == e2?.skinColor &&
-        e1?.facialHair == e2?.facialHair;
+        e1?.facialHair == e2?.facialHair &&
+        e1?.name == e2?.name;
   }
 
   @override
@@ -152,7 +160,8 @@ class DisabledProfileRecordDocumentEquality
         e?.hairColor,
         e?.eyeColor,
         e?.skinColor,
-        e?.facialHair
+        e?.facialHair,
+        e?.name
       ]);
 
   @override

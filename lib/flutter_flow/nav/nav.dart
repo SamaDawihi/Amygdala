@@ -95,14 +95,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HomeWidget(),
         ),
         FFRoute(
-          name: 'History',
-          path: '/history',
-          builder: (context, params) => const HistoryWidget(),
-        ),
-        FFRoute(
-          name: 'Session',
-          path: '/session',
-          builder: (context, params) => const SessionWidget(),
+          name: 'SessionNoBCI',
+          path: '/sessionNoBCI',
+          builder: (context, params) => const SessionNoBCIWidget(),
         ),
         FFRoute(
           name: 'SessionPic',
@@ -123,11 +118,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'CreateProfile',
           path: '/createProfile',
           builder: (context, params) => const CreateProfileWidget(),
-        ),
-        FFRoute(
-          name: 'EditProfile',
-          path: '/editProfile',
-          builder: (context, params) => const EditProfileWidget(),
         ),
         FFRoute(
           name: 'EditAccount',
@@ -161,6 +151,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ['DisabledProfile', 'Session']),
             facialhair: params.getParam('facialhair', ParamType.String),
           ),
+        ),
+        FFRoute(
+          name: 'HomeCopy',
+          path: '/homeCopy',
+          builder: (context, params) => const HomeCopyWidget(),
+        ),
+        FFRoute(
+          name: 'EditProfile',
+          path: '/EditProfile',
+          builder: (context, params) => const EditProfileWidget(),
+        ),
+        FFRoute(
+          name: 'profile',
+          path: '/Profile',
+          builder: (context, params) => const ProfileWidget(),
+        ),
+        FFRoute(
+          name: 'BciSetttings',
+          path: '/BciSetttings',
+          builder: (context, params) => const BciSetttingsWidget(),
+        ),
+        FFRoute(
+          name: 'History',
+          path: '/history',
+          builder: (context, params) => const HistoryWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

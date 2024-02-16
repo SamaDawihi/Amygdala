@@ -1,14 +1,17 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'emo_filter_widget.dart' show EmoFilterWidget;
+import 'emotion_filter_widget.dart' show EmotionFilterWidget;
 import 'package:flutter/material.dart';
 
-class EmoFilterModel extends FlutterFlowModel<EmoFilterWidget> {
+class EmotionFilterModel extends FlutterFlowModel<EmotionFilterWidget> {
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for ChoiceChips widget.
-  String? choiceChipsValue;
   FormFieldController<List<String>>? choiceChipsValueController;
+  String? get choiceChipsValue =>
+      choiceChipsValueController?.value?.firstOrNull;
+  set choiceChipsValue(String? val) =>
+      choiceChipsValueController?.value = val != null ? [val] : [];
 
   /// Initialization and disposal methods.
 

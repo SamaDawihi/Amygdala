@@ -94,8 +94,16 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100.0),
-                      child: Image.asset(
-                        'assets/images/Screenshot_2023-11-30_143639.png',
+                      child: Image.network(
+                        valueOrDefault<String>(
+                          functions.getMaxEmotionImage(functions.getMaxEmotion(
+                              columnSessionRecord.happy,
+                              columnSessionRecord.sad,
+                              columnSessionRecord.angry,
+                              columnSessionRecord.relaxed,
+                              columnSessionRecord.natural)),
+                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nbozqsm1b5v1/Screenshot_2023-11-30_144219.png',
+                        ),
                         width: 50.0,
                         height: 50.0,
                         fit: BoxFit.cover,
@@ -107,7 +115,12 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                       child: Text(
-                        functions.getMaxEmotion(widget.session!.happy),
+                        functions.getMaxEmotion(
+                            widget.session!.happy,
+                            columnSessionRecord.sad,
+                            columnSessionRecord.angry,
+                            columnSessionRecord.relaxed,
+                            columnSessionRecord.natural),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               fontWeight: FontWeight.bold,

@@ -4,18 +4,18 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'emo_filter_model.dart';
-export 'emo_filter_model.dart';
+import 'emotion_filter_model.dart';
+export 'emotion_filter_model.dart';
 
-class EmoFilterWidget extends StatefulWidget {
-  const EmoFilterWidget({super.key});
+class EmotionFilterWidget extends StatefulWidget {
+  const EmotionFilterWidget({super.key});
 
   @override
-  State<EmoFilterWidget> createState() => _EmoFilterWidgetState();
+  State<EmotionFilterWidget> createState() => _EmotionFilterWidgetState();
 }
 
-class _EmoFilterWidgetState extends State<EmoFilterWidget> {
-  late EmoFilterModel _model;
+class _EmotionFilterWidgetState extends State<EmotionFilterWidget> {
+  late EmotionFilterModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -26,7 +26,7 @@ class _EmoFilterWidgetState extends State<EmoFilterWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EmoFilterModel());
+    _model = createModel(context, () => EmotionFilterModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -54,13 +54,13 @@ class _EmoFilterWidgetState extends State<EmoFilterWidget> {
               options: const [
                 ChipData('All'),
                 ChipData('Happy'),
-                ChipData('Calm'),
-                ChipData('Nuetural'),
-                ChipData('Fatigue'),
-                ChipData('Tense')
+                ChipData('Relaxed'),
+                ChipData('Sad'),
+                ChipData('Angry'),
+                ChipData('Neutral')
               ],
               onChanged: (val) =>
-                  setState(() => _model.choiceChipsValue = val?.first),
+                  setState(() => _model.choiceChipsValue = val?.firstOrNull),
               selectedChipStyle: ChipStyle(
                 backgroundColor: const Color(0xFF4036A4),
                 textStyle: FlutterFlowTheme.of(context).bodyMedium.override(

@@ -1,4 +1,4 @@
-import '/components/confirm_log_out/confirm_log_out_widget.dart';
+import '/account_pages/confirm_log_out/confirm_log_out_widget.dart';
 import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';

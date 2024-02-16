@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -41,15 +40,15 @@ class SessionRecord extends FirestoreRecord {
   int get angry => _angry ?? 0;
   bool hasAngry() => _angry != null;
 
-  // "bored" field.
-  int? _bored;
-  int get bored => _bored ?? 0;
-  bool hasBored() => _bored != null;
-
   // "natural" field.
   int? _natural;
   int get natural => _natural ?? 0;
   bool hasNatural() => _natural != null;
+
+  // "relaxed" field.
+  int? _relaxed;
+  int get relaxed => _relaxed ?? 0;
+  bool hasRelaxed() => _relaxed != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
@@ -59,8 +58,8 @@ class SessionRecord extends FirestoreRecord {
     _happy = castToType<int>(snapshotData['happy']);
     _sad = castToType<int>(snapshotData['sad']);
     _angry = castToType<int>(snapshotData['angry']);
-    _bored = castToType<int>(snapshotData['bored']);
     _natural = castToType<int>(snapshotData['natural']);
+    _relaxed = castToType<int>(snapshotData['relaxed']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -108,8 +107,8 @@ Map<String, dynamic> createSessionRecordData({
   int? happy,
   int? sad,
   int? angry,
-  int? bored,
   int? natural,
+  int? relaxed,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -118,8 +117,8 @@ Map<String, dynamic> createSessionRecordData({
       'happy': happy,
       'sad': sad,
       'angry': angry,
-      'bored': bored,
       'natural': natural,
+      'relaxed': relaxed,
     }.withoutNulls,
   );
 
@@ -136,13 +135,20 @@ class SessionRecordDocumentEquality implements Equality<SessionRecord> {
         e1?.happy == e2?.happy &&
         e1?.sad == e2?.sad &&
         e1?.angry == e2?.angry &&
-        e1?.bored == e2?.bored &&
-        e1?.natural == e2?.natural;
+        e1?.natural == e2?.natural &&
+        e1?.relaxed == e2?.relaxed;
   }
 
   @override
-  int hash(SessionRecord? e) => const ListEquality().hash(
-      [e?.startAt, e?.endAt, e?.happy, e?.sad, e?.angry, e?.bored, e?.natural]);
+  int hash(SessionRecord? e) => const ListEquality().hash([
+        e?.startAt,
+        e?.endAt,
+        e?.happy,
+        e?.sad,
+        e?.angry,
+        e?.natural,
+        e?.relaxed
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is SessionRecord;

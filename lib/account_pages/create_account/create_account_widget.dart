@@ -691,7 +691,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 7.0),
                                         child: Text(
-                                          _model.emailErr!,
+                                          _model.repasserror!,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(

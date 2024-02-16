@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '/backend/backend.dart';
-import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -27,26 +25,46 @@ class FFAppState extends ChangeNotifier {
   set isLightMode(bool value) {
     _isLightMode = value;
   }
-}
 
-LatLng? _latLngFromString(String? val) {
-  if (val == null) {
-    return null;
+  List<String> _emotions = ['Happy', 'Angry', 'Natural', 'Sad', 'Relaxed'];
+  List<String> get emotions => _emotions;
+  set emotions(List<String> value) {
+    _emotions = value;
   }
-  final split = val.split(',');
-  final lat = double.parse(split.first);
-  final lng = double.parse(split.last);
-  return LatLng(lat, lng);
-}
 
-void _safeInit(Function() initializeField) {
-  try {
-    initializeField();
-  } catch (_) {}
-}
+  void addToEmotions(String value) {
+    _emotions.add(value);
+  }
 
-Future _safeInitAsync(Function() initializeField) async {
-  try {
-    await initializeField();
-  } catch (_) {}
+  void removeFromEmotions(String value) {
+    _emotions.remove(value);
+  }
+
+  void removeAtIndexFromEmotions(int index) {
+    _emotions.removeAt(index);
+  }
+
+  void updateEmotionsAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    _emotions[index] = updateFn(_emotions[index]);
+  }
+
+  void insertAtIndexInEmotions(int index, String value) {
+    _emotions.insert(index, value);
+  }
+
+  String _clientId = 'CkXnClNZKVdp00AN3EsXWwXtWhocR57vkG46NEx0';
+  String get clientId => _clientId;
+  set clientId(String value) {
+    _clientId = value;
+  }
+
+  String _clientSecret =
+      'uNvvXqglXVktp3nlzN7zNjLragEktCBYRoLVQWfrF0mkC1l3c3Lbnc91gdjRpfgl6tX0VpMKVFq6Q7dknHN4McGxFLu99kLGIy9Mi61R9mGQfK4Nshqbc1M3JjwXoP3W';
+  String get clientSecret => _clientSecret;
+  set clientSecret(String value) {
+    _clientSecret = value;
+  }
 }
