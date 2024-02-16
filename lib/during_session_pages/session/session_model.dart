@@ -1,11 +1,15 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'session_no_b_c_i_widget.dart' show SessionNoBCIWidget;
+import 'session_widget.dart' show SessionWidget;
 import 'package:flutter/material.dart';
 
-class SessionNoBCIModel extends FlutterFlowModel<SessionNoBCIWidget> {
+class SessionModel extends FlutterFlowModel<SessionWidget> {
   ///  Local state fields for this page.
 
   bool doneCoditionChecking = false;
@@ -32,9 +36,11 @@ class SessionNoBCIModel extends FlutterFlowModel<SessionNoBCIWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (Replicate Image)] action in SessionNoBCI widget.
+  // Stores action output result for [Action Block - getPredictedEmotion] action in Session widget.
+  MetStruct? metObject;
+  // Stores action output result for [Backend Call - API (Replicate Image)] action in Session widget.
   ApiCallResponse? getImageIdApi;
-  // Stores action output result for [Backend Call - API (get image)] action in SessionNoBCI widget.
+  // Stores action output result for [Backend Call - API (get image)] action in Session widget.
   ApiCallResponse? getImageApiCall;
   // State field(s) for Timer widget.
   int timerMilliseconds = 30000;
@@ -59,7 +65,20 @@ class SessionNoBCIModel extends FlutterFlowModel<SessionNoBCIWidget> {
 
   /// Action blocks are added here.
 
-  Future getPredictedEmotion(BuildContext context) async {}
+  Future<MetStruct> getPredictedEmotion(BuildContext context) async {
+    String? authorizeAction;
+    MetStruct? metObject;
+
+    authorizeAction = await actions.fAuthorize(
+      FFAppState().clientId,
+      FFAppState().clientSecret,
+    );
+    metObject = await actions.gSubscribeMet(
+      functions.bci5GetCortexToken(authorizeAction),
+      headsetId!,
+    );
+    return metObject;
+  }
 
   /// Additional helper methods are added here.
 }

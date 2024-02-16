@@ -129,7 +129,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               sessionRecordReference);
 
                           context.goNamed(
-                            'SessionNoBCI',
+                            'Session',
                             queryParameters: {
                               'disabledProfile': serializeParam(
                                 _model.queredDisabled,
@@ -145,7 +145,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             },
                           );
                         } else {
-                          context.pushNamed('SessionNoBCI');
+                          context.pushNamed('Session');
                         }
 
                         setState(() {});

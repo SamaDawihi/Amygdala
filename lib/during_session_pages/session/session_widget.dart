@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -12,11 +13,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'session_no_b_c_i_model.dart';
-export 'session_no_b_c_i_model.dart';
+import 'session_model.dart';
+export 'session_model.dart';
 
-class SessionNoBCIWidget extends StatefulWidget {
-  const SessionNoBCIWidget({
+class SessionWidget extends StatefulWidget {
+  const SessionWidget({
     super.key,
     this.disabledProfile,
     this.createdSession,
@@ -26,29 +27,107 @@ class SessionNoBCIWidget extends StatefulWidget {
   final DocumentReference? createdSession;
 
   @override
-  State<SessionNoBCIWidget> createState() => _SessionNoBCIWidgetState();
+  State<SessionWidget> createState() => _SessionWidgetState();
 }
 
-class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
-  late SessionNoBCIModel _model;
+class _SessionWidgetState extends State<SessionWidget> {
+  late SessionModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SessionNoBCIModel());
+    _model = createModel(context, () => SessionModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await action_blocks.checkBCIConnection(context);
+      if (FFAppState().connectionStatus.availableHeadsets.isNotEmpty) {
+        if (FFAppState()
+            .connectionStatus
+            .availableHeadsets
+            .contains(FFAppState().defaultHeadset)) {
+          setState(() {
+            _model.headsetId = FFAppState().defaultHeadset;
+          });
+        } else {
+          setState(() {
+            _model.headsetId =
+                FFAppState().connectionStatus.availableHeadsets.first;
+          });
+        }
+      } else {
+        var confirmDialogResponse = await showDialog<bool>(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  title: const Text('BCI ERROR'),
+                  content: const Text('No Available Headsets'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                      child: const Text('Continue With Random Emotion'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                      child: const Text('Check Connection Settings'),
+                    ),
+                  ],
+                );
+              },
+            ) ??
+            false;
+        if (confirmDialogResponse) {
+          context.pushNamed('BciSetttings');
+
+          return;
+        }
+      }
+
+      setState(() {
+        _model.doneCoditionChecking = true;
+      });
       while (!_model.terminated) {
         _model.timerController.onResetTimer();
 
-        setState(() {
-          _model.predictedEmotion =
-              FFAppState().emotions[random_data.randomInteger(0, 4)];
-          _model.doneCoditionChecking = true;
-        });
+        if (_model.headsetId != null && _model.headsetId != '') {
+          _model.metObject = await _model.getPredictedEmotion(context);
+          if (_model.metObject!.engagementSet &&
+              _model.metObject!.interestSet) {
+            setState(() {
+              _model.predictedEmotion =
+                  functions.getEmotionByInterestEngagement(
+                      _model.metObject!.interest, _model.metObject!.engagement);
+            });
+          } else {
+            await showDialog(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  title: const Text('Low accuracy'),
+                  content: const Text('adjust accuricy or check connection'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext),
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                );
+              },
+            );
+
+            context.goNamed('BciSetttings');
+
+            return;
+          }
+        } else {
+          setState(() {
+            _model.predictedEmotion =
+                FFAppState().emotions[random_data.randomInteger(0, 4)];
+          });
+        }
+
         if (widget.createdSession != null) {
           await widget.createdSession!.update({
             ...createSessionRecordData(

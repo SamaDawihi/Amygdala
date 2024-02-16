@@ -4,7 +4,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
+import '/custom_code/actions/index.dart' as actions;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'bci_setttings_model.dart';
@@ -26,6 +29,11 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BciSetttingsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await action_blocks.checkBCIConnection(context);
+    });
 
     _model.textController1 ??=
         TextEditingController(text: FFAppState().clientId);
@@ -519,6 +527,43 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                         ].divide(const SizedBox(width: 10.0)),
                       ),
                     ),
+                    FFButtonWidget(
+                      onPressed: () async {
+                        _model.getUserLoginAction =
+                            await actions.bGetUserLogin();
+                        setState(() {
+                          _model.result = _model.getUserLoginAction!;
+                        });
+
+                        setState(() {});
+                      },
+                      text: 'Button',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    SelectionArea(
+                        child: AutoSizeText(
+                      _model.result,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      minFontSize: 8.0,
+                    )),
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           30.0, 30.0, 30.0, 25.0),
@@ -564,10 +609,16 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                             .headlineLarge,
                                       ),
                                       FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          setState(() {
+                                            FFAppState().defaultHeadset =
+                                                headsetItem;
+                                          });
                                         },
-                                        text: 'Set Default',
+                                        text: headsetItem ==
+                                                FFAppState().defaultHeadset
+                                            ? 'Default'
+                                            : 'Set Default',
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
@@ -576,8 +627,12 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                           iconPadding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
+                                          color: headsetItem ==
+                                                  FFAppState().defaultHeadset
+                                              ? FlutterFlowTheme.of(context)
+                                                  .success
+                                              : FlutterFlowTheme.of(context)
+                                                  .primary,
                                           textStyle:
                                               FlutterFlowTheme.of(context)
                                                   .titleSmall

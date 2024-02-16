@@ -54,19 +54,16 @@ class _ConnectionStatusWidgetState extends State<ConnectionStatusWidget> {
                 : FlutterFlowTheme.of(context).error,
             size: 24.0,
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
-            child: AutoSizeText(
-              FFAppState().connectionStatus.status,
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Readex Pro',
-                    color: FlutterFlowTheme.of(context).secondaryText,
-                    fontWeight: FontWeight.w800,
-                  ),
-              minFontSize: 8.0,
-            ),
+          AutoSizeText(
+            FFAppState().connectionStatus.status,
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'Readex Pro',
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  fontWeight: FontWeight.w800,
+                ),
+            minFontSize: 8.0,
           ),
-        ],
+        ].divide(const SizedBox(width: 4.0)),
       ),
     );
   }

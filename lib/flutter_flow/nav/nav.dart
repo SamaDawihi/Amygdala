@@ -97,14 +97,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HomeWidget(),
         ),
         FFRoute(
-          name: 'SessionNoBCI',
-          path: '/sessionNoBCI',
+          name: 'Session',
+          path: '/session',
           requireAuth: true,
           asyncParams: {
             'disabledProfile':
                 getDoc(['DisabledProfile'], DisabledProfileRecord.fromSnapshot),
           },
-          builder: (context, params) => SessionNoBCIWidget(
+          builder: (context, params) => SessionWidget(
             disabledProfile:
                 params.getParam('disabledProfile', ParamType.Document),
             createdSession: params.getParam('createdSession',

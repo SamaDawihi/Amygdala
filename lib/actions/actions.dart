@@ -12,7 +12,7 @@ Future checkBCIConnection(BuildContext context) async {
   getCortexInfoAction = await actions.aGetCortexInfo();
   if (functions.bci1GetEmotivIsInstalled(getCortexInfoAction)) {
     getUserLoginAction = await actions.bGetUserLogin();
-    if (functions.bci2GetIsUserLogedIn(getHasAccessRightAction!)) {
+    if (functions.bci2GetIsUserLogedIn(getUserLoginAction)) {
       getHasAccessRightAction = await actions.dHasAccessRight(
         FFAppState().clientId,
         FFAppState().clientSecret,
@@ -37,7 +37,7 @@ Future checkBCIConnection(BuildContext context) async {
           FFAppState().update(() {
             FFAppState().updateConnectionStatusStruct(
               (e) => e
-                ..status = 'Device Is Not Connected'
+                ..status = 'BCI Not Connected'
                 ..details =
                     'Make sure to connect the device through the Emotiv Launcher App'
                 ..availableHeadsets = []
@@ -51,7 +51,7 @@ Future checkBCIConnection(BuildContext context) async {
         FFAppState().update(() {
           FFAppState().updateConnectionStatusStruct(
             (e) => e
-              ..status = 'Access right is required'
+              ..status = 'Error3'
               ..details = 'Request Access from BCI Settings Page'
               ..availableHeadsets = []
               ..lastChecked = getCurrentTimestamp
@@ -64,7 +64,7 @@ Future checkBCIConnection(BuildContext context) async {
       FFAppState().update(() {
         FFAppState().updateConnectionStatusStruct(
           (e) => e
-            ..status = 'Not Logged in Emotiv'
+            ..status = 'Error2'
             ..details = 'Log in through Emotiv Launcher app'
             ..availableHeadsets = []
             ..lastChecked = getCurrentTimestamp
@@ -77,8 +77,8 @@ Future checkBCIConnection(BuildContext context) async {
     FFAppState().update(() {
       FFAppState().updateConnectionStatusStruct(
         (e) => e
-          ..status = 'Emotiv is not installed'
-          ..details = 'Install Emotiv launcher to continue'
+          ..status = 'Error1'
+          ..details = 'Install Emotiv launcher to be Able To Connect'
           ..availableHeadsets = []
           ..lastChecked = getCurrentTimestamp
           ..condition = 0,
@@ -87,5 +87,3 @@ Future checkBCIConnection(BuildContext context) async {
     return;
   }
 }
-
-Future getAvailableHeadsets(BuildContext context) async {}

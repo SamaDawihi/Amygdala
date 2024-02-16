@@ -5,6 +5,10 @@ import 'bci_setttings_widget.dart' show BciSetttingsWidget;
 import 'package:flutter/material.dart';
 
 class BciSetttingsModel extends FlutterFlowModel<BciSetttingsWidget> {
+  ///  Local state fields for this page.
+
+  String result = 'no Action Yet';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -18,6 +22,8 @@ class BciSetttingsModel extends FlutterFlowModel<BciSetttingsWidget> {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
+  // Stores action output result for [Custom Action - bGetUserLogin] action in Button widget.
+  String? getUserLoginAction;
   // Model for connectionStatus component.
   late ConnectionStatusModel connectionStatusModel;
 

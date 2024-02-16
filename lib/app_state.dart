@@ -30,6 +30,9 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _defaultHeadset = prefs.getString('ff_defaultHeadset') ?? _defaultHeadset;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -99,6 +102,13 @@ class FFAppState extends ChangeNotifier {
   void updateConnectionStatusStruct(Function(ConnectionStatusStruct) updateFn) {
     updateFn(_connectionStatus);
     prefs.setString('ff_connectionStatus', _connectionStatus.serialize());
+  }
+
+  String _defaultHeadset = '';
+  String get defaultHeadset => _defaultHeadset;
+  set defaultHeadset(String value) {
+    _defaultHeadset = value;
+    prefs.setString('ff_defaultHeadset', value);
   }
 }
 
