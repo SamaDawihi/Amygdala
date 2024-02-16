@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'connection_status_model.dart';
@@ -46,20 +47,23 @@ class _ConnectionStatusWidgetState extends State<ConnectionStatusWidget> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
+          Icon(
             Icons.circle_sharp,
-            color: Color(0xFFDE1818),
+            color: FFAppState().connectionStatus.condition >= 4
+                ? FlutterFlowTheme.of(context).success
+                : FlutterFlowTheme.of(context).error,
             size: 24.0,
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
-            child: Text(
-              'BCI disconnected',
+            child: AutoSizeText(
+              FFAppState().connectionStatus.status,
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Readex Pro',
                     color: FlutterFlowTheme.of(context).secondaryText,
                     fontWeight: FontWeight.w800,
                   ),
+              minFontSize: 8.0,
             ),
           ),
         ],

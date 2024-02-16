@@ -3,6 +3,7 @@ import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -318,238 +319,14 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                           const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 20.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Align(
-                                    alignment: const AlignmentDirectional(-1.0, -1.0),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 20.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Connection Status ',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              fontSize: 40.0,
-                                            ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 15.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
-                                  },
-                                  text: 'Recheck',
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: Colors.white,
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Align(
-                      alignment: const AlignmentDirectional(-1.0, -1.0),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 20.0, 30.0, 20.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    40.0, 0.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Container(
-                                        width: 20.0,
-                                        height: 20.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          shape: BoxShape.circle,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      ' Installed Emotiv Launcher',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 10.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Container(
-                                        width: 20.0,
-                                        height: 20.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          shape: BoxShape.circle,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      '   Logged In Emotiv Launcher',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 10.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Container(
-                                        width: 20.0,
-                                        height: 20.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          shape: BoxShape.circle,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      '   Have Access Right',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 10.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Container(
-                                        width: 20.0,
-                                        height: 20.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          shape: BoxShape.circle,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      ' Device Connected',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    100.0, 0.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
-                                  },
-                                  text: 'Request Access',
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: Colors.white,
-                                        ),
-                                    elevation: 0.0,
-                                    borderRadius: BorderRadius.circular(0.0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          30.0, 30.0, 30.0, 25.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Align(
                             alignment: const AlignmentDirectional(-1.0, -1.0),
                             child: Text(
-                              'Available HeadSet',
+                              'Connection Status ',
+                              textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -559,25 +336,11 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                   ),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Device ID',
-                            style: FlutterFlowTheme.of(context).headlineLarge,
-                          ),
                           FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              await action_blocks.checkBCIConnection(context);
                             },
-                            text: 'Set Default',
+                            text: 'Recheck',
                             options: FFButtonOptions(
                               height: 40.0,
                               padding: const EdgeInsetsDirectional.fromSTEB(
@@ -602,7 +365,245 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                         ],
                       ),
                     ),
-                  ],
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: Container(
+                                      width: 20.0,
+                                      height: 20.0,
+                                      decoration: BoxDecoration(
+                                        color: FFAppState()
+                                                    .connectionStatus
+                                                    .condition >=
+                                                1
+                                            ? FlutterFlowTheme.of(context)
+                                                .success
+                                            : FlutterFlowTheme.of(context)
+                                                .error,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    ' Installed Emotiv Launcher',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                ].divide(const SizedBox(width: 5.0)),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: Container(
+                                      width: 20.0,
+                                      height: 20.0,
+                                      decoration: BoxDecoration(
+                                        color: FFAppState()
+                                                    .connectionStatus
+                                                    .condition >=
+                                                2
+                                            ? FlutterFlowTheme.of(context)
+                                                .success
+                                            : FlutterFlowTheme.of(context)
+                                                .error,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    '   Logged In Emotiv Launcher',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                ].divide(const SizedBox(width: 5.0)),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: Container(
+                                      width: 20.0,
+                                      height: 20.0,
+                                      decoration: BoxDecoration(
+                                        color: FFAppState()
+                                                    .connectionStatus
+                                                    .condition >=
+                                                3
+                                            ? FlutterFlowTheme.of(context)
+                                                .success
+                                            : FlutterFlowTheme.of(context)
+                                                .error,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    '   Have Access Right',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                ].divide(const SizedBox(width: 5.0)),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: Container(
+                                      width: 20.0,
+                                      height: 20.0,
+                                      decoration: BoxDecoration(
+                                        color: FFAppState()
+                                                    .connectionStatus
+                                                    .condition >=
+                                                4
+                                            ? FlutterFlowTheme.of(context)
+                                                .success
+                                            : FlutterFlowTheme.of(context)
+                                                .error,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    ' Device Connected',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                ].divide(const SizedBox(width: 5.0)),
+                              ),
+                            ].divide(const SizedBox(width: 15.0)),
+                          ),
+                          if (FFAppState().connectionStatus.condition == 2)
+                            FFButtonWidget(
+                              onPressed: () {
+                                print('Button pressed ...');
+                              },
+                              text: 'Request Access',
+                              options: FFButtonOptions(
+                                height: 40.0,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: Colors.white,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: const BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                        ].divide(const SizedBox(width: 10.0)),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          30.0, 30.0, 30.0, 25.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: const AlignmentDirectional(-1.0, -1.0),
+                            child: Text(
+                              'Available HeadSet',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    fontSize: 40.0,
+                                  ),
+                            ),
+                          ),
+                          Builder(
+                            builder: (context) {
+                              final headset = FFAppState()
+                                  .connectionStatus
+                                  .availableHeadsets
+                                  .toList();
+                              return ListView.separated(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: headset.length,
+                                separatorBuilder: (_, __) =>
+                                    const SizedBox(height: 15.0),
+                                itemBuilder: (context, headsetIndex) {
+                                  final headsetItem = headset[headsetIndex];
+                                  return Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        headsetItem,
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineLarge,
+                                      ),
+                                      FFButtonWidget(
+                                        onPressed: () {
+                                          print('Button pressed ...');
+                                        },
+                                        text: 'Set Default',
+                                        options: FFButtonOptions(
+                                          height: 40.0,
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  24.0, 0.0, 24.0, 0.0),
+                                          iconPadding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: Colors.white,
+                                                  ),
+                                          elevation: 3.0,
+                                          borderSide: const BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ].divide(const SizedBox(height: 15.0)),
+                      ),
+                    ),
+                  ].divide(const SizedBox(height: 20.0)),
                 ),
               ),
             ],

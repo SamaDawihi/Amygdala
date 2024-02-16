@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -13,12 +17,27 @@ class FFAppState extends ChangeNotifier {
     _instance = FFAppState._internal();
   }
 
-  Future initializePersistedState() async {}
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      if (prefs.containsKey('ff_connectionStatus')) {
+        try {
+          final serializedData = prefs.getString('ff_connectionStatus') ?? '{}';
+          _connectionStatus = ConnectionStatusStruct.fromSerializableMap(
+              jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
+  }
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
+
+  late SharedPreferences prefs;
 
   bool _isLightMode = true;
   bool get isLightMode => _isLightMode;
@@ -67,4 +86,30 @@ class FFAppState extends ChangeNotifier {
   set clientSecret(String value) {
     _clientSecret = value;
   }
+
+  ConnectionStatusStruct _connectionStatus =
+      ConnectionStatusStruct.fromSerializableMap(jsonDecode(
+          '{"status":"Not Connected","details":"Recheck Required","availableHeadsets":"[]","lastChecked":"1708109940000","condition":"0"}'));
+  ConnectionStatusStruct get connectionStatus => _connectionStatus;
+  set connectionStatus(ConnectionStatusStruct value) {
+    _connectionStatus = value;
+    prefs.setString('ff_connectionStatus', value.serialize());
+  }
+
+  void updateConnectionStatusStruct(Function(ConnectionStatusStruct) updateFn) {
+    updateFn(_connectionStatus);
+    prefs.setString('ff_connectionStatus', _connectionStatus.serialize());
+  }
+}
+
+void _safeInit(Function() initializeField) {
+  try {
+    initializeField();
+  } catch (_) {}
+}
+
+Future _safeInitAsync(Function() initializeField) async {
+  try {
+    await initializeField();
+  } catch (_) {}
 }

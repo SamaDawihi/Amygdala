@@ -1428,8 +1428,8 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                 padding:
                                                                     const EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            12.0,
                                                                             0.0,
+                                                                            15.0,
                                                                             0.0,
                                                                             0.0),
                                                                 child: Column(
@@ -1443,12 +1443,11 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                       CrossAxisAlignment
                                                                           .start,
                                                                   children: [
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                          50.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                    Align(
+                                                                      alignment:
+                                                                          const AlignmentDirectional(
+                                                                              0.0,
+                                                                              0.0),
                                                                       child:
                                                                           RichText(
                                                                         textScaleFactor:
@@ -1466,7 +1465,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                               .override(
                                                                                 fontFamily: 'Readex Pro',
                                                                                 color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                fontSize: 22.0,
+                                                                                fontSize: 26.0,
                                                                                 fontWeight: FontWeight.w600,
                                                                               ),
                                                                         ),

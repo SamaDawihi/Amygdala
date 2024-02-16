@@ -12,10 +12,6 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   // Model for sideNav component.
   late SideNavModel sideNavModel;
   // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
-  DisabledProfileRecord? disabledprofileExist;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  SessionRecord? sessionCreated;
-  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
   DisabledProfileRecord? queredDisabled;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   SessionRecord? sessionId;
