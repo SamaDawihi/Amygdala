@@ -128,8 +128,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HistoryRecord',
           path: '/historyRecord',
           builder: (context, params) => HistoryRecordWidget(
-            sessionId: params.getParam('sessionId', ParamType.DocumentReference,
-                false, ['DisabledProfile', 'Session']),
+            sessionId: params.getParam(
+                'sessionId', ParamType.DocumentReference, false, ['Session']),
           ),
         ),
         FFRoute(
@@ -145,10 +145,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             isSessionCreated:
                 params.getParam('isSessionCreated', ParamType.bool),
             sessionRef: params.getParam(
-                'sessionRef',
-                ParamType.DocumentReference,
-                false,
-                ['DisabledProfile', 'Session']),
+                'sessionRef', ParamType.DocumentReference, false, ['Session']),
             facialhair: params.getParam('facialhair', ParamType.String),
           ),
         ),
@@ -175,7 +172,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'History',
           path: '/history',
-          builder: (context, params) => const HistoryWidget(),
+          builder: (context, params) => HistoryWidget(
+            disabledProfile: params.getParam('disabledProfile',
+                ParamType.DocumentReference, false, ['DisabledProfile']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

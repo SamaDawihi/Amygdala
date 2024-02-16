@@ -15,6 +15,11 @@ class SessionRecord extends FirestoreRecord {
     _initializeFields();
   }
 
+  // "disabledProfile" field.
+  DocumentReference? _disabledProfile;
+  DocumentReference? get disabledProfile => _disabledProfile;
+  bool hasDisabledProfile() => _disabledProfile != null;
+
   // "startAt" field.
   DateTime? _startAt;
   DateTime? get startAt => _startAt;
@@ -35,11 +40,6 @@ class SessionRecord extends FirestoreRecord {
   int get sad => _sad ?? 0;
   bool hasSad() => _sad != null;
 
-  // "angry" field.
-  int? _angry;
-  int get angry => _angry ?? 0;
-  bool hasAngry() => _angry != null;
-
   // "natural" field.
   int? _natural;
   int get natural => _natural ?? 0;
@@ -50,25 +50,24 @@ class SessionRecord extends FirestoreRecord {
   int get relaxed => _relaxed ?? 0;
   bool hasRelaxed() => _relaxed != null;
 
-  DocumentReference get parentReference => reference.parent.parent!;
+  // "angry" field.
+  int? _angry;
+  int get angry => _angry ?? 0;
+  bool hasAngry() => _angry != null;
 
   void _initializeFields() {
+    _disabledProfile = snapshotData['disabledProfile'] as DocumentReference?;
     _startAt = snapshotData['startAt'] as DateTime?;
     _endAt = snapshotData['endAt'] as DateTime?;
     _happy = castToType<int>(snapshotData['happy']);
     _sad = castToType<int>(snapshotData['sad']);
-    _angry = castToType<int>(snapshotData['angry']);
     _natural = castToType<int>(snapshotData['natural']);
     _relaxed = castToType<int>(snapshotData['relaxed']);
+    _angry = castToType<int>(snapshotData['angry']);
   }
 
-  static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
-      parent != null
-          ? parent.collection('Session')
-          : FirebaseFirestore.instance.collectionGroup('Session');
-
-  static DocumentReference createDoc(DocumentReference parent, {String? id}) =>
-      parent.collection('Session').doc(id);
+  static CollectionReference get collection =>
+      FirebaseFirestore.instance.collection('Session');
 
   static Stream<SessionRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map((s) => SessionRecord.fromSnapshot(s));
@@ -102,23 +101,25 @@ class SessionRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createSessionRecordData({
+  DocumentReference? disabledProfile,
   DateTime? startAt,
   DateTime? endAt,
   int? happy,
   int? sad,
-  int? angry,
   int? natural,
   int? relaxed,
+  int? angry,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
+      'disabledProfile': disabledProfile,
       'startAt': startAt,
       'endAt': endAt,
       'happy': happy,
       'sad': sad,
-      'angry': angry,
       'natural': natural,
       'relaxed': relaxed,
+      'angry': angry,
     }.withoutNulls,
   );
 
@@ -130,24 +131,26 @@ class SessionRecordDocumentEquality implements Equality<SessionRecord> {
 
   @override
   bool equals(SessionRecord? e1, SessionRecord? e2) {
-    return e1?.startAt == e2?.startAt &&
+    return e1?.disabledProfile == e2?.disabledProfile &&
+        e1?.startAt == e2?.startAt &&
         e1?.endAt == e2?.endAt &&
         e1?.happy == e2?.happy &&
         e1?.sad == e2?.sad &&
-        e1?.angry == e2?.angry &&
         e1?.natural == e2?.natural &&
-        e1?.relaxed == e2?.relaxed;
+        e1?.relaxed == e2?.relaxed &&
+        e1?.angry == e2?.angry;
   }
 
   @override
   int hash(SessionRecord? e) => const ListEquality().hash([
+        e?.disabledProfile,
         e?.startAt,
         e?.endAt,
         e?.happy,
         e?.sad,
-        e?.angry,
         e?.natural,
-        e?.relaxed
+        e?.relaxed,
+        e?.angry
       ]);
 
   @override

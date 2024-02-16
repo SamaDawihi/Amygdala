@@ -24,7 +24,7 @@ class ReplicateImageCall {
       apiUrl: 'https://api.replicate.com/v1/predictions',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Token r8_P6zE7tUbMcDT8NkdhwLdZQaWtC747e71cTc1t',
+        'Authorization': 'Token r8_bMCjDyIgM2dojAlIVEk3YHV8PjfTkoH0yL4b5',
         'Content-Type': 'application/json',
       },
       params: {},

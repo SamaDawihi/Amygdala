@@ -111,8 +111,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                           singleRecord: true,
                         ).then((s) => s.firstOrNull);
                         if (_model.disabledprofileExist?.reference != null) {
-                          var sessionRecordReference = SessionRecord.createDoc(
-                              _model.disabledprofileExist!.reference);
+                          var sessionRecordReference =
+                              SessionRecord.collection.doc();
                           await sessionRecordReference.set({
                             ...createSessionRecordData(
                               happy: 0,

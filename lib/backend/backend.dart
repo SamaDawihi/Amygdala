@@ -95,24 +95,22 @@ Future<List<DisabledProfileRecord>> queryDisabledProfileRecordOnce({
 
 /// Functions to query SessionRecords (as a Stream and as a Future).
 Future<int> querySessionRecordCount({
-  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      SessionRecord.collection(parent),
+      SessionRecord.collection,
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
 Stream<List<SessionRecord>> querySessionRecord({
-  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      SessionRecord.collection(parent),
+      SessionRecord.collection,
       SessionRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
@@ -120,13 +118,12 @@ Stream<List<SessionRecord>> querySessionRecord({
     );
 
 Future<List<SessionRecord>> querySessionRecordOnce({
-  DocumentReference? parent,
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      SessionRecord.collection(parent),
+      SessionRecord.collection,
       SessionRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,

@@ -13,7 +13,12 @@ import 'history_model.dart';
 export 'history_model.dart';
 
 class HistoryWidget extends StatefulWidget {
-  const HistoryWidget({super.key});
+  const HistoryWidget({
+    super.key,
+    this.disabledProfile,
+  });
+
+  final DocumentReference? disabledProfile;
 
   @override
   State<HistoryWidget> createState() => _HistoryWidgetState();

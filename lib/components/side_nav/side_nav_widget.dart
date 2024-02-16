@@ -1,6 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -160,7 +162,27 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('History');
+                          _model.disableProfile =
+                              await queryDisabledProfileRecordOnce(
+                            queryBuilder: (disabledProfileRecord) =>
+                                disabledProfileRecord.where(
+                              'caregiverID',
+                              isEqualTo: currentUserReference,
+                            ),
+                            singleRecord: true,
+                          ).then((s) => s.firstOrNull);
+
+                          context.pushNamed(
+                            'History',
+                            queryParameters: {
+                              'disabledProfile': serializeParam(
+                                _model.disableProfile?.reference,
+                                ParamType.DocumentReference,
+                              ),
+                            }.withoutNulls,
+                          );
+
+                          setState(() {});
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
