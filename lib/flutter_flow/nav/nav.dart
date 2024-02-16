@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -98,17 +99,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'SessionNoBCI',
           path: '/sessionNoBCI',
-          builder: (context, params) => const SessionNoBCIWidget(),
-        ),
-        FFRoute(
-          name: 'SessionPic',
-          path: '/sessionPic',
-          builder: (context, params) => const SessionPicWidget(),
-        ),
-        FFRoute(
-          name: 'Session2pic',
-          path: '/session2pic',
-          builder: (context, params) => const Session2picWidget(),
+          requireAuth: true,
+          asyncParams: {
+            'disabledProfile':
+                getDoc(['DisabledProfile'], DisabledProfileRecord.fromSnapshot),
+          },
+          builder: (context, params) => SessionNoBCIWidget(
+            disabledProfile:
+                params.getParam('disabledProfile', ParamType.Document),
+            createdSession: params.getParam('createdSession',
+                ParamType.DocumentReference, false, ['Session']),
+          ),
         ),
         FFRoute(
           name: 'Account',

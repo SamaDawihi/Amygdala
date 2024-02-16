@@ -15,6 +15,10 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   DisabledProfileRecord? disabledprofileExist;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   SessionRecord? sessionCreated;
+  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  DisabledProfileRecord? queredDisabled;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  SessionRecord? sessionId;
   // Model for connectionStatus component.
   late ConnectionStatusModel connectionStatusModel;
 

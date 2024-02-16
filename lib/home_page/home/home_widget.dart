@@ -259,7 +259,52 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
-                        context.goNamed('SessionNoBCI');
+                        _model.queredDisabled =
+                            await queryDisabledProfileRecordOnce(
+                          queryBuilder: (disabledProfileRecord) =>
+                              disabledProfileRecord.where(
+                            'caregiverID',
+                            isEqualTo: currentUserReference,
+                          ),
+                          singleRecord: true,
+                        ).then((s) => s.firstOrNull);
+                        if (_model.queredDisabled?.reference != null) {
+                          var sessionRecordReference =
+                              SessionRecord.collection.doc();
+                          await sessionRecordReference
+                              .set(createSessionRecordData(
+                            disabledProfile: _model.queredDisabled?.reference,
+                            startAt: getCurrentTimestamp,
+                          ));
+                          _model.sessionId = SessionRecord.getDocumentFromData(
+                              createSessionRecordData(
+                                disabledProfile:
+                                    _model.queredDisabled?.reference,
+                                startAt: getCurrentTimestamp,
+                              ),
+                              sessionRecordReference);
+
+                          context.goNamed(
+                            'SessionNoBCI',
+                            queryParameters: {
+                              'disabledProfile': serializeParam(
+                                _model.queredDisabled,
+                                ParamType.Document,
+                              ),
+                              'createdSession': serializeParam(
+                                _model.sessionId?.reference,
+                                ParamType.DocumentReference,
+                              ),
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              'disabledProfile': _model.queredDisabled,
+                            },
+                          );
+                        } else {
+                          context.pushNamed('SessionNoBCI');
+                        }
+
+                        setState(() {});
                       },
                       text: 'No BCI Session ',
                       options: FFButtonOptions(

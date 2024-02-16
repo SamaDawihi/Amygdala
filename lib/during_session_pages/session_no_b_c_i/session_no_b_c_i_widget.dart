@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +16,14 @@ import 'session_no_b_c_i_model.dart';
 export 'session_no_b_c_i_model.dart';
 
 class SessionNoBCIWidget extends StatefulWidget {
-  const SessionNoBCIWidget({super.key});
+  const SessionNoBCIWidget({
+    super.key,
+    this.disabledProfile,
+    this.createdSession,
+  });
+
+  final DisabledProfileRecord? disabledProfile;
+  final DocumentReference? createdSession;
 
   @override
   State<SessionNoBCIWidget> createState() => _SessionNoBCIWidgetState();
@@ -36,16 +41,6 @@ class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.queredDisabled = await queryDisabledProfileRecordOnce(
-        queryBuilder: (disabledProfileRecord) => disabledProfileRecord.where(
-          'caregiverID',
-          isEqualTo: currentUserReference,
-        ),
-        singleRecord: true,
-      ).then((s) => s.firstOrNull);
-      setState(() {
-        _model.diabledProfile = _model.queredDisabled;
-      });
       while (!_model.terminated) {
         _model.timerController.onResetTimer();
 
@@ -54,14 +49,34 @@ class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
               FFAppState().emotions[random_data.randomInteger(0, 4)];
           _model.doneCoditionChecking = true;
         });
+        if (widget.createdSession != null) {
+          await widget.createdSession!.update({
+            ...createSessionRecordData(
+              angry: _model.predictedEmotion == 'Angry' ? 1 : 0,
+            ),
+            ...mapToFirestore(
+              {
+                'happy': FieldValue.increment(
+                    _model.predictedEmotion == 'Happy' ? 1 : 0),
+                'sad': FieldValue.increment(
+                    _model.predictedEmotion == 'Sad' ? 1 : 0),
+                'natural': FieldValue.increment(
+                    _model.predictedEmotion == 'Natural' ? 1 : 0),
+                'relaxed': FieldValue.increment(
+                    _model.predictedEmotion == 'Relaxed' ? 1 : 0),
+              },
+            ),
+          });
+        }
+        // If First Time Update the display emotion even before the image comes
         if (_model.displayEmotion == null || _model.displayEmotion == '') {
           setState(() {
             _model.displayEmotion = _model.predictedEmotion;
           });
         }
         _model.getImageIdApi = await ReplicateImageCall.call(
-          prompt:
-              functions.createImageDescription(_model.predictedEmotion!, null),
+          prompt: functions.createImageDescription(
+              _model.predictedEmotion!, widget.disabledProfile),
         );
         if ((_model.getImageIdApi?.succeeded ?? true)) {
           setState(() {
@@ -198,6 +213,11 @@ class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
                                   setState(() {
                                     _model.terminated = false;
                                   });
+
+                                  await widget.createdSession!
+                                      .update(createSessionRecordData(
+                                    endAt: getCurrentTimestamp,
+                                  ));
 
                                   context.goNamed('Home');
                                 },
@@ -388,7 +408,7 @@ class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 30.0, 0.0, 0.0),
                                 child: Text(
-                                  '${_model.diabledProfile != null ? _model.diabledProfile?.name : 'Tahani'} is ${_model.displayEmotion}',
+                                  '${widget.disabledProfile != null ? widget.disabledProfile?.name : 'Tahani'} is ${_model.displayEmotion}',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(

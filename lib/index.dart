@@ -5,10 +5,6 @@ export '/account_pages/create_account/create_account_widget.dart'
 export '/home_page/home/home_widget.dart' show HomeWidget;
 export '/during_session_pages/session_no_b_c_i/session_no_b_c_i_widget.dart'
     show SessionNoBCIWidget;
-export '/during_session_pages/session_pic/session_pic_widget.dart'
-    show SessionPicWidget;
-export '/during_session_pages/session2pic/session2pic_widget.dart'
-    show Session2picWidget;
 export '/account_pages/account/account_widget.dart' show AccountWidget;
 export '/profile_pages/create_profile/create_profile_widget.dart'
     show CreateProfileWidget;

@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -28,15 +27,11 @@ class SessionNoBCIModel extends FlutterFlowModel<SessionNoBCIWidget> {
 
   String? imageApiStatus;
 
-  DisabledProfileRecord? diabledProfile;
-
   String? headsetId;
 
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Firestore Query - Query a collection] action in SessionNoBCI widget.
-  DisabledProfileRecord? queredDisabled;
   // Stores action output result for [Backend Call - API (Replicate Image)] action in SessionNoBCI widget.
   ApiCallResponse? getImageIdApi;
   // Stores action output result for [Backend Call - API (get image)] action in SessionNoBCI widget.
