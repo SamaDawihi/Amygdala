@@ -66,7 +66,7 @@ class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
         if ((_model.getImageIdApi?.succeeded ?? true)) {
           setState(() {
             _model.imageApiStatus =
-                (_model.getImageIdApi?.jsonBody ?? '').toString();
+                'Get ID: ${(_model.getImageIdApi?.jsonBody ?? '').toString()}';
           });
           _model.timerController.onStartTimer();
           await Future.delayed(const Duration(milliseconds: 30000));
@@ -82,22 +82,23 @@ class _SessionNoBCIWidgetState extends State<SessionNoBCIWidget> {
               )!
                   .first);
               _model.imageApiStatus =
-                  (_model.getImageApiCall?.jsonBody ?? '').toString();
+                  'Get Image: ${(_model.getImageApiCall?.jsonBody ?? '').toString()}';
             });
           } else {
             setState(() {
-              _model.imageApiStatus = 'Faild To Get Image';
+              _model.imageApiStatus = 'Failed To Get Image';
             });
           }
         } else {
+          // If Failed To Generate Image Continue with no Image
           setState(() {
             _model.imageApiStatus = 'Failed To Get Image ID';
           });
-          _model.timerController.timer.setPresetTime(mSec: 4000, add: false);
+          _model.timerController.timer.setPresetTime(mSec: 10000, add: false);
           _model.timerController.onResetTimer();
 
           _model.timerController.onStartTimer();
-          await Future.delayed(const Duration(milliseconds: 4000));
+          await Future.delayed(const Duration(milliseconds: 10000));
         }
 
         setState(() {

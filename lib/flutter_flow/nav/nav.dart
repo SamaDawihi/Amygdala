@@ -92,6 +92,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Home',
           path: '/home',
+          requireAuth: true,
           builder: (context, params) => const HomeWidget(),
         ),
         FFRoute(
@@ -112,6 +113,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Account',
           path: '/account',
+          requireAuth: true,
           builder: (context, params) => const AccountWidget(),
         ),
         FFRoute(
@@ -122,6 +124,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'EditAccount',
           path: '/editAccount',
+          requireAuth: true,
           builder: (context, params) => const EditAccountWidget(),
         ),
         FFRoute(
