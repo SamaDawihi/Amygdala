@@ -92,7 +92,7 @@ Future<MetStruct> gSubscribeMet(
           met.interestSet = true;
         }
         completer.complete(met);
-        channel.sink.close(status.goingAway);
+        // channel.sink.close(status.goingAway);
       }
     }
   });

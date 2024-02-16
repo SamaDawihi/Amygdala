@@ -46,7 +46,7 @@ class ReplicateImageCall {
 
 class GetImageCall {
   static Future<ApiCallResponse> call({
-    String? id = 'dlxoyidbofi5xlxq5jzxfoqpzq',
+    String? id = '3lfo7plbbjklmv2txwun3ezdxe',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'get image',

@@ -171,14 +171,28 @@ class _SessionWidgetState extends State<SessionWidget> {
             ),
           );
           if ((_model.getImageApiCall?.succeeded ?? true)) {
-            setState(() {
-              _model.addToImagePath(GetImageCall.imagePath(
-                (_model.getImageApiCall?.jsonBody ?? ''),
-              )!
-                  .first);
-              _model.imageApiStatus =
-                  'Get Image: ${(_model.getImageApiCall?.jsonBody ?? '').toString()}';
-            });
+            if (GetImageCall.imagePath(
+                      (_model.getImageApiCall?.jsonBody ?? ''),
+                    ) !=
+                    null &&
+                (GetImageCall.imagePath(
+                  (_model.getImageApiCall?.jsonBody ?? ''),
+                ))!
+                    .isNotEmpty) {
+              setState(() {
+                _model.addToImagePath(GetImageCall.imagePath(
+                  (_model.getImageApiCall?.jsonBody ?? ''),
+                )!
+                    .first);
+                _model.imageApiStatus =
+                    'Get Image: ${(_model.getImageApiCall?.jsonBody ?? '').toString()}';
+              });
+            } else {
+              setState(() {
+                _model.imageApiStatus =
+                    'Get Image: Empty Output - ${(_model.getImageApiCall?.jsonBody ?? '').toString()}';
+              });
+            }
           } else {
             setState(() {
               _model.imageApiStatus = 'Failed To Get Image';
