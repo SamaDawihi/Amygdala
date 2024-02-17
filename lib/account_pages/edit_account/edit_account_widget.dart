@@ -109,7 +109,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
               wrapWithModel(
                 model: _model.sideNavModel,
                 updateCallback: () => setState(() {}),
-                child: const SideNavWidget(),
+                child: const SideNavWidget(
+                  currentPage: 2,
+                ),
               ),
               Align(
                 alignment: const AlignmentDirectional(-1.0, -1.0),

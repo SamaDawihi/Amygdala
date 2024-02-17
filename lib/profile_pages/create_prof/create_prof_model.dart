@@ -2,10 +2,10 @@ import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/profile_pages/form_comp/form_comp_widget.dart';
-import 'home_copy_widget.dart' show HomeCopyWidget;
+import 'create_prof_widget.dart' show CreateProfWidget;
 import 'package:flutter/material.dart';
 
-class HomeCopyModel extends FlutterFlowModel<HomeCopyWidget> {
+class CreateProfModel extends FlutterFlowModel<CreateProfWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

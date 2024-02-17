@@ -154,9 +154,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'HomeCopy',
-          path: '/homeCopy',
-          builder: (context, params) => const HomeCopyWidget(),
+          name: 'CreateProf',
+          path: '/createProf',
+          builder: (context, params) => const CreateProfWidget(),
         ),
         FFRoute(
           name: 'EditProfile',

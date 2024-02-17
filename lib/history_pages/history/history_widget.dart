@@ -96,7 +96,9 @@ class _HistoryWidgetState extends State<HistoryWidget> {
               wrapWithModel(
                 model: _model.sideNavModel,
                 updateCallback: () => setState(() {}),
-                child: const SideNavWidget(),
+                child: const SideNavWidget(
+                  currentPage: 4,
+                ),
               ),
               Expanded(
                 child: Padding(
@@ -131,7 +133,10 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: StreamBuilder<List<SessionRecord>>(
-                            stream: querySessionRecord(),
+                            stream: querySessionRecord(
+                              queryBuilder: (sessionRecord) => sessionRecord
+                                  .orderBy('endAt', descending: true),
+                            ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
                               if (!snapshot.hasData) {

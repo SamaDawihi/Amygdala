@@ -13,7 +13,8 @@ export '/history_pages/history_record/history_record_widget.dart'
     show HistoryRecordWidget;
 export '/during_session_pages/session_pic_custom/session_pic_custom_widget.dart'
     show SessionPicCustomWidget;
-export '/profile_pages/home_copy/home_copy_widget.dart' show HomeCopyWidget;
+export '/profile_pages/create_prof/create_prof_widget.dart'
+    show CreateProfWidget;
 export '/profile_pages/edit_profile/edit_profile_widget.dart'
     show EditProfileWidget;
 export '/profile_pages/profile/profile_widget.dart' show ProfileWidget;

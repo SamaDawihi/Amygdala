@@ -1,12 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'side_nav_widget.dart' show SideNavWidget;
+import 'confirm_delete_session_widget.dart' show ConfirmDeleteSessionWidget;
 import 'package:flutter/material.dart';
 
-class SideNavModel extends FlutterFlowModel<SideNavWidget> {
-  ///  Local state fields for this component.
-
-  DocumentReference? disabledProfile;
-
+class ConfirmDeleteSessionModel
+    extends FlutterFlowModel<ConfirmDeleteSessionWidget> {
   /// Initialization and disposal methods.
 
   @override

@@ -10,19 +10,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
-import 'home_copy_model.dart';
-export 'home_copy_model.dart';
+import 'create_prof_model.dart';
+export 'create_prof_model.dart';
 
-class HomeCopyWidget extends StatefulWidget {
-  const HomeCopyWidget({super.key});
+class CreateProfWidget extends StatefulWidget {
+  const CreateProfWidget({super.key});
 
   @override
-  State<HomeCopyWidget> createState() => _HomeCopyWidgetState();
+  State<CreateProfWidget> createState() => _CreateProfWidgetState();
 }
 
-class _HomeCopyWidgetState extends State<HomeCopyWidget>
+class _CreateProfWidgetState extends State<CreateProfWidget>
     with TickerProviderStateMixin {
-  late HomeCopyModel _model;
+  late CreateProfModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -70,7 +70,7 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomeCopyModel());
+    _model = createModel(context, () => CreateProfModel());
 
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -142,7 +142,9 @@ class _HomeCopyWidgetState extends State<HomeCopyWidget>
               wrapWithModel(
                 model: _model.sideNavModel,
                 updateCallback: () => setState(() {}),
-                child: const SideNavWidget(),
+                child: const SideNavWidget(
+                  currentPage: 1,
+                ),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 300.0, 0.0),

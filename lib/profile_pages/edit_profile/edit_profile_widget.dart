@@ -142,7 +142,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
               wrapWithModel(
                 model: _model.sideNavModel,
                 updateCallback: () => setState(() {}),
-                child: const SideNavWidget(),
+                child: const SideNavWidget(
+                  currentPage: 1,
+                ),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 300.0, 0.0),

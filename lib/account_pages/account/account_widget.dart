@@ -90,7 +90,9 @@ class _AccountWidgetState extends State<AccountWidget> {
               wrapWithModel(
                 model: _model.sideNavModel,
                 updateCallback: () => setState(() {}),
-                child: const SideNavWidget(),
+                child: const SideNavWidget(
+                  currentPage: 2,
+                ),
               ),
               Container(
                 width: 1500.0,

@@ -92,7 +92,9 @@ class _HomeWidgetState extends State<HomeWidget> {
               wrapWithModel(
                 model: _model.sideNavModel,
                 updateCallback: () => setState(() {}),
-                child: const SideNavWidget(),
+                child: const SideNavWidget(
+                  currentPage: 0,
+                ),
               ),
               Expanded(
                 child: Column(

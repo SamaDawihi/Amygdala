@@ -106,7 +106,9 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
               wrapWithModel(
                 model: _model.sideNavModel,
                 updateCallback: () => setState(() {}),
-                child: const SideNavWidget(),
+                child: const SideNavWidget(
+                  currentPage: 3,
+                ),
               ),
               Expanded(
                 child: Column(
