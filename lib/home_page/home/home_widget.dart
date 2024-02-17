@@ -69,13 +69,16 @@ class _HomeWidgetState extends State<HomeWidget> {
           actions: [
             Container(
               decoration: const BoxDecoration(),
-              child: SizedBox(
+              child: Container(
                 width: 200.0,
-                child: wrapWithModel(
-                  model: _model.connectionStatusModel,
-                  updateCallback: () => setState(() {}),
-                  child: const ConnectionStatusWidget(),
-                ),
+              ),
+            ),
+            SizedBox(
+              height: 200.0,
+              child: wrapWithModel(
+                model: _model.connectionStatusModel,
+                updateCallback: () => setState(() {}),
+                child: const ConnectionStatusWidget(),
               ),
             ),
           ],
@@ -160,7 +163,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: const Color(0x8B4036A4),
+                        color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Montserrat',

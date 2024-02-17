@@ -3,38 +3,33 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'confirmation_components_model.dart';
-export 'confirmation_components_model.dart';
+import 'information_component_model.dart';
+export 'information_component_model.dart';
 
-class ConfirmationComponentsWidget extends StatefulWidget {
-  const ConfirmationComponentsWidget({
+class InformationComponentWidget extends StatefulWidget {
+  const InformationComponentWidget({
     super.key,
     String? title,
     String? message,
     String? confirmText,
-    String? cancelText,
     required this.confirmAction,
-    required this.cancelAction,
   })  : title = title ?? 'Title',
         message = message ?? 'Message',
-        confirmText = confirmText ?? 'Confirm',
-        cancelText = cancelText ?? 'cancel';
+        confirmText = confirmText ?? 'Confirm';
 
   final String title;
   final String message;
   final String confirmText;
-  final String cancelText;
   final Future Function()? confirmAction;
-  final Future Function()? cancelAction;
 
   @override
-  State<ConfirmationComponentsWidget> createState() =>
-      _ConfirmationComponentsWidgetState();
+  State<InformationComponentWidget> createState() =>
+      _InformationComponentWidgetState();
 }
 
-class _ConfirmationComponentsWidgetState
-    extends State<ConfirmationComponentsWidget> {
-  late ConfirmationComponentsModel _model;
+class _InformationComponentWidgetState
+    extends State<InformationComponentWidget> {
+  late InformationComponentModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -45,7 +40,7 @@ class _ConfirmationComponentsWidgetState
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ConfirmationComponentsModel());
+    _model = createModel(context, () => InformationComponentModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -118,31 +113,6 @@ class _ConfirmationComponentsWidgetState
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  FFButtonWidget(
-                    onPressed: () async {
-                      await widget.cancelAction?.call();
-                    },
-                    text: widget.cancelText,
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).error,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Readex Pro',
-                                color: Colors.white,
-                              ),
-                      elevation: 3.0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
                   FFButtonWidget(
                     onPressed: () async {
                       await widget.confirmAction?.call();

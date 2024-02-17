@@ -104,6 +104,7 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(40.0, 30.0, 0.0, 0.0),
                   child: SingleChildScrollView(
+                    primary: false,
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,

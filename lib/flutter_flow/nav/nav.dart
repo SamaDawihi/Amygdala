@@ -132,23 +132,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'SessionPicCustom',
-          path: '/sessionPicCustom',
-          builder: (context, params) => SessionPicCustomWidget(
-            age: params.getParam('age', ParamType.int),
-            ethnicity: params.getParam('ethnicity', ParamType.String),
-            isMale: params.getParam('isMale', ParamType.bool),
-            skinColor: params.getParam('skinColor', ParamType.String),
-            hairColor: params.getParam('hairColor', ParamType.String),
-            eyeColor: params.getParam('eyeColor', ParamType.String),
-            isSessionCreated:
-                params.getParam('isSessionCreated', ParamType.bool),
-            sessionRef: params.getParam(
-                'sessionRef', ParamType.DocumentReference, false, ['Session']),
-            facialhair: params.getParam('facialhair', ParamType.String),
-          ),
-        ),
-        FFRoute(
           name: 'CreateProf',
           path: '/createProf',
           builder: (context, params) => const CreateProfWidget(),
@@ -161,7 +144,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'profile',
           path: '/Profile',
-          builder: (context, params) => const ProfileWidget(),
+          builder: (context, params) => ProfileWidget(
+            disabledProfile: params.getParam('disabledProfile',
+                ParamType.DocumentReference, false, ['DisabledProfile']),
+          ),
         ),
         FFRoute(
           name: 'BciSetttings',

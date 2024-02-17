@@ -11,6 +11,8 @@ class CreateProfModel extends FlutterFlowModel<CreateProfWidget> {
   final unfocusNode = FocusNode();
   // Model for sideNav component.
   late SideNavModel sideNavModel;
+  // State field(s) for Switch widget.
+  bool? switchValue;
   // Model for formComp component.
   late FormCompModel formCompModel;
   // Model for connectionStatus component.

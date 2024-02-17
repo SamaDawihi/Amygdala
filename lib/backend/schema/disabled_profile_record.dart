@@ -5,7 +5,6 @@ import 'package:collection/collection.dart';
 import '/backend/schema/util/firestore_util.dart';
 
 import 'index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 
 class DisabledProfileRecord extends FirestoreRecord {
   DisabledProfileRecord._(
@@ -24,11 +23,6 @@ class DisabledProfileRecord extends FirestoreRecord {
   bool? _isMale;
   bool get isMale => _isMale ?? false;
   bool hasIsMale() => _isMale != null;
-
-  // "age" field.
-  int? _age;
-  int get age => _age ?? 0;
-  bool hasAge() => _age != null;
 
   // "ethnicity" field.
   String? _ethnicity;
@@ -60,16 +54,27 @@ class DisabledProfileRecord extends FirestoreRecord {
   String get name => _name ?? '';
   bool hasName() => _name != null;
 
+  // "birthday" field.
+  DateTime? _birthday;
+  DateTime? get birthday => _birthday;
+  bool hasBirthday() => _birthday != null;
+
+  // "photo" field.
+  String? _photo;
+  String get photo => _photo ?? '';
+  bool hasPhoto() => _photo != null;
+
   void _initializeFields() {
     _caregiverID = snapshotData['caregiverID'] as DocumentReference?;
     _isMale = snapshotData['isMale'] as bool?;
-    _age = castToType<int>(snapshotData['age']);
     _ethnicity = snapshotData['ethnicity'] as String?;
     _hairColor = snapshotData['hairColor'] as String?;
     _eyeColor = snapshotData['eyeColor'] as String?;
     _skinColor = snapshotData['skinColor'] as String?;
     _facialHair = snapshotData['facialHair'] as String?;
     _name = snapshotData['name'] as String?;
+    _birthday = snapshotData['birthday'] as DateTime?;
+    _photo = snapshotData['photo'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -109,25 +114,27 @@ class DisabledProfileRecord extends FirestoreRecord {
 Map<String, dynamic> createDisabledProfileRecordData({
   DocumentReference? caregiverID,
   bool? isMale,
-  int? age,
   String? ethnicity,
   String? hairColor,
   String? eyeColor,
   String? skinColor,
   String? facialHair,
   String? name,
+  DateTime? birthday,
+  String? photo,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'caregiverID': caregiverID,
       'isMale': isMale,
-      'age': age,
       'ethnicity': ethnicity,
       'hairColor': hairColor,
       'eyeColor': eyeColor,
       'skinColor': skinColor,
       'facialHair': facialHair,
       'name': name,
+      'birthday': birthday,
+      'photo': photo,
     }.withoutNulls,
   );
 
@@ -142,26 +149,28 @@ class DisabledProfileRecordDocumentEquality
   bool equals(DisabledProfileRecord? e1, DisabledProfileRecord? e2) {
     return e1?.caregiverID == e2?.caregiverID &&
         e1?.isMale == e2?.isMale &&
-        e1?.age == e2?.age &&
         e1?.ethnicity == e2?.ethnicity &&
         e1?.hairColor == e2?.hairColor &&
         e1?.eyeColor == e2?.eyeColor &&
         e1?.skinColor == e2?.skinColor &&
         e1?.facialHair == e2?.facialHair &&
-        e1?.name == e2?.name;
+        e1?.name == e2?.name &&
+        e1?.birthday == e2?.birthday &&
+        e1?.photo == e2?.photo;
   }
 
   @override
   int hash(DisabledProfileRecord? e) => const ListEquality().hash([
         e?.caregiverID,
         e?.isMale,
-        e?.age,
         e?.ethnicity,
         e?.hairColor,
         e?.eyeColor,
         e?.skinColor,
         e?.facialHair,
-        e?.name
+        e?.name,
+        e?.birthday,
+        e?.photo
       ]);
 
   @override

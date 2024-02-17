@@ -1426,7 +1426,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                             padding:
                                                                 const EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        30.0,
+                                                                        25.0,
                                                                         20.0,
                                                                         0.0,
                                                                         0.0),

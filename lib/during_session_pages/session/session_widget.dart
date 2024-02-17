@@ -1,6 +1,7 @@
-import '/b_c_i_settings/confirmation_components/confirmation_components_widget.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/components/confirmation_component/confirmation_component_widget.dart';
+import '/components/information_component/information_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -46,6 +47,7 @@ class _SessionWidgetState extends State<SessionWidget> {
       await action_blocks.checkBCIConnection(context);
       if ((FFAppState().connectionStatus.condition >= 4) &&
           (FFAppState().connectionStatus.availableHeadsets.isNotEmpty)) {
+        // check if deafult headset is in the available headsets
         if (FFAppState()
             .connectionStatus
             .availableHeadsets
@@ -54,6 +56,41 @@ class _SessionWidgetState extends State<SessionWidget> {
             _model.headsetId = FFAppState().defaultHeadset;
           });
         } else {
+          // check if defaultheadset is set
+          if (FFAppState().defaultHeadset != '') {
+            await showDialog(
+              context: context,
+              builder: (dialogContext) {
+                return Dialog(
+                  elevation: 0,
+                  insetPadding: EdgeInsets.zero,
+                  backgroundColor: Colors.transparent,
+                  alignment: const AlignmentDirectional(0.0, 0.0)
+                      .resolve(Directionality.of(context)),
+                  child: GestureDetector(
+                    onTap: () => _model.unfocusNode.canRequestFocus
+                        ? FocusScope.of(context)
+                            .requestFocus(_model.unfocusNode)
+                        : FocusScope.of(context).unfocus(),
+                    child: ConfirmationComponentWidget(
+                      title: 'Default Headset Is Not Connected',
+                      message:
+                          'your Default Headset ${FFAppState().defaultHeadset}is not connected.',
+                      confirmText:
+                          'continue with ${FFAppState().connectionStatus.availableHeadsets.first}',
+                      cancelText: 'Go to BCI Settings',
+                      confirmAction: () async {
+                        Navigator.pop(context);
+                      },
+                      cancelAction: () async {
+                        context.goNamed('BciSetttings');
+                      },
+                    ),
+                  ),
+                );
+              },
+            ).then((value) => setState(() {}));
+          }
           setState(() {
             _model.headsetId =
                 FFAppState().connectionStatus.availableHeadsets.first;
@@ -74,7 +111,7 @@ class _SessionWidgetState extends State<SessionWidget> {
                 onTap: () => _model.unfocusNode.canRequestFocus
                     ? FocusScope.of(context).requestFocus(_model.unfocusNode)
                     : FocusScope.of(context).unfocus(),
-                child: ConfirmationComponentsWidget(
+                child: ConfirmationComponentWidget(
                   title: 'BCI ERROR',
                   message: 'No Available Headsets',
                   confirmText: 'Check Connection Settings',
@@ -106,25 +143,36 @@ class _SessionWidgetState extends State<SessionWidget> {
               _model.predictedEmotion =
                   functions.getEmotionByInterestEngagement(
                       _model.metObject!.interest, _model.metObject!.engagement);
+              _model.met = (_model.metObject!.toMap()).toString();
             });
           } else {
             await showDialog(
               context: context,
-              builder: (alertDialogContext) {
-                return AlertDialog(
-                  title: const Text('Low accuracy'),
-                  content: const Text('adjust accuricy or check connection'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(alertDialogContext),
-                      child: const Text('Ok'),
+              builder: (dialogContext) {
+                return Dialog(
+                  elevation: 0,
+                  insetPadding: EdgeInsets.zero,
+                  backgroundColor: Colors.transparent,
+                  alignment: const AlignmentDirectional(0.0, 0.0)
+                      .resolve(Directionality.of(context)),
+                  child: GestureDetector(
+                    onTap: () => _model.unfocusNode.canRequestFocus
+                        ? FocusScope.of(context)
+                            .requestFocus(_model.unfocusNode)
+                        : FocusScope.of(context).unfocus(),
+                    child: InformationComponentWidget(
+                      title: 'Low Accuracy',
+                      message:
+                          'Try Adjusting the headset set and check the accuracy through Emotiv Launcher App.',
+                      confirmText: 'BCI Settings',
+                      confirmAction: () async {
+                        context.goNamed('BciSetttings');
+                      },
                     ),
-                  ],
+                  ),
                 );
               },
-            );
-
-            context.goNamed('BciSetttings');
+            ).then((value) => setState(() {}));
 
             return;
           }
@@ -529,6 +577,20 @@ class _SessionWidgetState extends State<SessionWidget> {
                                   child: SelectionArea(
                                       child: Text(
                                     'Status:${_model.imageApiStatus}',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 18.0,
+                                        ),
+                                  )),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 30.0, 0.0, 0.0),
+                                  child: SelectionArea(
+                                      child: Text(
+                                    'Met Object:${_model.met}',
                                     style: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(

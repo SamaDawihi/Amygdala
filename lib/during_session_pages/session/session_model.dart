@@ -33,6 +33,8 @@ class SessionModel extends FlutterFlowModel<SessionWidget> {
 
   String? headsetId;
 
+  String met = 'No Object Yet';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

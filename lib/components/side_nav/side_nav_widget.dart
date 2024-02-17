@@ -174,7 +174,19 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('profile');
+                          if (_model.disabledProfile != null) {
+                            context.goNamed(
+                              'profile',
+                              queryParameters: {
+                                'disabledProfile': serializeParam(
+                                  _model.disabledProfile,
+                                  ParamType.DocumentReference,
+                                ),
+                              }.withoutNulls,
+                            );
+                          } else {
+                            context.pushNamed('CreateProf');
+                          }
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),

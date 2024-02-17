@@ -146,7 +146,8 @@ String createImageDescription(
   if (disabledProfile != null) {
     final gender = disabledProfile.isMale ? 'male' : 'female';
     final skinColor = 'white'; //disabledProfile.skincolor
-    return 'a ${disabledProfile.age} years old ${disabledProfile.ethnicity} ${gender}, with ${skinColor} skin color, ${disabledProfile.hairColor} hair and ${disabledProfile.eyeColor} eyes, he has ${disabledProfile.facialHair} facial hair. he seems to be feeling $emotion';
+    final age = 28;
+    return 'a $age years old ${disabledProfile.ethnicity} ${gender}, with ${skinColor} skin color, ${disabledProfile.hairColor} hair and ${disabledProfile.eyeColor} eyes, has ${disabledProfile.facialHair} facial hair And seems to be feeling $emotion';
   } else
     return 'a man seems to be feeling $emotion';
 }

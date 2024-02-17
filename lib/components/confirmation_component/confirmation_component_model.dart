@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'confirmation_components_widget.dart' show ConfirmationComponentsWidget;
+import 'confirmation_component_widget.dart' show ConfirmationComponentWidget;
 import 'package:flutter/material.dart';
 
-class ConfirmationComponentsModel
-    extends FlutterFlowModel<ConfirmationComponentsWidget> {
+class ConfirmationComponentModel
+    extends FlutterFlowModel<ConfirmationComponentWidget> {
   /// Initialization and disposal methods.
 
   @override
