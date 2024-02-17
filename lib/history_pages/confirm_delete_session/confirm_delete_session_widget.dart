@@ -144,11 +144,11 @@ class _ConfirmDeleteSessionWidgetState
                     ),
                     FFButtonWidget(
                       onPressed: () async {
-                        await widget.belongTo!.delete();
-
                         context.pushNamed('History');
 
+                        await widget.belongTo!.delete();
                         Navigator.pop(context);
+                        _model.updatePage(() {});
                       },
                       text: 'Delete',
                       options: FFButtonOptions(

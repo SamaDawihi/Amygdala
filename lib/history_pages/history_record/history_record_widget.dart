@@ -1418,66 +1418,58 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets.all(
-                                                                  12.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            15.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          const AlignmentDirectional(
-                                                                              0.0,
-                                                                              0.0),
-                                                                      child:
-                                                                          RichText(
-                                                                        textScaleFactor:
-                                                                            MediaQuery.of(context).textScaleFactor,
-                                                                        text:
-                                                                            TextSpan(
-                                                                          children: [
-                                                                            TextSpan(
-                                                                              text: functions.getMaxEmotion(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural),
-                                                                              style: const TextStyle(),
-                                                                            )
-                                                                          ],
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyLarge
-                                                                              .override(
-                                                                                fontFamily: 'Readex Pro',
-                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                fontSize: 26.0,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                        ),
-                                                                      ),
+                                                        Align(
+                                                          alignment:
+                                                              const AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        30.0,
+                                                                        20.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: RichText(
+                                                              textScaleFactor:
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .textScaleFactor,
+                                                              text: TextSpan(
+                                                                children: [
+                                                                  TextSpan(
+                                                                    text: functions.getMaxEmotion(
+                                                                        columnSessionRecord
+                                                                            .happy,
+                                                                        columnSessionRecord
+                                                                            .sad,
+                                                                        columnSessionRecord
+                                                                            .angry,
+                                                                        columnSessionRecord
+                                                                            .relaxed,
+                                                                        columnSessionRecord
+                                                                            .natural),
+                                                                    style:
+                                                                        const TextStyle(),
+                                                                  )
+                                                                ],
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLarge
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Readex Pro',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryBackground,
+                                                                      fontSize:
+                                                                          26.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
                                                                     ),
-                                                                  ],
-                                                                ),
                                                               ),
-                                                            ],
+                                                            ),
                                                           ),
                                                         ),
                                                         Padding(
