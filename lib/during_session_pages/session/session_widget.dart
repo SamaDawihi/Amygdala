@@ -308,11 +308,12 @@ class _SessionWidgetState extends State<SessionWidget> {
                                   setState(() {
                                     _model.terminated = false;
                                   });
-
-                                  await widget.createdSession!
-                                      .update(createSessionRecordData(
-                                    endAt: getCurrentTimestamp,
-                                  ));
+                                  if (widget.createdSession != null) {
+                                    await widget.createdSession!
+                                        .update(createSessionRecordData(
+                                      endAt: getCurrentTimestamp,
+                                    ));
+                                  }
 
                                   context.goNamed('Home');
                                 },
