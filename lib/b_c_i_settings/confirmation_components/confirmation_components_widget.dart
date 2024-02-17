@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'confirmation_components_model.dart';
 export 'confirmation_components_model.dart';
@@ -47,9 +46,6 @@ class _ConfirmationComponentsWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => ConfirmationComponentsModel());
-
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -123,8 +119,8 @@ class _ConfirmationComponentsWidgetState
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      await widget.cancelAction?.call();
                     },
                     text: widget.cancelText,
                     options: FFButtonOptions(
@@ -148,8 +144,8 @@ class _ConfirmationComponentsWidgetState
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      await widget.confirmAction?.call();
                     },
                     text: widget.confirmText,
                     options: FFButtonOptions(
