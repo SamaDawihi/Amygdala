@@ -5,8 +5,6 @@ export '/account_pages/create_account/create_account_widget.dart'
 export '/home_page/home/home_widget.dart' show HomeWidget;
 export '/during_session_pages/session/session_widget.dart' show SessionWidget;
 export '/account_pages/account/account_widget.dart' show AccountWidget;
-export '/profile_pages/create_profile/create_profile_widget.dart'
-    show CreateProfileWidget;
 export '/account_pages/edit_account/edit_account_widget.dart'
     show EditAccountWidget;
 export '/history_pages/history_record/history_record_widget.dart'

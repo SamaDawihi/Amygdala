@@ -155,7 +155,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('CreateProfile');
+                          context.pushNamed('profile');
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),

@@ -43,7 +43,8 @@ class _SessionWidgetState extends State<SessionWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await action_blocks.checkBCIConnection(context);
-      if (FFAppState().connectionStatus.availableHeadsets.isNotEmpty) {
+      if ((FFAppState().connectionStatus.condition >= 4) &&
+          (FFAppState().connectionStatus.availableHeadsets.isNotEmpty)) {
         if (FFAppState()
             .connectionStatus
             .availableHeadsets

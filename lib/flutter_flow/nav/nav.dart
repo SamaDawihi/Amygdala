@@ -118,11 +118,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const AccountWidget(),
         ),
         FFRoute(
-          name: 'CreateProfile',
-          path: '/createProfile',
-          builder: (context, params) => const CreateProfileWidget(),
-        ),
-        FFRoute(
           name: 'EditAccount',
           path: '/editAccount',
           requireAuth: true,
