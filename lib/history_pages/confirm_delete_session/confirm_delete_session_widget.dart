@@ -84,7 +84,7 @@ class _ConfirmDeleteSessionWidgetState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Delete Session',
+                      'Delete Record',
                       textAlign: TextAlign.start,
                       style:
                           FlutterFlowTheme.of(context).headlineMedium.override(
@@ -96,7 +96,7 @@ class _ConfirmDeleteSessionWidgetState
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                       child: Text(
-                        'Are you sure you want to delete this session?',
+                        'Are you sure you want to delete this session record?',
                         style:
                             FlutterFlowTheme.of(context).labelMedium.override(
                                   fontFamily: 'Readex Pro',
@@ -148,19 +148,7 @@ class _ConfirmDeleteSessionWidgetState
 
                         context.pushNamed('History');
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Session Deleted Successfully!',
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                            ),
-                            duration: const Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
+                        Navigator.pop(context);
                       },
                       text: 'Delete',
                       options: FFButtonOptions(
