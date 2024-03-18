@@ -4,11 +4,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
-import '/custom_code/actions/index.dart' as actions;
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'bci_setttings_model.dart';
 export 'bci_setttings_model.dart';
@@ -43,6 +40,10 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
         TextEditingController(text: FFAppState().clientSecret);
     _model.textFieldFocusNode2 ??= FocusNode();
 
+    _model.textController3 ??=
+        TextEditingController(text: FFAppState().imageGenerationToken);
+    _model.textFieldFocusNode3 ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -55,15 +56,6 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -83,8 +75,9 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
           actions: [
             Container(
               decoration: const BoxDecoration(),
-              child: SizedBox(
-                width: 200.0,
+              child: Container(
+                width: 400.0,
+                decoration: const BoxDecoration(),
                 child: wrapWithModel(
                   model: _model.connectionStatusModel,
                   updateCallback: () => setState(() {}),
@@ -285,39 +278,148 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                     _model.textController1.text) ||
                                 (FFAppState().clientSecret !=
                                     _model.textController2.text))
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    20.0, 0.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    setState(() {
-                                      FFAppState().clientId =
-                                          _model.textController1.text;
-                                      FFAppState().clientSecret =
-                                          _model.textController2.text;
-                                    });
-                                  },
-                                  text: 'Update',
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: Colors.white,
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  setState(() {
+                                    FFAppState().clientId =
+                                        _model.textController1.text;
+                                    FFAppState().clientSecret =
+                                        _model.textController2.text;
+                                  });
+                                },
+                                text: 'Update',
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
                                   ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: const AlignmentDirectional(-1.0, -1.0),
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            30.0, 0.0, 30.0, 20.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Align(
+                                alignment: const AlignmentDirectional(-1.0, -1.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 0.0, 8.0, 0.0),
+                                  child: SizedBox(
+                                    width: 700.0,
+                                    child: TextFormField(
+                                      controller: _model.textController3,
+                                      focusNode: _model.textFieldFocusNode3,
+                                      autofocus: true,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Image Generation Token',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        hintText: 'Image Generation Token',
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                      validator: _model.textController3Validator
+                                          .asValidator(context),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            if (FFAppState().imageGenerationToken !=
+                                _model.textController3.text)
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  setState(() {
+                                    FFAppState().imageGenerationToken =
+                                        _model.textController3.text;
+                                  });
+                                },
+                                text: 'Update',
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
                           ],
@@ -357,12 +459,14 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                   24.0, 0.0, 24.0, 0.0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).primary,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color: Colors.white,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                   ),
                               elevation: 3.0,
                               borderSide: const BorderSide(
@@ -511,12 +615,14 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                     24.0, 0.0, 24.0, 0.0),
                                 iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
                                       fontFamily: 'Readex Pro',
-                                      color: Colors.white,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                     ),
                                 elevation: 3.0,
                                 borderSide: const BorderSide(
@@ -529,43 +635,6 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                         ].divide(const SizedBox(width: 10.0)),
                       ),
                     ),
-                    FFButtonWidget(
-                      onPressed: () async {
-                        _model.getUserLoginAction =
-                            await actions.bGetUserLogin();
-                        setState(() {
-                          _model.result = _model.getUserLoginAction!;
-                        });
-
-                        setState(() {});
-                      },
-                      text: 'Button',
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    SelectionArea(
-                        child: AutoSizeText(
-                      _model.result,
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      minFontSize: 8.0,
-                    )),
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           30.0, 30.0, 30.0, 25.0),
@@ -629,19 +698,25 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                           iconPadding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
-                                          color: headsetItem ==
-                                                  FFAppState().defaultHeadset
-                                              ? FlutterFlowTheme.of(context)
-                                                  .success
-                                              : FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                  ),
+                                          color: valueOrDefault<Color>(
+                                            headsetItem ==
+                                                    FFAppState().defaultHeadset
+                                                ? FlutterFlowTheme.of(context)
+                                                    .success
+                                                : FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                            FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                          ),
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
                                           elevation: 3.0,
                                           borderSide: const BorderSide(
                                             color: Colors.transparent,

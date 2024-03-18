@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
@@ -7,42 +8,28 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
-import 'edit_profile_model.dart';
-export 'edit_profile_model.dart';
+import 'add_profile_model.dart';
+export 'add_profile_model.dart';
 
-class EditProfileWidget extends StatefulWidget {
-  const EditProfileWidget({
-    super.key,
-    required this.disabledProfile,
-  });
-
-  final DisabledProfileRecord? disabledProfile;
+class AddProfileWidget extends StatefulWidget {
+  const AddProfileWidget({super.key});
 
   @override
-  State<EditProfileWidget> createState() => _EditProfileWidgetState();
+  State<AddProfileWidget> createState() => _AddProfileWidgetState();
 }
 
-class _EditProfileWidgetState extends State<EditProfileWidget> {
-  late EditProfileModel _model;
+class _AddProfileWidgetState extends State<AddProfileWidget> {
+  late AddProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EditProfileModel());
+    _model = createModel(context, () => AddProfileModel());
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.isMale = widget.disabledProfile!.isMale;
-      });
-    });
-
-    _model.nameController ??=
-        TextEditingController(text: widget.disabledProfile?.name);
+    _model.nameController ??= TextEditingController();
     _model.nameFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -115,7 +102,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 20.0, 0.0, 0.0),
                             child: GradientText(
-                              'Edit Profile',
+                              'Tell Us More',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -375,8 +362,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 controller:
                                     _model.hairLengthDropDownValueController ??=
                                         FormFieldController<String>(
-                                  _model.hairLengthDropDownValue ??=
-                                      widget.disabledProfile?.hairLength,
+                                  _model.hairLengthDropDownValue ??= 'Medium',
                                 ),
                                 options: const [
                                   'Bald',
@@ -425,8 +411,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 controller:
                                     _model.hirColorDropDownValueController ??=
                                         FormFieldController<String>(
-                                  _model.hirColorDropDownValue ??=
-                                      widget.disabledProfile?.hairColor,
+                                  _model.hirColorDropDownValue ??= 'Black',
                                 ),
                                 options: const [
                                   'Black',
@@ -475,8 +460,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 controller:
                                     _model.eyesColorDropDownValueController ??=
                                         FormFieldController<String>(
-                                  _model.eyesColorDropDownValue ??=
-                                      widget.disabledProfile?.eyesColor,
+                                  _model.eyesColorDropDownValue ??= 'Black',
                                 ),
                                 options: const [
                                   'Brown',
@@ -535,13 +519,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 onPressed: () async {
                                   final datePickedDate = await showDatePicker(
                                     context: context,
-                                    initialDate:
-                                        (widget.disabledProfile?.birthday ??
-                                            DateTime.now()),
+                                    initialDate: getCurrentTimestamp,
                                     firstDate: DateTime(1900),
-                                    lastDate:
-                                        (widget.disabledProfile?.birthday ??
-                                            DateTime.now()),
+                                    lastDate: getCurrentTimestamp,
                                     builder: (context, child) {
                                       return wrapInMaterialDatePickerTheme(
                                         context,
@@ -607,8 +587,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             .primaryText,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
@@ -627,8 +608,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 controller:
                                     _model.ethnicityDropDownValueController ??=
                                         FormFieldController<String>(
-                                  _model.ethnicityDropDownValue ??=
-                                      widget.disabledProfile?.ethnicity,
+                                  _model.ethnicityDropDownValue ??= 'Gulf Arab',
                                 ),
                                 options: const [
                                   'Gulf Arab',
@@ -696,7 +676,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                     _model.skinColorDropDownValueController ??=
                                         FormFieldController<String>(
                                   _model.skinColorDropDownValue ??=
-                                      widget.disabledProfile?.skinColor,
+                                      'Medium Olive Skin',
                                 ),
                                 options: const [
                                   'Very Fair Skin',
@@ -749,8 +729,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 controller:
                                     _model.facialHairDropDownValueController ??=
                                         FormFieldController<String>(
-                                  _model.facialHairDropDownValue ??=
-                                      widget.disabledProfile?.facialHair,
+                                  _model.facialHairDropDownValue ??= 'None',
                                 ),
                                 options: const [
                                   'None',
@@ -794,46 +773,47 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          await widget.disabledProfile!.reference
-                              .update(createDisabledProfileRecordData(
-                            isMale: _model.isMale,
-                            ethnicity: _model.ethnicityDropDownValue,
-                            hairColor: _model.hirColorDropDownValue,
-                            skinColor: _model.skinColorDropDownValue,
-                            facialHair: _model.facialHairDropDownValue,
-                            name: _model.nameController.text,
-                            birthday: _model.datePicked,
-                            eyesColor: _model.eyesColorDropDownValue,
-                            hairLength: _model.hairLengthDropDownValue,
-                          ));
+                          await DisabledProfileRecord.collection
+                              .doc()
+                              .set(createDisabledProfileRecordData(
+                                caregiverID: currentUserReference,
+                                isMale: _model.isMale,
+                                ethnicity: _model.ethnicityDropDownValue,
+                                hairColor: _model.hirColorDropDownValue,
+                                skinColor: _model.skinColorDropDownValue,
+                                facialHair: _model.facialHairDropDownValue,
+                                name: _model.nameController.text,
+                                birthday: _model.datePicked,
+                                eyesColor: _model.eyesColorDropDownValue,
+                                hairLength: _model.hairLengthDropDownValue,
+                              ));
 
                           context.pushNamed('Home');
                         },
-                        text: 'Edit Profile',
-                        icon: const Icon(
+                        text: 'Add Profile',
+                        icon: Icon(
                           Icons.face,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           size: 15.0,
                         ),
                         options: FFButtonOptions(
                           width: 200.0,
                           height: 48.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
+                          padding: const EdgeInsets.all(0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: 'Readex Pro',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                          elevation: 3.0,
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 4.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
                     ]

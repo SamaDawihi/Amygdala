@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'information_component_model.dart';
 export 'information_component_model.dart';
 
@@ -54,8 +53,6 @@ class _InformationComponentWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
       child: Container(

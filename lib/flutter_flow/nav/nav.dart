@@ -118,12 +118,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const AccountWidget(),
         ),
         FFRoute(
-          name: 'EditAccount',
-          path: '/editAccount',
-          requireAuth: true,
-          builder: (context, params) => const EditAccountWidget(),
-        ),
-        FFRoute(
           name: 'HistoryRecord',
           path: '/historyRecord',
           builder: (context, params) => HistoryRecordWidget(
@@ -132,18 +126,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'CreateProf',
-          path: '/createProf',
-          builder: (context, params) => const CreateProfWidget(),
-        ),
-        FFRoute(
-          name: 'EditProfile',
-          path: '/EditProfile',
-          builder: (context, params) => const EditProfileWidget(),
+          name: 'AddProfile',
+          path: '/addProfile',
+          requireAuth: true,
+          builder: (context, params) => const AddProfileWidget(),
         ),
         FFRoute(
           name: 'profile',
           path: '/Profile',
+          requireAuth: true,
           builder: (context, params) => ProfileWidget(
             disabledProfile: params.getParam('disabledProfile',
                 ParamType.DocumentReference, false, ['DisabledProfile']),
@@ -158,9 +149,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'History',
           path: '/history',
+          requireAuth: true,
           builder: (context, params) => HistoryWidget(
             disabledProfile: params.getParam('disabledProfile',
                 ParamType.DocumentReference, false, ['DisabledProfile']),
+          ),
+        ),
+        FFRoute(
+          name: 'EditProfile',
+          path: '/editProfile',
+          requireAuth: true,
+          asyncParams: {
+            'disabledProfile':
+                getDoc(['DisabledProfile'], DisabledProfileRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditProfileWidget(
+            disabledProfile:
+                params.getParam('disabledProfile', ParamType.Document),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
@@ -333,6 +338,7 @@ class FFRoute {
           return null;
         },
         pageBuilder: (context, state) {
+          fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
           final page = ffParams.hasFutures
               ? FutureBuilder(

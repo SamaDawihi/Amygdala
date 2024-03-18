@@ -34,11 +34,6 @@ class DisabledProfileRecord extends FirestoreRecord {
   String get hairColor => _hairColor ?? '';
   bool hasHairColor() => _hairColor != null;
 
-  // "eyeColor" field.
-  String? _eyeColor;
-  String get eyeColor => _eyeColor ?? '';
-  bool hasEyeColor() => _eyeColor != null;
-
   // "skinColor" field.
   String? _skinColor;
   String get skinColor => _skinColor ?? '';
@@ -59,22 +54,27 @@ class DisabledProfileRecord extends FirestoreRecord {
   DateTime? get birthday => _birthday;
   bool hasBirthday() => _birthday != null;
 
-  // "photo" field.
-  String? _photo;
-  String get photo => _photo ?? '';
-  bool hasPhoto() => _photo != null;
+  // "eyesColor" field.
+  String? _eyesColor;
+  String get eyesColor => _eyesColor ?? '';
+  bool hasEyesColor() => _eyesColor != null;
+
+  // "hairLength" field.
+  String? _hairLength;
+  String get hairLength => _hairLength ?? '';
+  bool hasHairLength() => _hairLength != null;
 
   void _initializeFields() {
     _caregiverID = snapshotData['caregiverID'] as DocumentReference?;
     _isMale = snapshotData['isMale'] as bool?;
     _ethnicity = snapshotData['ethnicity'] as String?;
     _hairColor = snapshotData['hairColor'] as String?;
-    _eyeColor = snapshotData['eyeColor'] as String?;
     _skinColor = snapshotData['skinColor'] as String?;
     _facialHair = snapshotData['facialHair'] as String?;
     _name = snapshotData['name'] as String?;
     _birthday = snapshotData['birthday'] as DateTime?;
-    _photo = snapshotData['photo'] as String?;
+    _eyesColor = snapshotData['eyesColor'] as String?;
+    _hairLength = snapshotData['hairLength'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -116,12 +116,12 @@ Map<String, dynamic> createDisabledProfileRecordData({
   bool? isMale,
   String? ethnicity,
   String? hairColor,
-  String? eyeColor,
   String? skinColor,
   String? facialHair,
   String? name,
   DateTime? birthday,
-  String? photo,
+  String? eyesColor,
+  String? hairLength,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -129,12 +129,12 @@ Map<String, dynamic> createDisabledProfileRecordData({
       'isMale': isMale,
       'ethnicity': ethnicity,
       'hairColor': hairColor,
-      'eyeColor': eyeColor,
       'skinColor': skinColor,
       'facialHair': facialHair,
       'name': name,
       'birthday': birthday,
-      'photo': photo,
+      'eyesColor': eyesColor,
+      'hairLength': hairLength,
     }.withoutNulls,
   );
 
@@ -151,12 +151,12 @@ class DisabledProfileRecordDocumentEquality
         e1?.isMale == e2?.isMale &&
         e1?.ethnicity == e2?.ethnicity &&
         e1?.hairColor == e2?.hairColor &&
-        e1?.eyeColor == e2?.eyeColor &&
         e1?.skinColor == e2?.skinColor &&
         e1?.facialHair == e2?.facialHair &&
         e1?.name == e2?.name &&
         e1?.birthday == e2?.birthday &&
-        e1?.photo == e2?.photo;
+        e1?.eyesColor == e2?.eyesColor &&
+        e1?.hairLength == e2?.hairLength;
   }
 
   @override
@@ -165,12 +165,12 @@ class DisabledProfileRecordDocumentEquality
         e?.isMale,
         e?.ethnicity,
         e?.hairColor,
-        e?.eyeColor,
         e?.skinColor,
         e?.facialHair,
         e?.name,
         e?.birthday,
-        e?.photo
+        e?.eyesColor,
+        e?.hairLength
       ]);
 
   @override

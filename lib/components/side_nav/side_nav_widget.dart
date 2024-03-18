@@ -1,11 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'side_nav_model.dart';
@@ -36,20 +33,6 @@ class _SideNavWidgetState extends State<SideNavWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SideNavModel());
-
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.queredProfile = await queryDisabledProfileRecordOnce(
-        queryBuilder: (disabledProfileRecord) => disabledProfileRecord.where(
-          'caregiverID',
-          isEqualTo: currentUserReference,
-        ),
-        singleRecord: true,
-      ).then((s) => s.firstOrNull);
-      setState(() {
-        _model.disabledProfile = _model.queredProfile?.reference;
-      });
-    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -174,63 +157,6 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          if (_model.disabledProfile != null) {
-                            context.goNamed(
-                              'profile',
-                              queryParameters: {
-                                'disabledProfile': serializeParam(
-                                  _model.disabledProfile,
-                                  ParamType.DocumentReference,
-                                ),
-                              }.withoutNulls,
-                            );
-                          } else {
-                            context.pushNamed('CreateProf');
-                          }
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.easeInOut,
-                          width: double.infinity,
-                          height: 44.0,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            borderRadius: BorderRadius.circular(12.0),
-                            shape: BoxShape.rectangle,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 0.0, 6.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.face_retouching_natural,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 24.0,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Disabled Profile',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
                           context.pushNamed('Account');
                         },
                         child: AnimatedContainer(
@@ -315,63 +241,7 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                           ),
                         ),
                       ),
-                      if (_model.disabledProfile != null)
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed(
-                              'History',
-                              queryParameters: {
-                                'disabledProfile': serializeParam(
-                                  _model.disabledProfile,
-                                  ParamType.DocumentReference,
-                                ),
-                              }.withoutNulls,
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeInOut,
-                            width: double.infinity,
-                            height: 44.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              borderRadius: BorderRadius.circular(12.0),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 0.0, 6.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Icon(
-                                    Icons.history,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 24.0,
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'History',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                    ].divide(const SizedBox(height: 12.0)),
+                    ].divide(const SizedBox(height: 22.0)),
                   ),
                 ),
               ),

@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/confirmation_component/confirmation_component_widget.dart';
 import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -6,13 +7,11 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/history_pages/confirm_delete_session/confirm_delete_session_widget.dart';
+import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:provider/provider.dart';
 import 'history_record_model.dart';
 export 'history_record_model.dart';
 
@@ -191,17 +190,6 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -219,8 +207,9 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
           actions: [
             Container(
               decoration: const BoxDecoration(),
-              child: SizedBox(
-                width: 200.0,
+              child: Container(
+                width: 300.0,
+                decoration: const BoxDecoration(),
                 child: wrapWithModel(
                   model: _model.connectionStatusModel,
                   updateCallback: () => setState(() {}),
@@ -305,6 +294,48 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                           onPressed: () {
                                             print('IconButton pressed ...');
                                           },
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 8.0, 0.0),
+                                        child: Icon(
+                                          Icons.chevron_right_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 16.0,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 8.0, 16.0, 8.0),
+                                        child: Container(
+                                          height: 32.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    12.0, 4.0, 12.0, 4.0),
+                                            child: Text(
+                                              'Sessions History',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                  ),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       Padding(
@@ -471,9 +502,9 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 12.0),
                                                     child: RichText(
-                                                      textScaleFactor:
+                                                      textScaler:
                                                           MediaQuery.of(context)
-                                                              .textScaleFactor,
+                                                              .textScaler,
                                                       text: TextSpan(
                                                         children: [
                                                           TextSpan(
@@ -667,14 +698,14 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                               MainAxisSize.max,
                                                                           children: [
                                                                             Padding(
-                                                                              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(90.0, 0.0, 0.0, 0.0),
                                                                               child: Row(
                                                                                 mainAxisSize: MainAxisSize.min,
                                                                                 children: [
                                                                                   Padding(
                                                                                     padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 4.0, 0.0),
                                                                                     child: Text(
-                                                                                      'Happy,Excited',
+                                                                                      'Happy',
                                                                                       style: FlutterFlowTheme.of(context).displaySmall.override(
                                                                                             fontFamily: 'Outfit',
                                                                                             fontSize: 26.0,
@@ -707,7 +738,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                             child: Padding(
                                                                                               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                                                                                               child: CircularPercentIndicator(
-                                                                                                percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'happy'),
+                                                                                                percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'happy'),
                                                                                                 radius: 30.0,
                                                                                                 lineWidth: 8.0,
                                                                                                 animation: true,
@@ -717,7 +748,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                                 center: Text(
                                                                                                   valueOrDefault<String>(
                                                                                                     formatNumber(
-                                                                                                      functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'happy'),
+                                                                                                      functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'happy'),
                                                                                                       formatType: FormatType.percent,
                                                                                                     ),
                                                                                                     '0',
@@ -767,7 +798,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                     Align(
                                                                                       alignment: const AlignmentDirectional(-1.0, 0.0),
                                                                                       child: CircularPercentIndicator(
-                                                                                        percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'relaxed'),
+                                                                                        percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'relaxed'),
                                                                                         radius: 30.0,
                                                                                         lineWidth: 8.0,
                                                                                         animation: true,
@@ -776,7 +807,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                         backgroundColor: const Color(0xFFF6E8B6),
                                                                                         center: Text(
                                                                                           formatNumber(
-                                                                                            functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'relaxed'),
+                                                                                            functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'relaxed'),
                                                                                             formatType: FormatType.percent,
                                                                                           ),
                                                                                           style: FlutterFlowTheme.of(context).headlineMedium,
@@ -800,73 +831,70 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                           mainAxisSize:
                                                                               MainAxisSize.max,
                                                                           children: [
-                                                                            Padding(
-                                                                              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.min,
-                                                                                children: [
-                                                                                  Padding(
-                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(80.0, 4.0, 4.0, 0.0),
-                                                                                    child: Text(
-                                                                                      'Neutral',
-                                                                                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                                                                                            fontFamily: 'Outfit',
-                                                                                            fontSize: 26.0,
-                                                                                          ),
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.min,
+                                                                              children: [
+                                                                                Padding(
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(80.0, 4.0, 4.0, 0.0),
+                                                                                  child: Text(
+                                                                                    'Neutral',
+                                                                                    style: FlutterFlowTheme.of(context).displaySmall.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          fontSize: 26.0,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                                Padding(
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                                                                                  child: ClipRRect(
+                                                                                    borderRadius: BorderRadius.circular(100.0),
+                                                                                    child: Image.asset(
+                                                                                      'assets/images/Screenshot_2023-11-30_143523.png',
+                                                                                      width: 40.0,
+                                                                                      height: 40.0,
+                                                                                      fit: BoxFit.cover,
                                                                                     ),
                                                                                   ),
-                                                                                  Padding(
-                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                                                                                    child: ClipRRect(
-                                                                                      borderRadius: BorderRadius.circular(100.0),
-                                                                                      child: Image.asset(
-                                                                                        'assets/images/Screenshot_2023-11-30_143523.png',
-                                                                                        width: 40.0,
-                                                                                        height: 40.0,
-                                                                                        fit: BoxFit.cover,
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                  Align(
+                                                                                ),
+                                                                                Align(
+                                                                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                  child: Stack(
                                                                                     alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                    child: Stack(
-                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                      children: [
-                                                                                        if (responsiveVisibility(
-                                                                                          context: context,
-                                                                                          tabletLandscape: false,
-                                                                                        ))
-                                                                                          CircularPercentIndicator(
-                                                                                            percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'natural'),
-                                                                                            radius: 30.0,
-                                                                                            lineWidth: 8.0,
-                                                                                            animation: true,
-                                                                                            animateFromLastPercent: true,
-                                                                                            progressColor: const Color(0xFFF895C6),
-                                                                                            backgroundColor: const Color(0xFFFFC3E1),
-                                                                                            center: Text(
-                                                                                              formatNumber(
-                                                                                                functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'natural'),
-                                                                                                formatType: FormatType.percent,
-                                                                                              ),
-                                                                                              style: FlutterFlowTheme.of(context).headlineMedium,
+                                                                                    children: [
+                                                                                      if (responsiveVisibility(
+                                                                                        context: context,
+                                                                                        tabletLandscape: false,
+                                                                                      ))
+                                                                                        CircularPercentIndicator(
+                                                                                          percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'neutral'),
+                                                                                          radius: 30.0,
+                                                                                          lineWidth: 8.0,
+                                                                                          animation: true,
+                                                                                          animateFromLastPercent: true,
+                                                                                          progressColor: const Color(0xFFF895C6),
+                                                                                          backgroundColor: const Color(0xFFFFC3E1),
+                                                                                          center: Text(
+                                                                                            formatNumber(
+                                                                                              functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'natural'),
+                                                                                              formatType: FormatType.percent,
                                                                                             ),
-                                                                                          ).animateOnPageLoad(animationsMap['progressBarOnPageLoadAnimation3']!),
-                                                                                      ],
-                                                                                    ),
+                                                                                            style: FlutterFlowTheme.of(context).headlineMedium,
+                                                                                          ),
+                                                                                        ).animateOnPageLoad(animationsMap['progressBarOnPageLoadAnimation3']!),
+                                                                                    ],
                                                                                   ),
-                                                                                ],
-                                                                              ),
+                                                                                ),
+                                                                              ],
                                                                             ),
                                                                             Padding(
-                                                                              padding: const EdgeInsetsDirectional.fromSTEB(7.0, 0.0, 0.0, 0.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(100.0, 0.0, 0.0, 0.0),
                                                                               child: Row(
                                                                                 mainAxisSize: MainAxisSize.min,
                                                                                 children: [
                                                                                   Padding(
                                                                                     padding: const EdgeInsetsDirectional.fromSTEB(50.0, 4.0, 4.0, 0.0),
                                                                                     child: Text(
-                                                                                      'Sad,Fatigue',
+                                                                                      'Sad',
                                                                                       style: FlutterFlowTheme.of(context).displaySmall.override(
                                                                                             fontFamily: 'Outfit',
                                                                                             fontSize: 26.0,
@@ -899,7 +927,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                             child: Padding(
                                                                                               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                                                                                               child: CircularPercentIndicator(
-                                                                                                percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'sad'),
+                                                                                                percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'sad'),
                                                                                                 radius: 30.0,
                                                                                                 lineWidth: 8.0,
                                                                                                 animation: true,
@@ -908,7 +936,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                                 backgroundColor: const Color(0x8B4036A4),
                                                                                                 center: Text(
                                                                                                   formatNumber(
-                                                                                                    functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'sad'),
+                                                                                                    functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'sad'),
                                                                                                     formatType: FormatType.percent,
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).headlineMedium,
@@ -937,14 +965,14 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                               MainAxisSize.max,
                                                                           children: [
                                                                             Padding(
-                                                                              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(70.0, 0.0, 0.0, 0.0),
                                                                               child: Row(
                                                                                 mainAxisSize: MainAxisSize.min,
                                                                                 children: [
                                                                                   Padding(
                                                                                     padding: const EdgeInsetsDirectional.fromSTEB(25.0, 4.0, 4.0, 0.0),
                                                                                     child: Text(
-                                                                                      'Angry,Tense',
+                                                                                      'Angry',
                                                                                       style: FlutterFlowTheme.of(context).displaySmall.override(
                                                                                             fontFamily: 'Outfit',
                                                                                             fontSize: 26.0,
@@ -975,7 +1003,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                           Padding(
                                                                                             padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                                                                                             child: CircularPercentIndicator(
-                                                                                              percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'angry'),
+                                                                                              percent: functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'angry'),
                                                                                               radius: 30.0,
                                                                                               lineWidth: 8.0,
                                                                                               animation: true,
@@ -984,7 +1012,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                                               backgroundColor: const Color(0x67DE1818),
                                                                                               center: Text(
                                                                                                 formatNumber(
-                                                                                                  functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.natural, 'angry'),
+                                                                                                  functions.getEmotionPercentage(columnSessionRecord.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral, 'angry'),
                                                                                                   formatType: FormatType.percent,
                                                                                                 ),
                                                                                                 style: FlutterFlowTheme.of(context).headlineMedium,
@@ -1431,10 +1459,10 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                         0.0,
                                                                         0.0),
                                                             child: RichText(
-                                                              textScaleFactor:
+                                                              textScaler:
                                                                   MediaQuery.of(
                                                                           context)
-                                                                      .textScaleFactor,
+                                                                      .textScaler,
                                                               text: TextSpan(
                                                                 children: [
                                                                   TextSpan(
@@ -1448,7 +1476,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                         columnSessionRecord
                                                                             .relaxed,
                                                                         columnSessionRecord
-                                                                            .natural),
+                                                                            .neutral),
                                                                     style:
                                                                         const TextStyle(),
                                                                   )
@@ -1507,7 +1535,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                         columnSessionRecord
                                                                             .relaxed,
                                                                         columnSessionRecord
-                                                                            .natural)),
+                                                                            .neutral)),
                                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nbozqsm1b5v1/Screenshot_2023-11-30_144219.png',
                                                                   ),
                                                                   width: 200.0,
@@ -1565,9 +1593,33 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                                             context)
                                                                         .unfocus(),
                                                                 child:
-                                                                    ConfirmDeleteSessionWidget(
-                                                                  belongTo: widget
-                                                                      .sessionId!,
+                                                                    ConfirmationComponentWidget(
+                                                                  title:
+                                                                      'Delete Session History Record',
+                                                                  message:
+                                                                      'Are you sure you want to delete this  record?',
+                                                                  confirmText:
+                                                                      'Delete',
+                                                                  cancelText:
+                                                                      'Cancel',
+                                                                  confirmAction:
+                                                                      () async {
+                                                                    unawaited(
+                                                                      () async {
+                                                                        await widget
+                                                                            .sessionId!
+                                                                            .delete();
+                                                                      }(),
+                                                                    );
+
+                                                                    context.goNamed(
+                                                                        'Home');
+                                                                  },
+                                                                  cancelAction:
+                                                                      () async {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
                                                                 ),
                                                               ),
                                                             );

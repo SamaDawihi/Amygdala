@@ -11,4 +11,4 @@ PRODUCT_NAME = Amygdala
 PRODUCT_BUNDLE_IDENTIFIER = com.amygdala.amygdala
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 Amygdala. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 Amygdala. All rights reserved.

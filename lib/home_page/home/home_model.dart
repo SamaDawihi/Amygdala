@@ -1,7 +1,7 @@
-import '/backend/backend.dart';
 import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/profile_pages/disabled_profile_list_view/disabled_profile_list_view_widget.dart';
 import 'home_widget.dart' show HomeWidget;
 import 'package:flutter/material.dart';
 
@@ -11,10 +11,9 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   final unfocusNode = FocusNode();
   // Model for sideNav component.
   late SideNavModel sideNavModel;
-  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
-  DisabledProfileRecord? queredDisabled;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  SessionRecord? sessionId;
+  // Models for disabledProfileListView dynamic component.
+  late FlutterFlowDynamicModels<DisabledProfileListViewModel>
+      disabledProfileListViewModels;
   // Model for connectionStatus component.
   late ConnectionStatusModel connectionStatusModel;
 
@@ -23,6 +22,8 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
+    disabledProfileListViewModels =
+        FlutterFlowDynamicModels(() => DisabledProfileListViewModel());
     connectionStatusModel = createModel(context, () => ConnectionStatusModel());
   }
 
@@ -30,6 +31,7 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();
+    disabledProfileListViewModels.dispose();
     connectionStatusModel.dispose();
   }
 

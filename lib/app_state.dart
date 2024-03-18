@@ -33,6 +33,10 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _defaultHeadset = prefs.getString('ff_defaultHeadset') ?? _defaultHeadset;
     });
+    _safeInit(() {
+      _imageGenerationToken =
+          prefs.getString('ff_imageGenerationToken') ?? _imageGenerationToken;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -48,7 +52,7 @@ class FFAppState extends ChangeNotifier {
     _isLightMode = value;
   }
 
-  List<String> _emotions = ['Happy', 'Angry', 'Natural', 'Sad', 'Relaxed'];
+  List<String> _emotions = ['Happy', 'Angry', 'Neutral', 'Sad', 'Relaxed'];
   List<String> get emotions => _emotions;
   set emotions(List<String> value) {
     _emotions = value;
@@ -92,7 +96,7 @@ class FFAppState extends ChangeNotifier {
 
   ConnectionStatusStruct _connectionStatus =
       ConnectionStatusStruct.fromSerializableMap(jsonDecode(
-          '{"status":"Not Connected","details":"Recheck Required","availableHeadsets":"[]","lastChecked":"1708109940000","condition":"0"}'));
+          '{\"status\":\"Not Connected\",\"details\":\"Recheck Required\",\"availableHeadsets\":\"[]\",\"lastChecked\":\"1708109940000\",\"condition\":\"0\"}'));
   ConnectionStatusStruct get connectionStatus => _connectionStatus;
   set connectionStatus(ConnectionStatusStruct value) {
     _connectionStatus = value;
@@ -109,6 +113,14 @@ class FFAppState extends ChangeNotifier {
   set defaultHeadset(String value) {
     _defaultHeadset = value;
     prefs.setString('ff_defaultHeadset', value);
+  }
+
+  String _imageGenerationToken =
+      'Token r8_bMCjDyIgM2dojAlIVEk3YHV8PjfTkoH0yL4b5';
+  String get imageGenerationToken => _imageGenerationToken;
+  set imageGenerationToken(String value) {
+    _imageGenerationToken = value;
+    prefs.setString('ff_imageGenerationToken', value);
   }
 }
 

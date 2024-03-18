@@ -5,15 +5,13 @@ export '/account_pages/create_account/create_account_widget.dart'
 export '/home_page/home/home_widget.dart' show HomeWidget;
 export '/during_session_pages/session/session_widget.dart' show SessionWidget;
 export '/account_pages/account/account_widget.dart' show AccountWidget;
-export '/account_pages/edit_account/edit_account_widget.dart'
-    show EditAccountWidget;
 export '/history_pages/history_record/history_record_widget.dart'
     show HistoryRecordWidget;
-export '/profile_pages/create_prof/create_prof_widget.dart'
-    show CreateProfWidget;
-export '/profile_pages/edit_profile/edit_profile_widget.dart'
-    show EditProfileWidget;
+export '/profile_pages/add_profile/add_profile_widget.dart'
+    show AddProfileWidget;
 export '/profile_pages/profile/profile_widget.dart' show ProfileWidget;
 export '/b_c_i_settings/bci_setttings/bci_setttings_widget.dart'
     show BciSetttingsWidget;
 export '/history_pages/history/history_widget.dart' show HistoryWidget;
+export '/profile_pages/edit_profile/edit_profile_widget.dart'
+    show EditProfileWidget;

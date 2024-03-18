@@ -1,3 +1,18 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "Session",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "disabledProfile",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "endAt",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
 }

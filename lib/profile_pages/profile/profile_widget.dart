@@ -1,14 +1,12 @@
 import '/backend/backend.dart';
+import '/components/confirmation_component/confirmation_component_widget.dart';
 import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'profile_model.dart';
 export 'profile_model.dart';
 
@@ -46,17 +44,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -74,8 +61,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           actions: [
             Container(
               decoration: const BoxDecoration(),
-              child: SizedBox(
-                width: 200.0,
+              child: Container(
+                width: 300.0,
+                decoration: const BoxDecoration(),
                 child: wrapWithModel(
                   model: _model.connectionStatusModel,
                   updateCallback: () => setState(() {}),
@@ -102,270 +90,403 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 ),
               ),
               Expanded(
-                child: StreamBuilder<DisabledProfileRecord>(
-                  stream: DisabledProfileRecord.getDocument(
-                      widget.disabledProfile!),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return const Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Color(0xFF4036A4),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                  child: StreamBuilder<DisabledProfileRecord>(
+                    stream: DisabledProfileRecord.getDocument(
+                        widget.disabledProfile!),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return const Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Color(0xFF4036A4),
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                    final columnDisabledProfileRecord = snapshot.data!;
-                    return SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 50.0, 0.0, 0.0),
-                                    child: GradientText(
-                                      'Profile',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontSize: 30.0,
-                                          ),
-                                      colors: const [
-                                        Color(0xFF1D1753),
-                                        Color(0xFF4036A4)
-                                      ],
-                                      gradientType: GradientType.radial,
-                                      radius: 1.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 30.0, 0.0),
-                                child: Lottie.network(
-                                  'https://lottie.host/04297aaf-9807-4e1c-83cf-03a8edd1b470/IESuWdztNF.json',
-                                  width: 150.0,
-                                  height: 130.0,
-                                  fit: BoxFit.fitHeight,
-                                  animate: true,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      GradientText(
-                                        'Name : Ahmad Ali ',
-                                        textAlign: TextAlign.start,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                        colors: const [
-                                          Color(0xFF1D1753),
-                                          Color(0xFF4036A4)
-                                        ],
-                                        gradientType: GradientType.radial,
-                                        radius: 1.0,
-                                      ),
-                                      GradientText(
-                                        'Age : 16 ',
-                                        textAlign: TextAlign.start,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                        colors: const [
-                                          Color(0xFF1D1753),
-                                          Color(0xFF4036A4)
-                                        ],
-                                        gradientType: GradientType.radial,
-                                        radius: 1.0,
-                                      ),
-                                      GradientText(
-                                        'Ethnicity : Gulf Arab',
-                                        textAlign: TextAlign.start,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                        colors: const [
-                                          Color(0xFF1D1753),
-                                          Color(0xFF4036A4)
-                                        ],
-                                        gradientType: GradientType.radial,
-                                        radius: 1.0,
-                                      ),
-                                      GradientText(
-                                        'Hair Color : black ',
-                                        textAlign: TextAlign.start,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                        colors: const [
-                                          Color(0xFF1D1753),
-                                          Color(0xFF4036A4)
-                                        ],
-                                        gradientType: GradientType.radial,
-                                        radius: 1.0,
-                                      ),
-                                      GradientText(
-                                        'Skin Color : Medium',
-                                        textAlign: TextAlign.start,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                        colors: const [
-                                          Color(0xFF1D1753),
-                                          Color(0xFF4036A4)
-                                        ],
-                                        gradientType: GradientType.radial,
-                                        radius: 1.0,
-                                      ),
-                                      GradientText(
-                                        'Eyes color : brown',
-                                        textAlign: TextAlign.start,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                        colors: const [
-                                          Color(0xFF1D1753),
-                                          Color(0xFF4036A4)
-                                        ],
-                                        gradientType: GradientType.radial,
-                                        radius: 1.0,
-                                      ),
-                                      GradientText(
-                                        'facial hair : None',
-                                        textAlign: TextAlign.start,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                        colors: const [
-                                          Color(0xFF1D1753),
-                                          Color(0xFF4036A4)
-                                        ],
-                                        gradientType: GradientType.radial,
-                                        radius: 1.0,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 40.0, 0.0, 90.0),
-                                child: Row(
+                        );
+                      }
+                      final columnDisabledProfileRecord = snapshot.data!;
+                      return SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Profile',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context).displayLarge,
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
                                   mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 24.0, 20.0, 12.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          context.pushNamed('EditProfile');
-                                        },
-                                        text: 'Edit Profile',
-                                        icon: const Icon(
-                                          Icons.face,
-                                          size: 15.0,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 200.0,
-                                          height: 48.0,
-                                          padding: const EdgeInsets.all(0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: const Color(0xFF4036A4),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                  ),
-                                          elevation: 4.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
+                                    RichText(
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Name : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 26.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                           ),
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
+                                          TextSpan(
+                                            text: columnDisabledProfileRecord
+                                                .name,
+                                            style: const TextStyle(),
+                                          )
+                                        ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 26.0,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    RichText(
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Birthday : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 26.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: dateTimeFormat(
+                                                'd/M/y',
+                                                columnDisabledProfileRecord
+                                                    .birthday!),
+                                            style: const TextStyle(),
+                                          )
+                                        ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 26.0,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    RichText(
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Ethnicity : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 26.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: columnDisabledProfileRecord
+                                                .ethnicity,
+                                            style: const TextStyle(),
+                                          )
+                                        ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 26.0,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    RichText(
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Hair Color : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 26.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: columnDisabledProfileRecord
+                                                .hairColor,
+                                            style: const TextStyle(),
+                                          )
+                                        ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 26.0,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    RichText(
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Skin Color : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 26.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: columnDisabledProfileRecord
+                                                .skinColor,
+                                            style: const TextStyle(),
+                                          )
+                                        ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 26.0,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    RichText(
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Eyes color : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 26.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: columnDisabledProfileRecord
+                                                .eyesColor,
+                                            style: const TextStyle(),
+                                          )
+                                        ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 26.0,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    RichText(
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'facial hair : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 26.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: columnDisabledProfileRecord
+                                                .facialHair,
+                                            style: const TextStyle(),
+                                          )
+                                        ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 26.0,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    RichText(
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Hair Length : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 26.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: columnDisabledProfileRecord
+                                                .hairLength,
+                                            style: const TextStyle(),
+                                          )
+                                        ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 26.0,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ].divide(const SizedBox(height: 15.0)),
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Lottie.network(
+                                      'https://lottie.host/04297aaf-9807-4e1c-83cf-03a8edd1b470/IESuWdztNF.json',
+                                      width: 300.0,
+                                      height: 250.0,
+                                      fit: BoxFit.fitWidth,
+                                      animate: true,
+                                    ),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        context.pushNamed(
+                                          'EditProfile',
+                                          queryParameters: {
+                                            'disabledProfile': serializeParam(
+                                              columnDisabledProfileRecord,
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'disabledProfile':
+                                                columnDisabledProfileRecord,
+                                          },
+                                        );
+                                      },
+                                      text: 'Edit Profile',
+                                      icon: const Icon(
+                                        Icons.face,
+                                        size: 15.0,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 200.0,
+                                        height: 48.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
                                         ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 24.0, 20.0, 12.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                    Builder(
+                                      builder: (context) => FFButtonWidget(
+                                        onPressed: () async {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: const AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child:
+                                                      ConfirmationComponentWidget(
+                                                    title: 'Delete Profile',
+                                                    message:
+                                                        'Are you sure you want to delete this profile?',
+                                                    confirmText: 'Delete',
+                                                    cancelText: 'Cancel',
+                                                    confirmAction: () async {
+                                                      await columnDisabledProfileRecord
+                                                          .reference
+                                                          .delete();
+                                                    },
+                                                    cancelAction: () async {
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ).then((value) => setState(() {}));
                                         },
-                                        text: 'Remove Profile',
+                                        text: 'Delete Profile',
                                         icon: const Icon(
                                           Icons.remove_circle_outline_sharp,
                                           size: 15.0,
@@ -373,41 +494,45 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         options: FFButtonOptions(
                                           width: 200.0,
                                           height: 48.0,
-                                          padding: const EdgeInsets.all(0.0),
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  24.0, 0.0, 24.0, 0.0),
                                           iconPadding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .error,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                  ),
-                                          elevation: 4.0,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                          elevation: 3.0,
                                           borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(15.0),
+                                              BorderRadius.circular(8.0),
                                         ),
                                       ),
                                     ),
-                                  ],
+                                  ].divide(const SizedBox(height: 20.0)),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                              ],
+                            ),
+                          ].divide(const SizedBox(height: 30.0)),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
-            ],
+            ].divide(const SizedBox(width: 50.0)),
           ),
         ),
       ),

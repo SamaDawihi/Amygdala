@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -62,6 +63,30 @@ class _ConnectionStatusWidgetState extends State<ConnectionStatusWidget> {
                   fontWeight: FontWeight.w800,
                 ),
             minFontSize: 8.0,
+          ),
+          AlignedTooltip(
+            content: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text(
+                  FFAppState().connectionStatus.details,
+                  textAlign: TextAlign.start,
+                  style: FlutterFlowTheme.of(context).bodyLarge,
+                )),
+            offset: 4.0,
+            preferredDirection: AxisDirection.down,
+            borderRadius: BorderRadius.circular(8.0),
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            elevation: 4.0,
+            tailBaseWidth: 24.0,
+            tailLength: 12.0,
+            waitDuration: const Duration(milliseconds: 100),
+            showDuration: const Duration(milliseconds: 1500),
+            triggerMode: TooltipTriggerMode.tap,
+            child: Icon(
+              Icons.info_outline_rounded,
+              color: FlutterFlowTheme.of(context).secondaryText,
+              size: 14.0,
+            ),
           ),
         ].divide(const SizedBox(width: 4.0)),
       ),

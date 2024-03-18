@@ -2,10 +2,10 @@ import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'edit_profile_widget.dart' show EditProfileWidget;
+import 'add_profile_widget.dart' show AddProfileWidget;
 import 'package:flutter/material.dart';
 
-class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
+class AddProfileModel extends FlutterFlowModel<AddProfileWidget> {
   ///  Local state fields for this page.
 
   bool isMale = true;

@@ -12,7 +12,6 @@ import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'session_model.dart';
@@ -45,6 +44,7 @@ class _SessionWidgetState extends State<SessionWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await action_blocks.checkBCIConnection(context);
+      // check if the connection is successful and if there is any BCI device connected
       if ((FFAppState().connectionStatus.condition >= 4) &&
           (FFAppState().connectionStatus.availableHeadsets.isNotEmpty)) {
         // check if deafult headset is in the available headsets
@@ -195,10 +195,10 @@ class _SessionWidgetState extends State<SessionWidget> {
                     _model.predictedEmotion == 'Happy' ? 1 : 0),
                 'sad': FieldValue.increment(
                     _model.predictedEmotion == 'Sad' ? 1 : 0),
-                'natural': FieldValue.increment(
-                    _model.predictedEmotion == 'Natural' ? 1 : 0),
                 'relaxed': FieldValue.increment(
                     _model.predictedEmotion == 'Relaxed' ? 1 : 0),
+                'neutral': FieldValue.increment(
+                    _model.predictedEmotion == 'Neutral' ? 1 : 0),
               },
             ),
           });
@@ -258,11 +258,11 @@ class _SessionWidgetState extends State<SessionWidget> {
           setState(() {
             _model.imageApiStatus = 'Failed To Get Image ID';
           });
-          _model.timerController.timer.setPresetTime(mSec: 10000, add: false);
+          _model.timerController.timer.setPresetTime(mSec: 3000, add: false);
           _model.timerController.onResetTimer();
 
           _model.timerController.onStartTimer();
-          await Future.delayed(const Duration(milliseconds: 10000));
+          await Future.delayed(const Duration(milliseconds: 3000));
         }
 
         setState(() {
@@ -283,15 +283,6 @@ class _SessionWidgetState extends State<SessionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return Builder(
@@ -314,17 +305,13 @@ class _SessionWidgetState extends State<SessionWidget> {
                   children: [
                     Align(
                       alignment: const AlignmentDirectional(-1.0, 0.0),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(50.0, 0.0, 0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            'assets/images/image-removebg-preview.png',
-                            width: 80.0,
-                            height: 80.0,
-                            fit: BoxFit.cover,
-                          ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          'assets/images/image-removebg-preview.png',
+                          width: 80.0,
+                          height: 80.0,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -348,61 +335,48 @@ class _SessionWidgetState extends State<SessionWidget> {
                         style: FlutterFlowTheme.of(context).headlineSmall,
                       ),
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 50.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(1.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    setState(() {
-                                      _model.terminated = false;
-                                    });
-                                    if (widget.createdSession != null) {
-                                      await widget.createdSession!
-                                          .update(createSessionRecordData(
-                                        endAt: getCurrentTimestamp,
-                                      ));
-                                    }
+                    Align(
+                      alignment: const AlignmentDirectional(1.0, 0.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          setState(() {
+                            _model.terminated = false;
+                          });
+                          if (widget.createdSession != null) {
+                            await widget.createdSession!
+                                .update(createSessionRecordData(
+                              endAt: getCurrentTimestamp,
+                            ));
+                          }
 
-                                    context.goNamed('Home');
-                                  },
-                                  text: 'Terminate',
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).error,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: Colors.white,
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    hoverColor: const Color(0xFFDE1818),
+                          context.goNamed('Home');
+                        },
+                        text: 'Terminate',
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).error,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
                                   ),
-                                ),
-                              ),
-                            ].divide(const SizedBox(height: 5.0)),
+                          elevation: 3.0,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
                           ),
-                        ],
+                          borderRadius: BorderRadius.circular(8.0),
+                          hoverColor: const Color(0xFFDE1818),
+                        ),
                       ),
                     ),
-                  ],
+                  ]
+                      .addToStart(const SizedBox(width: 50.0))
+                      .addToEnd(const SizedBox(width: 100.0)),
                 ),
               ),
               Expanded(
@@ -571,34 +545,36 @@ class _SessionWidgetState extends State<SessionWidget> {
                                         ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 30.0, 0.0, 0.0),
-                                  child: SelectionArea(
-                                      child: Text(
-                                    'Status:${_model.imageApiStatus}',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          fontSize: 18.0,
-                                        ),
-                                  )),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 30.0, 0.0, 0.0),
-                                  child: SelectionArea(
-                                      child: Text(
-                                    'Met Object:${_model.met}',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          fontSize: 18.0,
-                                        ),
-                                  )),
-                                ),
+                                if (false)
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 30.0, 0.0, 0.0),
+                                    child: SelectionArea(
+                                        child: Text(
+                                      'Status:${_model.imageApiStatus}',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 18.0,
+                                          ),
+                                    )),
+                                  ),
+                                if (false)
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 30.0, 0.0, 0.0),
+                                    child: SelectionArea(
+                                        child: Text(
+                                      'Met Object:${_model.met}',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 18.0,
+                                          ),
+                                    )),
+                                  ),
                               ].divide(const SizedBox(height: 15.0)),
                             ),
                           );

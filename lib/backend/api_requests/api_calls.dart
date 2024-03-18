@@ -10,7 +10,8 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 class ReplicateImageCall {
   static Future<ApiCallResponse> call({
     String? prompt =
-        'a 21 year old arabian female, with medium skin color, black hair and black eyes, who seems to be feeling sad.',
+        'Capture a realistic portrayal of a 21-year-old Arabian woman with medium-toned skin, black hair, and dark eyes. Depict her looking directly at the camera. Her expression should convey genuine sadness, with eyes appearing downturned and lips slightly downturned at the corners. Aim for a lifelike photo resembling a photograph, evoking authentic emotions from viewers. Emphasize natural lighting to enhance realism, with subdued colors to evoke a somber mood. Frame the subject centrally to draw focus and intensity',
+    String? token = 'Token r8_bMCjDyIgM2dojAlIVEk3YHV8PjfTkoH0yL4b5',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -24,7 +25,7 @@ class ReplicateImageCall {
       apiUrl: 'https://api.replicate.com/v1/predictions',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Token r8_bMCjDyIgM2dojAlIVEk3YHV8PjfTkoH0yL4b5',
+        'Authorization': '$token',
         'Content-Type': 'application/json',
       },
       params: {},

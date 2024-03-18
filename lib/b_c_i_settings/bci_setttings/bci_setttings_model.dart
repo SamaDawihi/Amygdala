@@ -22,8 +22,10 @@ class BciSetttingsModel extends FlutterFlowModel<BciSetttingsWidget> {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
-  // Stores action output result for [Custom Action - bGetUserLogin] action in Button widget.
-  String? getUserLoginAction;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode3;
+  TextEditingController? textController3;
+  String? Function(BuildContext, String?)? textController3Validator;
   // Model for connectionStatus component.
   late ConnectionStatusModel connectionStatusModel;
 
@@ -44,6 +46,9 @@ class BciSetttingsModel extends FlutterFlowModel<BciSetttingsWidget> {
 
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
+
+    textFieldFocusNode3?.dispose();
+    textController3?.dispose();
 
     connectionStatusModel.dispose();
   }

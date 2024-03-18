@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'session_record_model.dart';
 export 'session_record_model.dart';
 
@@ -45,8 +44,6 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: double.infinity,
       constraints: const BoxConstraints(
@@ -101,7 +98,7 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                               columnSessionRecord.sad,
                               columnSessionRecord.angry,
                               columnSessionRecord.relaxed,
-                              columnSessionRecord.natural)),
+                              columnSessionRecord.neutral)),
                           'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nbozqsm1b5v1/Screenshot_2023-11-30_144219.png',
                         ),
                         width: 50.0,
@@ -115,12 +112,7 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                       child: Text(
-                        functions.getMaxEmotion(
-                            widget.session!.happy,
-                            columnSessionRecord.sad,
-                            columnSessionRecord.angry,
-                            columnSessionRecord.relaxed,
-                            columnSessionRecord.natural),
+                        'Mostly ${functions.getMaxEmotion(widget.session!.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral)}',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               fontWeight: FontWeight.bold,
@@ -163,8 +155,7 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 4.0),
                           child: RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 const TextSpan(
@@ -192,8 +183,7 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 12.0),
                           child: RichText(
-                            textScaleFactor:
-                                MediaQuery.of(context).textScaleFactor,
+                            textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
                               children: [
                                 TextSpan(

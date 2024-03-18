@@ -1,7 +1,7 @@
 import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/history_pages/emotion_filter/emotion_filter_widget.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/history_pages/session_record/session_record_widget.dart';
 import 'history_widget.dart' show HistoryWidget;
 import 'package:flutter/material.dart';
@@ -16,8 +16,12 @@ class HistoryModel extends FlutterFlowModel<HistoryWidget> {
   final unfocusNode = FocusNode();
   // Model for sideNav component.
   late SideNavModel sideNavModel;
-  // Model for emotionFilter component.
-  late EmotionFilterModel emotionFilterModel;
+  // State field(s) for ChoiceChips widget.
+  FormFieldController<List<String>>? choiceChipsValueController;
+  String? get choiceChipsValue =>
+      choiceChipsValueController?.value?.firstOrNull;
+  set choiceChipsValue(String? val) =>
+      choiceChipsValueController?.value = val != null ? [val] : [];
   // Models for SessionRecord dynamic component.
   late FlutterFlowDynamicModels<SessionRecordModel> sessionRecordModels;
   // Model for connectionStatus component.
@@ -28,7 +32,6 @@ class HistoryModel extends FlutterFlowModel<HistoryWidget> {
   @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
-    emotionFilterModel = createModel(context, () => EmotionFilterModel());
     sessionRecordModels = FlutterFlowDynamicModels(() => SessionRecordModel());
     connectionStatusModel = createModel(context, () => ConnectionStatusModel());
   }
@@ -37,7 +40,6 @@ class HistoryModel extends FlutterFlowModel<HistoryWidget> {
   void dispose() {
     unfocusNode.dispose();
     sideNavModel.dispose();
-    emotionFilterModel.dispose();
     sessionRecordModels.dispose();
     connectionStatusModel.dispose();
   }
