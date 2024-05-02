@@ -196,6 +196,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             }
                             return ListView.separated(
                               padding: EdgeInsets.zero,
+                              primary: false,
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
                               itemCount:

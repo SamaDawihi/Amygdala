@@ -125,18 +125,13 @@ class _SessionWidgetState extends State<SessionWidget> {
                           await widget.createdSession!
                               .update(createSessionRecordData(
                             status: 'Canceled due no available headsets',
+                            endAt: getCurrentTimestamp,
                           ));
                         }(),
                       );
-
-                      context.goNamed('BciSetttings');
-
-                      return;
-                    } else {
-                      context.goNamed('BciSetttings');
-
-                      return;
                     }
+
+                    context.goNamed('BciSetttings');
                   },
                   cancelAction: () async {
                     Navigator.pop(context);
@@ -148,6 +143,13 @@ class _SessionWidgetState extends State<SessionWidget> {
         ).then((value) => setState(() {}));
       }
 
+      if ((widget.createdSession?.id != null &&
+              widget.createdSession?.id != '') &&
+          (_model.headsetId != null && _model.headsetId != '')) {
+        await widget.createdSession!.update(createSessionRecordData(
+          headsetId: _model.headsetId,
+        ));
+      }
       setState(() {
         _model.doneCoditionChecking = true;
       });
@@ -186,35 +188,19 @@ class _SessionWidgetState extends State<SessionWidget> {
                           'Try Adjusting the headset set and check the accuracy through Emotiv Launcher App.',
                       confirmText: 'BCI Settings',
                       confirmAction: () async {
-                        var shouldSetState = false;
                         if (widget.createdSession != null) {
                           _model.lowAccuracySession =
                               await SessionRecord.getDocumentOnce(
                                   widget.createdSession!);
-                          shouldSetState = true;
-                          if (functions.getNumberOfEmotions(
-                                  _model.lowAccuracySession!) >
-                              0) {
-                            await widget.createdSession!
-                                .update(createSessionRecordData(
-                              endAt: getCurrentTimestamp,
-                            ));
 
-                            context.goNamed('BciSetttings');
-
-                            return;
-                          } else {
-                            await widget.createdSession!.delete();
-
-                            context.goNamed('BciSetttings');
-
-                            return;
-                          }
-                        } else {
-                          context.goNamed('BciSetttings');
-
-                          return;
+                          await widget.createdSession!
+                              .update(createSessionRecordData(
+                            endAt: getCurrentTimestamp,
+                            status: 'Terminated due to low accuracy',
+                          ));
                         }
+
+                        context.goNamed('BciSetttings');
                       },
                     ),
                   ),
@@ -449,13 +435,11 @@ class _SessionWidgetState extends State<SessionWidget> {
                                 child: FFButtonWidget(
                                   key: const ValueKey('Button_b9nt'),
                                   onPressed: () async {
-                                    var shouldSetState = false;
                                     _model.terminated = true;
                                     if (widget.createdSession != null) {
                                       _model.session =
                                           await SessionRecord.getDocumentOnce(
                                               widget.createdSession!);
-                                      shouldSetState = true;
                                       if (functions.getNumberOfEmotions(
                                               _model.session!) >
                                           0) {
@@ -482,8 +466,6 @@ class _SessionWidgetState extends State<SessionWidget> {
                                                     .secondary,
                                           ),
                                         );
-
-                                        context.goNamed('Home');
                                       } else {
                                         await widget.createdSession!
                                             .update(createSessionRecordData(
@@ -509,12 +491,7 @@ class _SessionWidgetState extends State<SessionWidget> {
                                                     .warning,
                                           ),
                                         );
-
-                                        context.goNamed('Home');
                                       }
-
-                                      if (shouldSetState) setState(() {});
-                                      return;
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
@@ -534,14 +511,11 @@ class _SessionWidgetState extends State<SessionWidget> {
                                                   .secondary,
                                         ),
                                       );
-
-                                      context.goNamed('Home');
-
-                                      if (shouldSetState) setState(() {});
-                                      return;
                                     }
 
-                                    if (shouldSetState) setState(() {});
+                                    context.goNamed('Home');
+
+                                    setState(() {});
                                   },
                                   text: 'Terminate',
                                   options: FFButtonOptions(

@@ -60,6 +60,11 @@ class SessionRecord extends FirestoreRecord {
   String get status => _status ?? '';
   bool hasStatus() => _status != null;
 
+  // "headsetId" field.
+  String? _headsetId;
+  String get headsetId => _headsetId ?? '';
+  bool hasHeadsetId() => _headsetId != null;
+
   void _initializeFields() {
     _disabledProfile = snapshotData['disabledProfile'] as DocumentReference?;
     _startAt = snapshotData['startAt'] as DateTime?;
@@ -70,6 +75,7 @@ class SessionRecord extends FirestoreRecord {
     _angry = castToType<int>(snapshotData['angry']);
     _neutral = castToType<int>(snapshotData['neutral']);
     _status = snapshotData['status'] as String?;
+    _headsetId = snapshotData['headsetId'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -116,6 +122,7 @@ Map<String, dynamic> createSessionRecordData({
   int? angry,
   int? neutral,
   String? status,
+  String? headsetId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -128,6 +135,7 @@ Map<String, dynamic> createSessionRecordData({
       'angry': angry,
       'neutral': neutral,
       'status': status,
+      'headsetId': headsetId,
     }.withoutNulls,
   );
 
@@ -147,7 +155,8 @@ class SessionRecordDocumentEquality implements Equality<SessionRecord> {
         e1?.relaxed == e2?.relaxed &&
         e1?.angry == e2?.angry &&
         e1?.neutral == e2?.neutral &&
-        e1?.status == e2?.status;
+        e1?.status == e2?.status &&
+        e1?.headsetId == e2?.headsetId;
   }
 
   @override
@@ -160,7 +169,8 @@ class SessionRecordDocumentEquality implements Equality<SessionRecord> {
         e?.relaxed,
         e?.angry,
         e?.neutral,
-        e?.status
+        e?.status,
+        e?.headsetId
       ]);
 
   @override
