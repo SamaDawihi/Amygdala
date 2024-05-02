@@ -59,6 +59,7 @@ class _EmptySessionsComponentWidgetState
                 'you have no sessions yet.',
                 style: FlutterFlowTheme.of(context).labelMedium.override(
                       fontFamily: 'Readex Pro',
+                      letterSpacing: 0.0,
                       fontWeight: FontWeight.normal,
                     ),
               ),

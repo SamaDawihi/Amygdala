@@ -116,7 +116,7 @@ class FFAppState extends ChangeNotifier {
   }
 
   String _imageGenerationToken =
-      'Token r8_bMCjDyIgM2dojAlIVEk3YHV8PjfTkoH0yL4b5';
+      'token r8_P6zE7tUbMcDT8NkdhwLdZQaWtC747e71cTc1t';
   String get imageGenerationToken => _imageGenerationToken;
   set imageGenerationToken(String value) {
     _imageGenerationToken = value;

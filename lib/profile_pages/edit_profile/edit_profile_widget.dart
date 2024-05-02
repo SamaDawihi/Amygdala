@@ -41,7 +41,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
       });
     });
 
-    _model.nameController ??=
+    _model.nameTextController ??=
         TextEditingController(text: widget.disabledProfile?.name);
     _model.nameFocusNode ??= FocusNode();
 
@@ -68,8 +68,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           title: Text(
-            'Home',
-            style: FlutterFlowTheme.of(context).headlineMedium,
+            'Edit Profile',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Outfit',
+                  letterSpacing: 0.0,
+                ),
           ),
           actions: [
             Container(
@@ -99,7 +102,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                 model: _model.sideNavModel,
                 updateCallback: () => setState(() {}),
                 child: const SideNavWidget(
-                  currentPage: 1,
+                  currentPage: 3,
                 ),
               ),
               Expanded(
@@ -111,22 +114,19 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 20.0, 0.0, 0.0),
-                            child: GradientText(
-                              'Edit Profile',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: 30.0,
-                                  ),
-                              colors: const [Color(0xFF1D1753), Color(0xFF4036A4)],
-                              gradientType: GradientType.radial,
-                              radius: 1.0,
-                            ),
+                          GradientText(
+                            'Edit Profile',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  fontSize: 30.0,
+                                  letterSpacing: 0.0,
+                                ),
+                            colors: const [Color(0xFF1D1753), Color(0xFF4036A4)],
+                            gradientType: GradientType.radial,
+                            radius: 1.0,
                           ),
                           GradientText(
                             'By giving us more information about the person whom emotions will be \ntranslated, we will optimize the Generated Art to match his/her real looks',
@@ -136,6 +136,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 .override(
                                   fontFamily: 'Readex Pro',
                                   fontSize: 20.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w300,
                                 ),
                             colors: const [Color(0xFF1D1753), Color(0xFF4036A4)],
@@ -159,12 +160,13 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               });
                             },
                             child: Container(
-                              width: 120.0,
+                              width: 80.0,
+                              height: 80.0,
                               constraints: const BoxConstraints(
-                                minWidth: 100.0,
-                                minHeight: 100.0,
-                                maxWidth: 100.0,
-                                maxHeight: 100.0,
+                                minWidth: 80.0,
+                                minHeight: 80.0,
+                                maxWidth: 80.0,
+                                maxHeight: 80.0,
                               ),
                               decoration: BoxDecoration(
                                 color: !_model.isMale
@@ -206,6 +208,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             FlutterFlowTheme.of(context)
                                                 .primary,
                                           ),
+                                          letterSpacing: 0.0,
                                         ),
                                   ),
                                 ],
@@ -223,12 +226,13 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               });
                             },
                             child: Container(
-                              width: 120.0,
+                              width: 80.0,
+                              height: 80.0,
                               constraints: const BoxConstraints(
-                                minWidth: 100.0,
-                                minHeight: 100.0,
-                                maxWidth: 100.0,
-                                maxHeight: 100.0,
+                                minWidth: 80.0,
+                                minHeight: 80.0,
+                                maxWidth: 80.0,
+                                maxHeight: 80.0,
                               ),
                               decoration: BoxDecoration(
                                 color: _model.isMale
@@ -266,6 +270,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                   .primary
                                               : FlutterFlowTheme.of(context)
                                                   .primaryBackground,
+                                          letterSpacing: 0.0,
                                         ),
                                   ),
                                 ],
@@ -274,540 +279,630 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           ),
                         ].divide(const SizedBox(width: 50.0)),
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Name*',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 18.0,
-                                    ),
-                              ),
-                              SizedBox(
-                                width: 300.0,
-                                child: TextFormField(
-                                  controller: _model.nameController,
-                                  focusNode: _model.nameFocusNode,
-                                  autofocus: true,
-                                  autofillHints: const [AutofillHints.name],
-                                  textCapitalization: TextCapitalization.words,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'Enter Name',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          fontFamily: 'Plus Jakarta Sans',
-                                          color: const Color(0xFF57636C),
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    contentPadding: const EdgeInsets.all(24.0),
-                                  ),
+                      Form(
+                        key: _model.formKey,
+                        autovalidateMode: AutovalidateMode.disabled,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Name*',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Plus Jakarta Sans',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                  keyboardType: TextInputType.name,
-                                  validator: _model.nameControllerValidator
-                                      .asValidator(context),
-                                ),
-                              ),
-                              Text(
-                                'Hair Length',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 18.0,
-                                    ),
-                              ),
-                              FlutterFlowDropDown<String>(
-                                controller:
-                                    _model.hairLengthDropDownValueController ??=
-                                        FormFieldController<String>(
-                                  _model.hairLengthDropDownValue ??=
-                                      widget.disabledProfile?.hairLength,
-                                ),
-                                options: const [
-                                  'Bald',
-                                  'Very Short',
-                                  'Short',
-                                  'Medium',
-                                  'long',
-                                  'Very Long'
-                                ],
-                                onChanged: (val) => setState(
-                                    () => _model.hairLengthDropDownValue = val),
-                                width: 300.0,
-                                height: 50.0,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyMedium,
-                                hintText: 'Hair Length',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                elevation: 2.0,
-                                borderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderWidth: 2.0,
-                                borderRadius: 8.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 4.0, 16.0, 4.0),
-                                hidesUnderline: true,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              ),
-                              Text(
-                                'Hair Color',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 18.0,
-                                    ),
-                              ),
-                              FlutterFlowDropDown<String>(
-                                controller:
-                                    _model.hirColorDropDownValueController ??=
-                                        FormFieldController<String>(
-                                  _model.hirColorDropDownValue ??=
-                                      widget.disabledProfile?.hairColor,
-                                ),
-                                options: const [
-                                  'Black',
-                                  'Brown',
-                                  'Red',
-                                  'Grey',
-                                  'White',
-                                  'Blonde'
-                                ],
-                                onChanged: (val) => setState(
-                                    () => _model.hirColorDropDownValue = val),
-                                width: 300.0,
-                                height: 50.0,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyMedium,
-                                hintText: 'Hair Color',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                elevation: 2.0,
-                                borderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderWidth: 2.0,
-                                borderRadius: 8.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 4.0, 16.0, 4.0),
-                                hidesUnderline: true,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              ),
-                              Text(
-                                'Eyes color',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 18.0,
-                                    ),
-                              ),
-                              FlutterFlowDropDown<String>(
-                                controller:
-                                    _model.eyesColorDropDownValueController ??=
-                                        FormFieldController<String>(
-                                  _model.eyesColorDropDownValue ??=
-                                      widget.disabledProfile?.eyesColor,
-                                ),
-                                options: const [
-                                  'Brown',
-                                  'Blue',
-                                  'Green',
-                                  'Hazel',
-                                  'Gray',
-                                  'Amber',
-                                  'Black'
-                                ],
-                                onChanged: (val) => setState(
-                                    () => _model.eyesColorDropDownValue = val),
-                                width: 300.0,
-                                height: 50.0,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyMedium,
-                                hintText: 'Eyes Color',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                elevation: 2.0,
-                                borderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderWidth: 2.0,
-                                borderRadius: 8.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 4.0, 16.0, 4.0),
-                                hidesUnderline: true,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              ),
-                              Container(
-                                width: 200.0,
-                              ),
-                            ].divide(const SizedBox(height: 12.0)),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Birthday',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 18.0,
-                                    ),
-                              ),
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  final datePickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate:
-                                        (widget.disabledProfile?.birthday ??
-                                            DateTime.now()),
-                                    firstDate: DateTime(1900),
-                                    lastDate:
-                                        (widget.disabledProfile?.birthday ??
-                                            DateTime.now()),
-                                    builder: (context, child) {
-                                      return wrapInMaterialDatePickerTheme(
-                                        context,
-                                        child!,
-                                        headerBackgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                        headerForegroundColor:
-                                            FlutterFlowTheme.of(context).info,
-                                        headerTextStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .headlineLarge
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  fontSize: 32.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                        pickerBackgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                        pickerForegroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                        selectedDateTimeBackgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                        selectedDateTimeForegroundColor:
-                                            FlutterFlowTheme.of(context).info,
-                                        actionButtonForegroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                        iconSize: 24.0,
-                                      );
-                                    },
-                                  );
-
-                                  if (datePickedDate != null) {
-                                    safeSetState(() {
-                                      _model.datePicked = DateTime(
-                                        datePickedDate.year,
-                                        datePickedDate.month,
-                                        datePickedDate.day,
-                                      );
-                                    });
-                                  }
-                                },
-                                text:
-                                    dateTimeFormat('d/M/y', _model.datePicked),
-                                options: FFButtonOptions(
-                                  width: 300.0,
-                                  height: 50.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
+                                      .labelLarge
                                       .override(
                                         fontFamily: 'Readex Pro',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
                                       ),
-                                  elevation: 3.0,
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
+                                ),
+                                SizedBox(
+                                  width: 300.0,
+                                  child: TextFormField(
+                                    controller: _model.nameTextController,
+                                    focusNode: _model.nameFocusNode,
+                                    autofocus: true,
+                                    autofillHints: const [AutofillHints.name],
+                                    textCapitalization:
+                                        TextCapitalization.words,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Enter Name',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Plus Jakarta Sans',
+                                            color: const Color(0xFF57636C),
+                                            fontSize: 14.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      contentPadding: const EdgeInsets.all(12.0),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Plus Jakarta Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    keyboardType: TextInputType.name,
+                                    validator: _model
+                                        .nameTextControllerValidator
+                                        .asValidator(context),
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
-                              ),
-                              Text(
-                                'Ethnicity',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 18.0,
+                                Text(
+                                  'Hair Length',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                FlutterFlowDropDown<String>(
+                                  controller: _model
+                                          .hairLengthDropDownValueController ??=
+                                      FormFieldController<String>(
+                                    _model.hairLengthDropDownValue ??=
+                                        widget.disabledProfile?.hairLength,
+                                  ),
+                                  options: const [
+                                    'Bald',
+                                    'Very Short',
+                                    'Short',
+                                    'Medium',
+                                    'long',
+                                    'Very Long'
+                                  ],
+                                  onChanged: (val) => setState(() =>
+                                      _model.hairLengthDropDownValue = val),
+                                  width: 300.0,
+                                  height: 40.0,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  hintText: 'Hair Length',
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  elevation: 2.0,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderWidth: 2.0,
+                                  borderRadius: 8.0,
+                                  margin: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 4.0, 16.0, 4.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
+                                ),
+                                Text(
+                                  'Hair Color',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                FlutterFlowDropDown<String>(
+                                  controller:
+                                      _model.hirColorDropDownValueController ??=
+                                          FormFieldController<String>(
+                                    _model.hirColorDropDownValue ??=
+                                        widget.disabledProfile?.hairColor,
+                                  ),
+                                  options: const [
+                                    'Black',
+                                    'Brown',
+                                    'Red',
+                                    'Grey',
+                                    'White',
+                                    'Blonde'
+                                  ],
+                                  onChanged: (val) => setState(
+                                      () => _model.hirColorDropDownValue = val),
+                                  width: 300.0,
+                                  height: 40.0,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  hintText: 'Hair Color',
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  elevation: 2.0,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderWidth: 2.0,
+                                  borderRadius: 8.0,
+                                  margin: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 4.0, 16.0, 4.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
+                                ),
+                                Text(
+                                  'Eyes color',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                FlutterFlowDropDown<String>(
+                                  controller: _model
+                                          .eyesColorDropDownValueController ??=
+                                      FormFieldController<String>(
+                                    _model.eyesColorDropDownValue ??=
+                                        widget.disabledProfile?.eyesColor,
+                                  ),
+                                  options: const [
+                                    'Brown',
+                                    'Blue',
+                                    'Green',
+                                    'Hazel',
+                                    'Gray',
+                                    'Amber',
+                                    'Black'
+                                  ],
+                                  onChanged: (val) => setState(() =>
+                                      _model.eyesColorDropDownValue = val),
+                                  width: 300.0,
+                                  height: 40.0,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  hintText: 'Eyes Color',
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  elevation: 2.0,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderWidth: 2.0,
+                                  borderRadius: 8.0,
+                                  margin: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 4.0, 16.0, 4.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
+                                ),
+                                Container(
+                                  width: 200.0,
+                                ),
+                              ].divide(const SizedBox(height: 12.0)),
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Birthday',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                FFButtonWidget(
+                                  onPressed: () async {
+                                    final datePickedDate =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate:
+                                          (widget.disabledProfile?.birthday ??
+                                              DateTime.now()),
+                                      firstDate: DateTime(1900),
+                                      lastDate:
+                                          (widget.disabledProfile?.birthday ??
+                                              DateTime.now()),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .override(
+                                                    fontFamily: 'Outfit',
+                                                    fontSize: 32.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    if (datePickedDate != null) {
+                                      safeSetState(() {
+                                        _model.datePicked = DateTime(
+                                          datePickedDate.year,
+                                          datePickedDate.month,
+                                          datePickedDate.day,
+                                        );
+                                      });
+                                    }
+                                  },
+                                  text: dateTimeFormat(
+                                      'd/M/y', _model.datePicked),
+                                  options: FFButtonOptions(
+                                    width: 300.0,
+                                    height: 40.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          letterSpacing: 0.0,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
                                     ),
-                              ),
-                              FlutterFlowDropDown<String>(
-                                controller:
-                                    _model.ethnicityDropDownValueController ??=
-                                        FormFieldController<String>(
-                                  _model.ethnicityDropDownValue ??=
-                                      widget.disabledProfile?.ethnicity,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
                                 ),
-                                options: const [
-                                  'Gulf Arab',
-                                  'Egyptian Arab',
-                                  'Iraqi Arab',
-                                  'Levantine Arab',
-                                  'Maghreb Arab',
-                                  'Japanese',
-                                  'Russian',
-                                  'Punjabi',
-                                  'German',
-                                  'French',
-                                  'Italian',
-                                  'Kurdish',
-                                  'Korean',
-                                  'Yoruba',
-                                  'Polish',
-                                  'Thai',
-                                  'Ukrainian',
-                                  'Somali',
-                                  'Turkish',
-                                  'Serb',
-                                  'Irish',
-                                  'Romanian',
-                                  'Maldivian',
-                                  'Sami'
-                                ],
-                                onChanged: (val) => setState(
-                                    () => _model.ethnicityDropDownValue = val),
-                                width: 300.0,
-                                height: 50.0,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyMedium,
-                                hintText: 'Ethnicity',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
+                                Text(
+                                  'Ethnicity',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                elevation: 2.0,
-                                borderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderWidth: 2.0,
-                                borderRadius: 8.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 4.0, 16.0, 4.0),
-                                hidesUnderline: true,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              ),
-                              Text(
-                                'Skin Color',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 18.0,
-                                    ),
-                              ),
-                              FlutterFlowDropDown<String>(
-                                controller:
-                                    _model.skinColorDropDownValueController ??=
-                                        FormFieldController<String>(
-                                  _model.skinColorDropDownValue ??=
-                                      widget.disabledProfile?.skinColor,
+                                FlutterFlowDropDown<String>(
+                                  controller: _model
+                                          .ethnicityDropDownValueController ??=
+                                      FormFieldController<String>(
+                                    _model.ethnicityDropDownValue ??=
+                                        widget.disabledProfile?.ethnicity,
+                                  ),
+                                  options: const [
+                                    'Gulf Arab',
+                                    'Egyptian Arab',
+                                    'Iraqi Arab',
+                                    'Levantine Arab',
+                                    'Maghreb Arab',
+                                    'Japanese',
+                                    'Russian',
+                                    'Punjabi',
+                                    'German',
+                                    'French',
+                                    'Italian',
+                                    'Kurdish',
+                                    'Korean',
+                                    'Yoruba',
+                                    'Polish',
+                                    'Thai',
+                                    'Ukrainian',
+                                    'Somali',
+                                    'Turkish',
+                                    'Serb',
+                                    'Irish',
+                                    'Romanian',
+                                    'Maldivian',
+                                    'Sami'
+                                  ],
+                                  onChanged: (val) => setState(() =>
+                                      _model.ethnicityDropDownValue = val),
+                                  width: 300.0,
+                                  height: 40.0,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  hintText: 'Ethnicity',
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  elevation: 2.0,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderWidth: 2.0,
+                                  borderRadius: 8.0,
+                                  margin: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 4.0, 16.0, 4.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
                                 ),
-                                options: const [
-                                  'Very Fair Skin',
-                                  'Fair Skin',
-                                  'Light Olive Skin',
-                                  'Medium Olive Skin',
-                                  'Light Tan Skin',
-                                  'Medium Tan Skin',
-                                  'Dark Tan Skin',
-                                  'Light Brown Skin',
-                                  'Medium Brown Skin',
-                                  'Dark Brown to Black Skin'
-                                ],
-                                onChanged: (val) => setState(
-                                    () => _model.skinColorDropDownValue = val),
-                                width: 300.0,
-                                height: 50.0,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyMedium,
-                                hintText: 'Skin Color',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
+                                Text(
+                                  'Skin Color',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                elevation: 2.0,
-                                borderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderWidth: 2.0,
-                                borderRadius: 8.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 4.0, 16.0, 4.0),
-                                hidesUnderline: true,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              ),
-                              Text(
-                                'Facial Hair',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 18.0,
-                                    ),
-                              ),
-                              FlutterFlowDropDown<String>(
-                                controller:
-                                    _model.facialHairDropDownValueController ??=
-                                        FormFieldController<String>(
-                                  _model.facialHairDropDownValue ??=
-                                      widget.disabledProfile?.facialHair,
+                                FlutterFlowDropDown<String>(
+                                  controller: _model
+                                          .skinColorDropDownValueController ??=
+                                      FormFieldController<String>(
+                                    _model.skinColorDropDownValue ??=
+                                        widget.disabledProfile?.skinColor,
+                                  ),
+                                  options: const [
+                                    'Very Fair Skin',
+                                    'Fair Skin',
+                                    'Light Olive Skin',
+                                    'Medium Olive Skin',
+                                    'Light Tan Skin',
+                                    'Medium Tan Skin',
+                                    'Dark Tan Skin',
+                                    'Light Brown Skin',
+                                    'Medium Brown Skin',
+                                    'Dark Brown to Black Skin'
+                                  ],
+                                  onChanged: (val) => setState(() =>
+                                      _model.skinColorDropDownValue = val),
+                                  width: 300.0,
+                                  height: 40.0,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  hintText: 'Skin Color',
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  elevation: 2.0,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderWidth: 2.0,
+                                  borderRadius: 8.0,
+                                  margin: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 4.0, 16.0, 4.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
                                 ),
-                                options: const [
-                                  'None',
-                                  'Subtle',
-                                  'Beard',
-                                  'Beard and Mustache',
-                                  'Mustache'
-                                ],
-                                onChanged: (val) => setState(
-                                    () => _model.facialHairDropDownValue = val),
-                                width: 300.0,
-                                height: 50.0,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyMedium,
-                                hintText: 'Facial Hair',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
+                                Text(
+                                  'Facial Hair',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                elevation: 2.0,
-                                borderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderWidth: 2.0,
-                                borderRadius: 8.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 4.0, 16.0, 4.0),
-                                hidesUnderline: true,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              ),
-                              Container(
-                                width: 200.0,
-                              ),
-                            ].divide(const SizedBox(height: 12.0)),
-                          ),
-                        ],
+                                FlutterFlowDropDown<String>(
+                                  controller: _model
+                                          .facialHairDropDownValueController ??=
+                                      FormFieldController<String>(
+                                    _model.facialHairDropDownValue ??=
+                                        widget.disabledProfile?.facialHair,
+                                  ),
+                                  options: const [
+                                    'None',
+                                    'Subtle',
+                                    'Beard',
+                                    'Beard and Mustache',
+                                    'Mustache'
+                                  ],
+                                  onChanged: (val) => setState(() =>
+                                      _model.facialHairDropDownValue = val),
+                                  width: 300.0,
+                                  height: 40.0,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  hintText: 'Facial Hair',
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  elevation: 2.0,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderWidth: 2.0,
+                                  borderRadius: 8.0,
+                                  margin: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 4.0, 16.0, 4.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
+                                ),
+                                Container(
+                                  width: 200.0,
+                                ),
+                              ].divide(const SizedBox(height: 12.0)),
+                            ),
+                          ],
+                        ),
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          await widget.disabledProfile!.reference
-                              .update(createDisabledProfileRecordData(
-                            isMale: _model.isMale,
-                            ethnicity: _model.ethnicityDropDownValue,
-                            hairColor: _model.hirColorDropDownValue,
-                            skinColor: _model.skinColorDropDownValue,
-                            facialHair: _model.facialHairDropDownValue,
-                            name: _model.nameController.text,
-                            birthday: _model.datePicked,
-                            eyesColor: _model.eyesColorDropDownValue,
-                            hairLength: _model.hairLengthDropDownValue,
-                          ));
+                          if (_model.formKey.currentState == null ||
+                              !_model.formKey.currentState!.validate()) {
+                            return;
+                          }
+                          if (_model.hairLengthDropDownValue == null) {
+                            return;
+                          }
+                          if (_model.hirColorDropDownValue == null) {
+                            return;
+                          }
+                          if (_model.eyesColorDropDownValue == null) {
+                            return;
+                          }
+                          if (_model.datePicked == null) {
+                            return;
+                          }
+                          if (_model.ethnicityDropDownValue == null) {
+                            return;
+                          }
+                          if (_model.skinColorDropDownValue == null) {
+                            return;
+                          }
+                          if (_model.facialHairDropDownValue == null) {
+                            return;
+                          }
+                          if (_model.datePicked != null) {
+                            await widget.disabledProfile!.reference
+                                .update(createDisabledProfileRecordData(
+                              isMale: _model.isMale,
+                              ethnicity: _model.ethnicityDropDownValue,
+                              hairColor: _model.hirColorDropDownValue,
+                              skinColor: _model.skinColorDropDownValue,
+                              facialHair: _model.facialHairDropDownValue,
+                              name: _model.nameTextController.text,
+                              birthday: _model.datePicked,
+                              eyesColor: _model.eyesColorDropDownValue,
+                              hairLength: _model.hairLengthDropDownValue,
+                            ));
 
-                          context.pushNamed('Home');
+                            context.pushNamed('Home');
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Set Birthday.',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: const Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).error,
+                              ),
+                            );
+                            return;
+                          }
                         },
                         text: 'Edit Profile',
                         icon: const Icon(
@@ -816,7 +911,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         ),
                         options: FFButtonOptions(
                           width: 200.0,
-                          height: 48.0,
+                          height: 30.0,
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
@@ -827,6 +922,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               .override(
                                 fontFamily: 'Readex Pro',
                                 color: FlutterFlowTheme.of(context).primaryText,
+                                letterSpacing: 0.0,
                               ),
                           elevation: 3.0,
                           borderSide: const BorderSide(
@@ -836,9 +932,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                    ]
-                        .divide(const SizedBox(height: 20.0))
-                        .addToStart(const SizedBox(height: 20.0)),
+                    ].divide(const SizedBox(height: 20.0)),
                   ),
                 ),
               ),

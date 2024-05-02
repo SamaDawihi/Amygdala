@@ -37,7 +37,7 @@ Future checkBCIConnection(BuildContext context) async {
           FFAppState().update(() {
             FFAppState().updateConnectionStatusStruct(
               (e) => e
-                ..status = 'BCI Not Connected'
+                ..status = 'Not Connected'
                 ..details =
                     'Make sure to connect the device through the Emotiv Launcher App'
                 ..availableHeadsets = []
@@ -51,7 +51,7 @@ Future checkBCIConnection(BuildContext context) async {
         FFAppState().update(() {
           FFAppState().updateConnectionStatusStruct(
             (e) => e
-              ..status = 'Error3'
+              ..status = 'No Access Right'
               ..details = 'Request Access from BCI Settings Page'
               ..availableHeadsets = []
               ..lastChecked = getCurrentTimestamp
@@ -64,7 +64,10 @@ Future checkBCIConnection(BuildContext context) async {
       FFAppState().update(() {
         FFAppState().updateConnectionStatusStruct(
           (e) => e
-            ..status = 'Error2'
+            ..status = valueOrDefault<String>(
+              'Not Logged In Emotiv Launcher',
+              'Not Logged In Emotiv Launcher',
+            )
             ..details = 'Log in through Emotiv Launcher app'
             ..availableHeadsets = []
             ..lastChecked = getCurrentTimestamp
@@ -77,7 +80,10 @@ Future checkBCIConnection(BuildContext context) async {
     FFAppState().update(() {
       FFAppState().updateConnectionStatusStruct(
         (e) => e
-          ..status = 'Error1'
+          ..status = valueOrDefault<String>(
+            'Emotiv Launcher Isn\'t Installed',
+            'Emotiv Launcher Isn\'t Installed',
+          )
           ..details = 'Install Emotiv launcher to be Able To Connect'
           ..availableHeadsets = []
           ..lastChecked = getCurrentTimestamp

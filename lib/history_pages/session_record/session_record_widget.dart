@@ -115,6 +115,7 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                         'Mostly ${functions.getMaxEmotion(widget.session!.happy, columnSessionRecord.sad, columnSessionRecord.angry, columnSessionRecord.relaxed, columnSessionRecord.neutral)}',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
                               fontWeight: FontWeight.bold,
                             ),
                       ),
@@ -122,7 +123,10 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                   ),
                   Text(
                     dateTimeFormat('relative', columnSessionRecord.startAt!),
-                    style: FlutterFlowTheme.of(context).labelSmall,
+                    style: FlutterFlowTheme.of(context).labelSmall.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
                   ),
                 ],
               ),
@@ -136,7 +140,10 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                       BoxShadow(
                         blurRadius: 0.0,
                         color: FlutterFlowTheme.of(context).primary,
-                        offset: const Offset(-2.0, 0.0),
+                        offset: const Offset(
+                          -2.0,
+                          0.0,
+                        ),
                       )
                     ],
                     border: Border.all(
@@ -171,11 +178,17 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                                         fontFamily: 'Readex Pro',
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.bold,
                                       ),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).labelMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ),
@@ -188,8 +201,12 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                               children: [
                                 TextSpan(
                                   text: 'Start : ',
-                                  style:
-                                      FlutterFlowTheme.of(context).labelSmall,
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
                                 TextSpan(
                                   text: dateTimeFormat(
@@ -206,7 +223,12 @@ class _SessionRecordWidgetState extends State<SessionRecordWidget> {
                                   style: const TextStyle(),
                                 )
                               ],
-                              style: FlutterFlowTheme.of(context).labelSmall,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ),

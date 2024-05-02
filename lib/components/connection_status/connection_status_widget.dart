@@ -56,22 +56,33 @@ class _ConnectionStatusWidgetState extends State<ConnectionStatusWidget> {
             size: 24.0,
           ),
           AutoSizeText(
-            FFAppState().connectionStatus.status,
+            valueOrDefault<String>(
+              FFAppState().connectionStatus.status,
+              'Not Connected',
+            ),
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Readex Pro',
                   color: FlutterFlowTheme.of(context).secondaryText,
+                  letterSpacing: 0.0,
                   fontWeight: FontWeight.w800,
                 ),
             minFontSize: 8.0,
           ),
           AlignedTooltip(
             content: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Text(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                valueOrDefault<String>(
                   FFAppState().connectionStatus.details,
-                  textAlign: TextAlign.start,
-                  style: FlutterFlowTheme.of(context).bodyLarge,
-                )),
+                  'Go To BCI Settings',
+                ),
+                textAlign: TextAlign.start,
+                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                      fontFamily: 'Readex Pro',
+                      letterSpacing: 0.0,
+                    ),
+              ),
+            ),
             offset: 4.0,
             preferredDirection: AxisDirection.down,
             borderRadius: BorderRadius.circular(8.0),

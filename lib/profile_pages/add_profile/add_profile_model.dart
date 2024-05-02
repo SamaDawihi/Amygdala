@@ -13,12 +13,30 @@ class AddProfileModel extends FlutterFlowModel<AddProfileWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  final formKey = GlobalKey<FormState>();
   // Model for sideNav component.
   late SideNavModel sideNavModel;
   // State field(s) for name widget.
   FocusNode? nameFocusNode;
-  TextEditingController? nameController;
-  String? Function(BuildContext, String?)? nameControllerValidator;
+  TextEditingController? nameTextController;
+  String? Function(BuildContext, String?)? nameTextControllerValidator;
+  String? _nameTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    if (val.length < 3) {
+      return 'Name must at least be 3 characters .long';
+    }
+    if (val.length > 15) {
+      return 'Name can\'t exceed 15 characters';
+    }
+    if (!RegExp('^[a-zA-Z ]+\$').hasMatch(val)) {
+      return 'Name must contain only letters';
+    }
+    return null;
+  }
+
   // State field(s) for HairLengthDropDown widget.
   String? hairLengthDropDownValue;
   FormFieldController<String>? hairLengthDropDownValueController;
@@ -41,11 +59,10 @@ class AddProfileModel extends FlutterFlowModel<AddProfileWidget> {
   // Model for connectionStatus component.
   late ConnectionStatusModel connectionStatusModel;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
+    nameTextControllerValidator = _nameTextControllerValidator;
     connectionStatusModel = createModel(context, () => ConnectionStatusModel());
   }
 
@@ -54,12 +71,8 @@ class AddProfileModel extends FlutterFlowModel<AddProfileWidget> {
     unfocusNode.dispose();
     sideNavModel.dispose();
     nameFocusNode?.dispose();
-    nameController?.dispose();
+    nameTextController?.dispose();
 
     connectionStatusModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

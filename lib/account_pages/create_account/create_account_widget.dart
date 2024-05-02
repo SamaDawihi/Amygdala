@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -22,59 +24,61 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.0, 140.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.9, 0.9),
-          end: const Offset(1.0, 1.0),
-        ),
-        TiltEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(-0.349, 0),
-          end: const Offset(0, 0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => CreateAccountModel());
 
-    _model.nameController ??= TextEditingController();
+    _model.nameTextController ??= TextEditingController();
     _model.nameFocusNode ??= FocusNode();
 
-    _model.emailAddressController ??= TextEditingController();
+    _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
-    _model.resetPasswordController ??= TextEditingController();
+    _model.resetPasswordTextController ??= TextEditingController();
     _model.resetPasswordFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 140.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          ScaleEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.9, 0.9),
+            end: const Offset(1.0, 1.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -100,6 +104,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
           autovalidateMode: AutovalidateMode.disabled,
           child: Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 flex: 6,
@@ -130,8 +135,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset(
                               'assets/images/image-removebg-preview.png',
-                              width: 100.0,
-                              height: 100.0,
+                              width: 50.0,
+                              height: 50.0,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -153,6 +158,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                             ),
                           ),
@@ -171,7 +177,10 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                 BoxShadow(
                                   blurRadius: 4.0,
                                   color: Color(0x33000000),
-                                  offset: Offset(0.0, 2.0),
+                                  offset: Offset(
+                                    0.0,
+                                    2.0,
+                                  ),
                                 )
                               ],
                               borderRadius: BorderRadius.circular(12.0),
@@ -188,16 +197,24 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       'Get Started',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
-                                          .displaySmall,
+                                          .displaySmall
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 12.0, 0.0, 24.0),
+                                          0.0, 0.0, 0.0, 10.0),
                                       child: Text(
                                         'Let\'s get started by filling out the form below.',
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
-                                            .labelLarge,
+                                            .labelLarge
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ),
                                     Padding(
@@ -206,14 +223,15 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       child: SizedBox(
                                         width: double.infinity,
                                         child: TextFormField(
-                                          controller: _model.nameController,
+                                          controller: _model.nameTextController,
                                           focusNode: _model.nameFocusNode,
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
-                                            '_model.nameController',
+                                            '_model.nameTextController',
                                             const Duration(milliseconds: 2000),
                                             () async {
-                                              if (_model.nameController.text !=
+                                              if (_model.nameTextController
+                                                          .text !=
                                                       '') {
                                                 setState(() {
                                                   _model.nameErr = '';
@@ -237,7 +255,11 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             labelText: 'Name',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelLarge,
+                                                    .labelLarge
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
@@ -285,37 +307,18 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                                     .primaryBackground,
                                           ),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
                                           keyboardType: TextInputType.name,
                                           validator: _model
-                                              .nameControllerValidator
+                                              .nameTextControllerValidator
                                               .asValidator(context),
                                         ),
                                       ),
                                     ),
-                                    if (_model.nameErr != null &&
-                                        _model.nameErr != '')
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(-1.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 7.0),
-                                          child: Text(
-                                            _model.nameErr!,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  fontSize: 12.0,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 16.0),
@@ -323,16 +326,17 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                         width: double.infinity,
                                         child: TextFormField(
                                           controller:
-                                              _model.emailAddressController,
+                                              _model.emailAddressTextController,
                                           focusNode:
                                               _model.emailAddressFocusNode,
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
-                                            '_model.emailAddressController',
+                                            '_model.emailAddressTextController',
                                             const Duration(milliseconds: 2000),
                                             () async {
                                               if (functions.checkIfTextMatchRegExp(
-                                                  _model.emailAddressController
+                                                  _model
+                                                      .emailAddressTextController
                                                       .text,
                                                   '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$')) {
                                                 setState(() {
@@ -355,7 +359,11 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             labelText: 'Email',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelLarge,
+                                                    .labelLarge
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
@@ -403,52 +411,34 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                                     .primaryBackground,
                                           ),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           validator: _model
-                                              .emailAddressControllerValidator
+                                              .emailAddressTextControllerValidator
                                               .asValidator(context),
                                         ),
                                       ),
                                     ),
-                                    if (_model.nameErr != null &&
-                                        _model.nameErr != '')
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(-1.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 7.0),
-                                          child: Text(
-                                            _model.emailErr!,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  fontSize: 12.0,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 16.0),
                                       child: SizedBox(
                                         width: double.infinity,
                                         child: TextFormField(
-                                          controller: _model.passwordController,
+                                          controller:
+                                              _model.passwordTextController,
                                           focusNode: _model.passwordFocusNode,
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
-                                            '_model.passwordController',
+                                            '_model.passwordTextController',
                                             const Duration(milliseconds: 2000),
                                             () async {
-                                              if (_model.passwordController
+                                              if (_model.passwordTextController
                                                           .text !=
                                                       '') {
                                                 setState(() {
@@ -474,7 +464,11 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             labelText: 'Password',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelLarge,
+                                                    .labelLarge
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
@@ -541,54 +535,36 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             ),
                                           ),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
                                           validator: _model
-                                              .passwordControllerValidator
+                                              .passwordTextControllerValidator
                                               .asValidator(context),
                                         ),
                                       ),
                                     ),
-                                    if (_model.passwordErr != null &&
-                                        _model.passwordErr != '')
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(-1.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 7.0),
-                                          child: Text(
-                                            _model.passwordErr!,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  fontSize: 12.0,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 16.0),
                                       child: SizedBox(
                                         width: double.infinity,
                                         child: TextFormField(
-                                          controller:
-                                              _model.resetPasswordController,
+                                          controller: _model
+                                              .resetPasswordTextController,
                                           focusNode:
                                               _model.resetPasswordFocusNode,
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
-                                            '_model.resetPasswordController',
+                                            '_model.resetPasswordTextController',
                                             const Duration(milliseconds: 500),
                                             () async {
-                                              if (_model.passwordController
+                                              if (_model.passwordTextController
                                                       .text ==
-                                                  _model.resetPasswordController
+                                                  _model
+                                                      .resetPasswordTextController
                                                       .text) {
                                                 setState(() {
                                                   _model.matchpass = true;
@@ -612,7 +588,11 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             labelText: 'Repeat Password',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelLarge,
+                                                    .labelLarge
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color: _model.matchpass!
@@ -688,59 +668,27 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             ),
                                           ),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
                                           validator: _model
-                                              .resetPasswordControllerValidator
+                                              .resetPasswordTextControllerValidator
                                               .asValidator(context),
                                         ),
                                       ),
                                     ),
-                                    Builder(
-                                      builder: (context) {
-                                        if (_model.matchpass ?? false) {
-                                          return Container(
-                                            width: 1.0,
-                                            height: 1.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                            ),
-                                          );
-                                        } else {
-                                          return Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                'password does not match',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      fontSize: 12.0,
-                                                    ),
-                                              ),
-                                            ],
-                                          );
-                                        }
-                                      },
-                                    ),
-                                    if (_model.nameErr != null &&
-                                        _model.nameErr != '')
+                                    if (!_model.matchpass!)
                                       Align(
                                         alignment:
                                             const AlignmentDirectional(-1.0, 0.0),
                                         child: Padding(
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 7.0),
+                                                  0.0, 0.0, 0.0, 5.0),
                                           child: Text(
-                                            _model.repasserror!,
+                                            'password does not match',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -749,48 +697,73 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                                           context)
                                                       .error,
                                                   fontSize: 12.0,
+                                                  letterSpacing: 0.0,
                                                 ),
                                           ),
                                         ),
                                       ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 16.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          if (_model.formKey.currentState ==
-                                                  null ||
-                                              !_model.formKey.currentState!
-                                                  .validate()) {
-                                            return;
-                                          }
-                                        },
-                                        text: 'Create Account',
-                                        options: FFButtonOptions(
-                                          width: double.infinity,
-                                          height: 44.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: const Color(0xFF4036A4),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        if (_model.formKey.currentState ==
+                                                null ||
+                                            !_model.formKey.currentState!
+                                                .validate()) {
+                                          return;
+                                        }
+                                        GoRouter.of(context).prepareAuthEvent();
+
+                                        final user = await authManager
+                                            .createAccountWithEmail(
+                                          context,
+                                          _model
+                                              .emailAddressTextController.text,
+                                          _model.passwordTextController.text,
+                                        );
+                                        if (user == null) {
+                                          return;
+                                        }
+
+                                        await UsersRecord.collection
+                                            .doc(user.uid)
+                                            .update(createUsersRecordData(
+                                              email: _model
+                                                  .emailAddressTextController
+                                                  .text,
+                                              displayName: _model
+                                                  .nameTextController.text,
+                                              createdTime: getCurrentTimestamp,
+                                            ));
+
+                                        context.goNamedAuth(
+                                            'Home', context.mounted);
+                                      },
+                                      text: 'Create Account',
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 44.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
                                         ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
                                     ),
 
@@ -827,13 +800,18 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primary,
+                                                      letterSpacing: 0.0,
                                                       fontWeight:
                                                           FontWeight.w600,
                                                     ),
                                               )
                                             ],
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ),
                                       ),

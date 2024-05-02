@@ -133,6 +133,18 @@ String getMaxEmotionImage(String maxEmotion) {
     return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nbozqsm1b5v1/Screenshot_2023-11-30_144219.png';
 }
 
+String createProfileImageDescription(DisabledProfileRecord disabledProfile) {
+  final gender = disabledProfile.isMale ? 'male' : 'female';
+  final now = DateTime.now();
+  final birthDate = disabledProfile.birthday!;
+  int age = now.year - birthDate.year;
+  if (now.month < birthDate.month ||
+      (now.month == birthDate.month && now.day < birthDate.day)) {
+    age--;
+  }
+  return 'an profile image of a $age years old ${disabledProfile.ethnicity} ${gender}, with ${disabledProfile.skinColor} skin color, ${disabledProfile.hairLength} ${disabledProfile.hairColor} hair and ${disabledProfile.eyesColor} eyes, has ${disabledProfile.facialHair} facial hair';
+}
+
 String bci6GetSessionId(String json) {
   final Map<String, dynamic> data = jsonDecode(json);
   final dynamic result = data['result'];
@@ -176,9 +188,9 @@ String createImageDescription(
         (now.month == birthDate.month && now.day < birthDate.day)) {
       age--;
     }
-    return 'a $age years old ${disabledProfile.ethnicity} ${gender}, with ${disabledProfile.skinColor} skin color, ${disabledProfile.hairLength} ${disabledProfile.hairColor} hair and ${disabledProfile.eyesColor} eyes, has ${disabledProfile.facialHair} facial hair And seems to be feeling $emotion_des';
+    return 'a $age years old ${disabledProfile.ethnicity} ${gender}, with ${disabledProfile.skinColor} skin color, ${disabledProfile.hairLength} ${disabledProfile.hairColor} hair and ${disabledProfile.eyesColor} eyes, has ${disabledProfile.facialHair} facial hair And seems to be feeling $emotion';
   } else
-    return 'a man seems to be feeling $emotion_des';
+    return 'a man seems to be feeling $emotion';
 }
 
 bool bci1GetEmotivIsInstalled(String json) {
@@ -224,4 +236,38 @@ String getEmotionByInterestEngagement(
   } else {
     return (valence >= 5) ? "Relaxed" : "Sad";
   }
+}
+
+bool isLink(String input) {
+  // Regular expression to match URLs
+  RegExp urlRegex = RegExp(
+    r'^(?:http|https):\/\/[\w\-]+(?:\.[\w\-]+)+[\w\-.,@?^=%&:/~\+#]*[\w\-@?^=%&/~\+#]$',
+    caseSensitive: false,
+    multiLine: false,
+  );
+  return urlRegex.hasMatch(input);
+}
+
+int getNumberOfEmotions(SessionRecord session) {
+  return session.angry +
+      session.happy +
+      session.neutral +
+      session.relaxed +
+      session.sad;
+}
+
+String trimAndCollapseSpaces(String text) {
+  // trim And Collapse Spaces
+  return text.trim().replaceAll(RegExp(r'\s+'), ' ');
+}
+
+bool isValidName(String name) {
+  // checks if name is valid no numbers or special characters
+  RegExp regex = RegExp(r'^[a-zA-Z ]+$');
+  return regex.hasMatch(name);
+}
+
+String toLowerCase(String text) {
+  // string to lower case
+  return text.toLowerCase();
 }

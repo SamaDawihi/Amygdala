@@ -15,11 +15,23 @@ import 'package:web_socket_channel/status.dart' as status;
 
 Future<String> aGetCortexInfo() async {
   // Add your function code here!
-  print('aGetCortexInfo Start');
-  final wsUrl = Uri.parse('wss://localhost:6868');
-  final channel = WebSocketChannel.connect(wsUrl);
+  try {
+    print('aGetCortexInfo Start');
+    final wsUrl = Uri.parse('wss://localhost:6868');
+    final channel = WebSocketChannel.connect(wsUrl);
 
-  channel.sink.add('{"id":1,"jsonrpc":"2.0","method":"getCortexInfo"}');
+    // Send the request
+    channel.sink.add('{"id":1,"jsonrpc":"2.0","method":"getCortexInfo"}');
 
-  return await channel.stream.first;
+    // Wait for response
+    final response = await channel.stream.first;
+
+    // Close the channel
+    await channel.sink.close();
+
+    return response;
+  } catch (e) {
+    // Handle connection failure
+    return '{"error": "Connection failed"}';
+  }
 }

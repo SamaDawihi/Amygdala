@@ -63,6 +63,7 @@ class _NoProfileWidgetState extends State<NoProfileWidget> {
                   fontFamily: 'Readex Pro',
                   color: FlutterFlowTheme.of(context).primaryText,
                   fontSize: 28.0,
+                  letterSpacing: 0.0,
                   fontWeight: FontWeight.normal,
                 ),
           ),

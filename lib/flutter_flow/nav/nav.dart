@@ -67,18 +67,20 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
-GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
+GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
+    GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomeWidget() : const LoginWidget(),
+          appStateNotifier.loggedIn ? entryPage ?? const HomeWidget() : const LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? const HomeWidget() : const LoginWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? entryPage ?? const HomeWidget()
+              : const LoginWidget(),
         ),
         FFRoute(
           name: 'Login',
@@ -105,10 +107,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 getDoc(['DisabledProfile'], DisabledProfileRecord.fromSnapshot),
           },
           builder: (context, params) => SessionWidget(
-            disabledProfile:
-                params.getParam('disabledProfile', ParamType.Document),
-            createdSession: params.getParam('createdSession',
-                ParamType.DocumentReference, false, ['Session']),
+            disabledProfile: params.getParam(
+              'disabledProfile',
+              ParamType.Document,
+            ),
+            createdSession: params.getParam(
+              'createdSession',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['Session'],
+            ),
           ),
         ),
         FFRoute(
@@ -122,7 +130,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/historyRecord',
           builder: (context, params) => HistoryRecordWidget(
             sessionId: params.getParam(
-                'sessionId', ParamType.DocumentReference, false, ['Session']),
+              'sessionId',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['Session'],
+            ),
           ),
         ),
         FFRoute(
@@ -136,8 +148,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/Profile',
           requireAuth: true,
           builder: (context, params) => ProfileWidget(
-            disabledProfile: params.getParam('disabledProfile',
-                ParamType.DocumentReference, false, ['DisabledProfile']),
+            disabledProfile: params.getParam(
+              'disabledProfile',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['DisabledProfile'],
+            ),
           ),
         ),
         FFRoute(
@@ -151,8 +167,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/history',
           requireAuth: true,
           builder: (context, params) => HistoryWidget(
-            disabledProfile: params.getParam('disabledProfile',
-                ParamType.DocumentReference, false, ['DisabledProfile']),
+            disabledProfile: params.getParam(
+              'disabledProfile',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['DisabledProfile'],
+            ),
           ),
         ),
         FFRoute(
@@ -164,9 +184,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 getDoc(['DisabledProfile'], DisabledProfileRecord.fromSnapshot),
           },
           builder: (context, params) => EditProfileWidget(
-            disabledProfile:
-                params.getParam('disabledProfile', ParamType.Document),
+            disabledProfile: params.getParam(
+              'disabledProfile',
+              ParamType.Document,
+            ),
           ),
+        ),
+        FFRoute(
+          name: 'CORSproxy',
+          path: '/cORSproxy',
+          requireAuth: true,
+          builder: (context, params) => const CORSproxyWidget(),
+        ),
+        FFRoute(
+          name: 'NormalProxy',
+          path: '/normalProxy',
+          requireAuth: true,
+          builder: (context, params) => const NormalProxyWidget(),
+        ),
+        FFRoute(
+          name: 'Editaccount',
+          path: '/Editaccount',
+          requireAuth: true,
+          builder: (context, params) => const EditaccountWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -243,7 +283,7 @@ extension _GoRouterStateExtensions on GoRouterState {
       extra != null ? extra as Map<String, dynamic> : {};
   Map<String, dynamic> get allParams => <String, dynamic>{}
     ..addAll(pathParameters)
-    ..addAll(queryParameters)
+    ..addAll(uri.queryParameters)
     ..addAll(extraMap);
   TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
       ? extraMap[kTransitionInfoKey] as TransitionInfo
@@ -262,7 +302,7 @@ class FFParameters {
   // present is the special extra parameter reserved for the transition info.
   bool get isEmpty =>
       state.allParams.isEmpty ||
-      (state.extraMap.length == 1 &&
+      (state.allParams.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
@@ -283,10 +323,11 @@ class FFParameters {
 
   dynamic getParam<T>(
     String paramName,
-    ParamType type, [
+    ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
-  ]) {
+    StructBuilder<T>? structBuilder,
+  }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
     }
@@ -299,8 +340,13 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(param, type, isList,
-        collectionNamePath: collectionNamePath);
+    return deserializeParam<T>(
+      param,
+      type,
+      isList,
+      collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
+    );
   }
 }
 
@@ -332,7 +378,7 @@ class FFRoute {
           }
 
           if (requireAuth && !appStateNotifier.loggedIn) {
-            appStateNotifier.setRedirectLocationIfUnset(state.location);
+            appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
             return '/login';
           }
           return null;
@@ -411,7 +457,7 @@ class RootPageContext {
   static bool isInactiveRootPage(BuildContext context) {
     final rootPageContext = context.read<RootPageContext?>();
     final isRootPage = rootPageContext?.isRootPage ?? false;
-    final location = GoRouter.of(context).location;
+    final location = GoRouterState.of(context).uri.toString();
     return isRootPage &&
         location != '/' &&
         location != rootPageContext?.errorRoute;

@@ -15,3 +15,9 @@ export '/b_c_i_settings/bci_setttings/bci_setttings_widget.dart'
 export '/history_pages/history/history_widget.dart' show HistoryWidget;
 export '/profile_pages/edit_profile/edit_profile_widget.dart'
     show EditProfileWidget;
+export '/during_session_pages/c_o_r_sproxy/c_o_r_sproxy_widget.dart'
+    show CORSproxyWidget;
+export '/during_session_pages/normal_proxy/normal_proxy_widget.dart'
+    show NormalProxyWidget;
+export '/account_pages/editaccount/editaccount_widget.dart'
+    show EditaccountWidget;

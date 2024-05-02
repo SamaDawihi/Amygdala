@@ -27,8 +27,6 @@ class HistoryModel extends FlutterFlowModel<HistoryWidget> {
   // Model for connectionStatus component.
   late ConnectionStatusModel connectionStatusModel;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
@@ -43,8 +41,4 @@ class HistoryModel extends FlutterFlowModel<HistoryWidget> {
     sessionRecordModels.dispose();
     connectionStatusModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

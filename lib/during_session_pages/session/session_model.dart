@@ -1,8 +1,8 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -35,14 +35,18 @@ class SessionModel extends FlutterFlowModel<SessionWidget> {
 
   String met = 'No Object Yet';
 
+  bool showMoreInfo = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   // Stores action output result for [Action Block - getPredictedEmotion] action in Session widget.
   MetStruct? metObject;
-  // Stores action output result for [Backend Call - API (Replicate Image)] action in Session widget.
+  // Stores action output result for [Backend Call - Read Document] action in Session widget.
+  SessionRecord? lowAccuracySession;
+  // Stores action output result for [Backend Call - API (Request image id Cors)] action in Session widget.
   ApiCallResponse? getImageIdApi;
-  // Stores action output result for [Backend Call - API (get image)] action in Session widget.
+  // Stores action output result for [Backend Call - API (Get image path CORS)] action in Session widget.
   ApiCallResponse? getImageApiCall;
   // State field(s) for Timer widget.
   int timerMilliseconds = 30000;
@@ -54,7 +58,10 @@ class SessionModel extends FlutterFlowModel<SessionWidget> {
   FlutterFlowTimerController timerController =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
 
-  /// Initialization and disposal methods.
+  // State field(s) for Switch widget.
+  bool? switchValue;
+  // Stores action output result for [Backend Call - Read Document] action in Button widget.
+  SessionRecord? session;
 
   @override
   void initState(BuildContext context) {}
@@ -65,8 +72,7 @@ class SessionModel extends FlutterFlowModel<SessionWidget> {
     timerController.dispose();
   }
 
-  /// Action blocks are added here.
-
+  /// Action blocks.
   Future<MetStruct> getPredictedEmotion(BuildContext context) async {
     String? authorizeAction;
     MetStruct? metObject;
@@ -81,6 +87,4 @@ class SessionModel extends FlutterFlowModel<SessionWidget> {
     );
     return metObject;
   }
-
-  /// Additional helper methods are added here.
 }

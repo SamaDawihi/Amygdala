@@ -5,3 +5,7 @@ export 'd_has_access_right.dart' show dHasAccessRight;
 export 'f_authorize.dart' show fAuthorize;
 export 'c_request_access.dart' show cRequestAccess;
 export 'g_subscribe_met.dart' show gSubscribeMet;
+export 'post_image.dart' show postImage;
+export 'get_image.dart' show getImage;
+export 'is_email_unique.dart' show isEmailUnique;
+export 'send_verlink.dart' show sendVerlink;

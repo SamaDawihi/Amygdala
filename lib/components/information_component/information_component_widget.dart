@@ -57,14 +57,17 @@ class _InformationComponentWidgetState
       padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
       child: Container(
         width: 700.0,
-        height: 300.0,
+        height: 200.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: const [
             BoxShadow(
               blurRadius: 7.0,
               color: Color(0x2F1D2429),
-              offset: Offset(0.0, 3.0),
+              offset: Offset(
+                0.0,
+                3.0,
+              ),
             )
           ],
           borderRadius: BorderRadius.circular(8.0),
@@ -87,6 +90,7 @@ class _InformationComponentWidgetState
                           FlutterFlowTheme.of(context).headlineLarge.override(
                                 fontFamily: 'Outfit',
                                 color: FlutterFlowTheme.of(context).primary,
+                                letterSpacing: 0.0,
                               ),
                     ),
                     Divider(
@@ -99,7 +103,10 @@ class _InformationComponentWidgetState
                           const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                       child: Text(
                         widget.message,
-                        style: FlutterFlowTheme.of(context).labelLarge,
+                        style: FlutterFlowTheme.of(context).labelLarge.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
                       ),
                     ),
                   ],
@@ -126,6 +133,7 @@ class _InformationComponentWidgetState
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Readex Pro',
                                 color: Colors.white,
+                                letterSpacing: 0.0,
                               ),
                       elevation: 3.0,
                       borderSide: const BorderSide(

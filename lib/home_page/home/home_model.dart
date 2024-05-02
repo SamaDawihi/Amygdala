@@ -17,8 +17,6 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   // Model for connectionStatus component.
   late ConnectionStatusModel connectionStatusModel;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
@@ -34,8 +32,4 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
     disabledProfileListViewModels.dispose();
     connectionStatusModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -6,20 +6,20 @@ import 'package:flutter/material.dart';
 
 class DisabledProfileListViewModel
     extends FlutterFlowModel<DisabledProfileListViewWidget> {
+  ///  Local state fields for this component.
+
+  int deleteSessionsLoop = 0;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   SessionRecord? sessionId;
-
-  /// Initialization and disposal methods.
+  // Stores action output result for [Firestore Query - Query a collection] action in Icon widget.
+  List<SessionRecord>? sessionsToBeDeleted;
 
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {}
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

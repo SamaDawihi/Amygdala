@@ -27,27 +27,7 @@ class _DisabledProfileListViewWidgetState
     extends State<DisabledProfileListViewWidget> with TickerProviderStateMixin {
   late DisabledProfileListViewModel _model;
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 80.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -60,6 +40,27 @@ class _DisabledProfileListViewWidgetState
     super.initState();
     _model = createModel(context, () => DisabledProfileListViewModel());
 
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 80.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -105,7 +106,10 @@ class _DisabledProfileListViewWidgetState
               BoxShadow(
                 blurRadius: 7.0,
                 color: Color(0x32171717),
-                offset: Offset(0.0, 3.0),
+                offset: Offset(
+                  0.0,
+                  3.0,
+                ),
               )
             ],
             borderRadius: BorderRadius.circular(8.0),
@@ -120,9 +124,17 @@ class _DisabledProfileListViewWidgetState
                   borderRadius: BorderRadius.circular(40.0),
                   child: Image.network(
                     valueOrDefault<String>(
-                      widget.disabledProfile!.isMale
-                          ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/760wzgp9yyl4/male_avatar.jpeg'
-                          : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nwtsmnmcy3g7/female_avatar.jpeg',
+                      widget.disabledProfile!.hasPhoto()
+                          ? valueOrDefault<String>(
+                              widget.disabledProfile?.photo,
+                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nwtsmnmcy3g7/female_avatar.jpeg',
+                            )
+                          : valueOrDefault<String>(
+                              widget.disabledProfile!.isMale
+                                  ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/760wzgp9yyl4/male_avatar.jpeg'
+                                  : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nwtsmnmcy3g7/female_avatar.jpeg',
+                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nwtsmnmcy3g7/female_avatar.jpeg',
+                            ),
                       'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nwtsmnmcy3g7/female_avatar.jpeg',
                     ),
                     width: 40.0,
@@ -141,7 +153,10 @@ class _DisabledProfileListViewWidgetState
                           widget.disabledProfile?.name,
                           'Name',
                         ),
-                        style: FlutterFlowTheme.of(context).bodyLarge,
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
                       ),
                       Padding(
                         padding:
@@ -149,7 +164,11 @@ class _DisabledProfileListViewWidgetState
                         child: Text(
                           dateTimeFormat(
                               'd/M/y', widget.disabledProfile!.birthday!),
-                          style: FlutterFlowTheme.of(context).labelSmall,
+                          style:
+                              FlutterFlowTheme.of(context).labelSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                       ),
                     ],
@@ -182,6 +201,7 @@ class _DisabledProfileListViewWidgetState
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Readex Pro',
                           color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
                         ),
                     elevation: 3.0,
                     borderSide: const BorderSide(
@@ -197,17 +217,27 @@ class _DisabledProfileListViewWidgetState
                     await sessionRecordReference.set(createSessionRecordData(
                       disabledProfile: widget.disabledProfile?.reference,
                       startAt: getCurrentTimestamp,
-                      endAt: getCurrentTimestamp,
+                      happy: 0,
+                      sad: 0,
+                      relaxed: 0,
+                      angry: 0,
+                      neutral: 0,
+                      status: 'Started',
                     ));
                     _model.sessionId = SessionRecord.getDocumentFromData(
                         createSessionRecordData(
                           disabledProfile: widget.disabledProfile?.reference,
                           startAt: getCurrentTimestamp,
-                          endAt: getCurrentTimestamp,
+                          happy: 0,
+                          sad: 0,
+                          relaxed: 0,
+                          angry: 0,
+                          neutral: 0,
+                          status: 'Started',
                         ),
                         sessionRecordReference);
 
-                    context.pushNamed(
+                    context.goNamed(
                       'Session',
                       queryParameters: {
                         'disabledProfile': serializeParam(
@@ -240,6 +270,7 @@ class _DisabledProfileListViewWidgetState
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Readex Pro',
                           color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
                         ),
                     elevation: 3.0,
                     borderSide: const BorderSide(
@@ -301,8 +332,36 @@ class _DisabledProfileListViewWidgetState
                                   confirmText: 'Delete',
                                   cancelText: 'Cancel',
                                   confirmAction: () async {
+                                    _model.sessionsToBeDeleted =
+                                        await querySessionRecordOnce(
+                                      queryBuilder: (sessionRecord) =>
+                                          sessionRecord.where(
+                                        'disabledProfile',
+                                        isEqualTo:
+                                            widget.disabledProfile?.reference,
+                                      ),
+                                    );
+                                    setState(() {
+                                      _model.deleteSessionsLoop = 0;
+                                    });
+                                    while (_model.deleteSessionsLoop <
+                                        valueOrDefault<int>(
+                                          _model.sessionsToBeDeleted?.length,
+                                          0,
+                                        )) {
+                                      await _model
+                                          .sessionsToBeDeleted![
+                                              _model.deleteSessionsLoop]
+                                          .reference
+                                          .delete();
+                                      setState(() {
+                                        _model.deleteSessionsLoop =
+                                            _model.deleteSessionsLoop + 1;
+                                      });
+                                    }
                                     await widget.disabledProfile!.reference
                                         .delete();
+                                    Navigator.pop(context);
                                   },
                                   cancelAction: () async {
                                     Navigator.pop(context);
@@ -311,6 +370,8 @@ class _DisabledProfileListViewWidgetState
                               );
                             },
                           ).then((value) => setState(() {}));
+
+                          setState(() {});
                         },
                         child: Icon(
                           Icons.delete_forever_outlined,

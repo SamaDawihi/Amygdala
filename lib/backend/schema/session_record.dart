@@ -55,6 +55,11 @@ class SessionRecord extends FirestoreRecord {
   int get neutral => _neutral ?? 0;
   bool hasNeutral() => _neutral != null;
 
+  // "status" field.
+  String? _status;
+  String get status => _status ?? '';
+  bool hasStatus() => _status != null;
+
   void _initializeFields() {
     _disabledProfile = snapshotData['disabledProfile'] as DocumentReference?;
     _startAt = snapshotData['startAt'] as DateTime?;
@@ -64,6 +69,7 @@ class SessionRecord extends FirestoreRecord {
     _relaxed = castToType<int>(snapshotData['relaxed']);
     _angry = castToType<int>(snapshotData['angry']);
     _neutral = castToType<int>(snapshotData['neutral']);
+    _status = snapshotData['status'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -109,6 +115,7 @@ Map<String, dynamic> createSessionRecordData({
   int? relaxed,
   int? angry,
   int? neutral,
+  String? status,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -120,6 +127,7 @@ Map<String, dynamic> createSessionRecordData({
       'relaxed': relaxed,
       'angry': angry,
       'neutral': neutral,
+      'status': status,
     }.withoutNulls,
   );
 
@@ -138,7 +146,8 @@ class SessionRecordDocumentEquality implements Equality<SessionRecord> {
         e1?.sad == e2?.sad &&
         e1?.relaxed == e2?.relaxed &&
         e1?.angry == e2?.angry &&
-        e1?.neutral == e2?.neutral;
+        e1?.neutral == e2?.neutral &&
+        e1?.status == e2?.status;
   }
 
   @override
@@ -150,7 +159,8 @@ class SessionRecordDocumentEquality implements Equality<SessionRecord> {
         e?.sad,
         e?.relaxed,
         e?.angry,
-        e?.neutral
+        e?.neutral,
+        e?.status
       ]);
 
   @override

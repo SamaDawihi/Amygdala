@@ -57,8 +57,11 @@ class _HistoryWidgetState extends State<HistoryWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           title: Text(
-            'Team Activity',
-            style: FlutterFlowTheme.of(context).headlineMedium,
+            'History',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Outfit',
+                  letterSpacing: 0.0,
+                ),
           ),
           actions: [
             Container(
@@ -91,206 +94,199 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                 ),
               ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(40.0, 30.0, 0.0, 0.0),
-                  child: SingleChildScrollView(
-                    primary: false,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 0.0, 4.0),
-                          child: Text(
-                            'Session History',
-                            style: FlutterFlowTheme.of(context).headlineMedium,
+                child: SingleChildScrollView(
+                  primary: false,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Sessions History',
+                            style: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  fontSize: 30.0,
+                                  letterSpacing: 0.0,
+                                ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 0.0, 0.0),
-                          child: Text(
+                          Text(
                             'Below is a summary of sessions.',
-                            style: FlutterFlowTheme.of(context).labelMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
+                        ].divide(const SizedBox(height: 8.0)),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 8.0, 0.0, 8.0),
+                            child: FlutterFlowChoiceChips(
+                              options: const [
+                                ChipData('All'),
+                                ChipData('Happy'),
+                                ChipData('Relaxed'),
+                                ChipData('Sad'),
+                                ChipData('Angry'),
+                                ChipData('Neutral')
+                              ],
+                              onChanged: (val) => setState(() =>
+                                  _model.choiceChipsValue = val?.firstOrNull),
+                              selectedChipStyle: ChipStyle(
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: FlutterFlowTheme.of(context).info,
+                                      letterSpacing: 0.0,
+                                    ),
+                                iconColor: FlutterFlowTheme.of(context).info,
+                                iconSize: 18.0,
+                                elevation: 2.0,
+                                borderColor:
+                                    FlutterFlowTheme.of(context).accent1,
+                                borderWidth: 1.0,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              unselectedChipStyle: ChipStyle(
+                                backgroundColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      letterSpacing: 0.0,
+                                    ),
+                                iconColor:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                iconSize: 18.0,
+                                elevation: 0.0,
+                                borderColor:
+                                    FlutterFlowTheme.of(context).alternate,
+                                borderWidth: 1.0,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              chipSpacing: 8.0,
+                              rowSpacing: 12.0,
+                              multiselect: false,
+                              initialized: _model.choiceChipsValue != null,
+                              alignment: WrapAlignment.start,
+                              controller: _model.choiceChipsValueController ??=
+                                  FormFieldController<List<String>>(
+                                ['All'],
+                              ),
+                              wrapped: true,
+                            ),
+                          ),
+                        ],
+                      ),
+                      StreamBuilder<List<SessionRecord>>(
+                        stream: querySessionRecord(
+                          queryBuilder: (sessionRecord) => sessionRecord
+                              .where(
+                                'disabledProfile',
+                                isEqualTo: widget.disabledProfile,
+                              )
+                              .orderBy('endAt', descending: true),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 12.0, 16.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 8.0, 0.0, 8.0),
-                                child: FlutterFlowChoiceChips(
-                                  options: const [
-                                    ChipData('All'),
-                                    ChipData('Happy'),
-                                    ChipData('Relaxed'),
-                                    ChipData('Sad'),
-                                    ChipData('Angry'),
-                                    ChipData('Neutral')
-                                  ],
-                                  onChanged: (val) => setState(() => _model
-                                      .choiceChipsValue = val?.firstOrNull),
-                                  selectedChipStyle: ChipStyle(
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                        ),
-                                    iconColor:
-                                        FlutterFlowTheme.of(context).info,
-                                    iconSize: 18.0,
-                                    elevation: 2.0,
-                                    borderColor:
-                                        FlutterFlowTheme.of(context).accent1,
-                                    borderWidth: 1.0,
-                                    borderRadius: BorderRadius.circular(8.0),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return const Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Color(0xFF4036A4),
                                   ),
-                                  unselectedChipStyle: ChipStyle(
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                        ),
-                                    iconColor: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    iconSize: 18.0,
-                                    elevation: 0.0,
-                                    borderColor:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    borderWidth: 1.0,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  chipSpacing: 8.0,
-                                  rowSpacing: 12.0,
-                                  multiselect: false,
-                                  initialized: _model.choiceChipsValue != null,
-                                  alignment: WrapAlignment.start,
-                                  controller:
-                                      _model.choiceChipsValueController ??=
-                                          FormFieldController<List<String>>(
-                                    ['All'],
-                                  ),
-                                  wrapped: true,
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
-                          child: StreamBuilder<List<SessionRecord>>(
-                            stream: querySessionRecord(
-                              queryBuilder: (sessionRecord) => sessionRecord
-                                  .where(
-                                    'disabledProfile',
-                                    isEqualTo: widget.disabledProfile,
-                                  )
-                                  .orderBy('endAt', descending: true),
+                            );
+                          }
+                          List<SessionRecord> listViewSessionRecordList =
+                              snapshot.data!;
+                          if (listViewSessionRecordList.isEmpty) {
+                            return const EmptySessionsComponentWidget();
+                          }
+                          return ListView.separated(
+                            padding: const EdgeInsets.fromLTRB(
+                              0,
+                              16.0,
+                              0,
+                              16.0,
                             ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return const Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        Color(0xFF4036A4),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: listViewSessionRecordList.length,
+                            separatorBuilder: (_, __) => const SizedBox(height: 0.0),
+                            itemBuilder: (context, listViewIndex) {
+                              final listViewSessionRecord =
+                                  listViewSessionRecordList[listViewIndex];
+                              return Visibility(
+                                visible: (_model.choiceChipsValue == 'All') ||
+                                    (_model.choiceChipsValue ==
+                                        functions.getMaxEmotion(
+                                            listViewSessionRecord.happy,
+                                            listViewSessionRecord.sad,
+                                            listViewSessionRecord.angry,
+                                            listViewSessionRecord.relaxed,
+                                            listViewSessionRecord.neutral)),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      'HistoryRecord',
+                                      queryParameters: {
+                                        'sessionId': serializeParam(
+                                          listViewSessionRecord.reference,
+                                          ParamType.DocumentReference,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  child: wrapWithModel(
+                                    model: _model.sessionRecordModels.getModel(
+                                      listViewIndex.toString(),
+                                      listViewIndex,
+                                    ),
+                                    updateCallback: () => setState(() {}),
+                                    child: SessionRecordWidget(
+                                      key: Key(
+                                        'Keyyth_${listViewIndex.toString()}',
                                       ),
+                                      session: listViewSessionRecord,
                                     ),
                                   ),
-                                );
-                              }
-                              List<SessionRecord> listViewSessionRecordList =
-                                  snapshot.data!;
-                              if (listViewSessionRecordList.isEmpty) {
-                                return const EmptySessionsComponentWidget();
-                              }
-                              return ListView.separated(
-                                padding: const EdgeInsets.fromLTRB(
-                                  0,
-                                  16.0,
-                                  0,
-                                  16.0,
                                 ),
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: listViewSessionRecordList.length,
-                                separatorBuilder: (_, __) =>
-                                    const SizedBox(height: 0.0),
-                                itemBuilder: (context, listViewIndex) {
-                                  final listViewSessionRecord =
-                                      listViewSessionRecordList[listViewIndex];
-                                  return Visibility(
-                                    visible: (_model.choiceChipsValue ==
-                                            'All') ||
-                                        (_model.choiceChipsValue ==
-                                            functions.getMaxEmotion(
-                                                listViewSessionRecord.happy,
-                                                listViewSessionRecord.sad,
-                                                listViewSessionRecord.angry,
-                                                listViewSessionRecord.relaxed,
-                                                listViewSessionRecord.neutral)),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed(
-                                          'HistoryRecord',
-                                          queryParameters: {
-                                            'sessionId': serializeParam(
-                                              listViewSessionRecord.reference,
-                                              ParamType.DocumentReference,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                      child: wrapWithModel(
-                                        model:
-                                            _model.sessionRecordModels.getModel(
-                                          listViewIndex.toString(),
-                                          listViewIndex,
-                                        ),
-                                        updateCallback: () => setState(() {}),
-                                        child: SessionRecordWidget(
-                                          key: Key(
-                                            'Keyyth_${listViewIndex.toString()}',
-                                          ),
-                                          session: listViewSessionRecord,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
                               );
                             },
-                          ),
-                        ),
-                      ],
-                    ),
+                          );
+                        },
+                      ),
+                    ].divide(const SizedBox(height: 10.0)),
                   ),
                 ),
               ),
-            ],
+            ].divide(const SizedBox(width: 30.0)),
           ),
         ),
       ),

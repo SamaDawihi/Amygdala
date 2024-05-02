@@ -21,29 +21,30 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
   final formKey = GlobalKey<FormState>();
   // State field(s) for name widget.
   FocusNode? nameFocusNode;
-  TextEditingController? nameController;
-  String? Function(BuildContext, String?)? nameControllerValidator;
+  TextEditingController? nameTextController;
+  String? Function(BuildContext, String?)? nameTextControllerValidator;
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode;
-  TextEditingController? emailAddressController;
-  String? Function(BuildContext, String?)? emailAddressControllerValidator;
-  String? _emailAddressControllerValidator(BuildContext context, String? val) {
+  TextEditingController? emailAddressTextController;
+  String? Function(BuildContext, String?)? emailAddressTextControllerValidator;
+  String? _emailAddressTextControllerValidator(
+      BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'email is required';
     }
 
-    if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
-      return 'Has to be a valid email address.';
+    if (!RegExp('^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}\$').hasMatch(val)) {
+      return 'Invalid text';
     }
     return null;
   }
 
   // State field(s) for password widget.
   FocusNode? passwordFocusNode;
-  TextEditingController? passwordController;
+  TextEditingController? passwordTextController;
   late bool passwordVisibility;
-  String? Function(BuildContext, String?)? passwordControllerValidator;
-  String? _passwordControllerValidator(BuildContext context, String? val) {
+  String? Function(BuildContext, String?)? passwordTextControllerValidator;
+  String? _passwordTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Field is required';
     }
@@ -62,10 +63,11 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
 
   // State field(s) for resetPassword widget.
   FocusNode? resetPasswordFocusNode;
-  TextEditingController? resetPasswordController;
+  TextEditingController? resetPasswordTextController;
   late bool resetPasswordVisibility;
-  String? Function(BuildContext, String?)? resetPasswordControllerValidator;
-  String? _resetPasswordControllerValidator(BuildContext context, String? val) {
+  String? Function(BuildContext, String?)? resetPasswordTextControllerValidator;
+  String? _resetPasswordTextControllerValidator(
+      BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Field is required';
     }
@@ -82,34 +84,29 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
     return null;
   }
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
-    emailAddressControllerValidator = _emailAddressControllerValidator;
+    emailAddressTextControllerValidator = _emailAddressTextControllerValidator;
     passwordVisibility = false;
-    passwordControllerValidator = _passwordControllerValidator;
+    passwordTextControllerValidator = _passwordTextControllerValidator;
     resetPasswordVisibility = false;
-    resetPasswordControllerValidator = _resetPasswordControllerValidator;
+    resetPasswordTextControllerValidator =
+        _resetPasswordTextControllerValidator;
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
     nameFocusNode?.dispose();
-    nameController?.dispose();
+    nameTextController?.dispose();
 
     emailAddressFocusNode?.dispose();
-    emailAddressController?.dispose();
+    emailAddressTextController?.dispose();
 
     passwordFocusNode?.dispose();
-    passwordController?.dispose();
+    passwordTextController?.dispose();
 
     resetPasswordFocusNode?.dispose();
-    resetPasswordController?.dispose();
+    resetPasswordTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

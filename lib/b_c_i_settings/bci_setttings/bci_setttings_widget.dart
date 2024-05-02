@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -69,8 +71,11 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           title: Text(
-            'Home',
-            style: FlutterFlowTheme.of(context).headlineMedium,
+            'BCI Settings',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Outfit',
+                  letterSpacing: 0.0,
+                ),
           ),
           actions: [
             Container(
@@ -100,7 +105,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                 model: _model.sideNavModel,
                 updateCallback: () => setState(() {}),
                 child: const SideNavWidget(
-                  currentPage: 3,
+                  currentPage: 2,
                 ),
               ),
               Expanded(
@@ -116,21 +121,18 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                           Expanded(
                             child: Align(
                               alignment: const AlignmentDirectional(-1.0, -1.0),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 40.0, 20.0, 40.0),
-                                child: Text(
-                                  'Connection Details  ',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        fontSize: 40.0,
-                                      ),
-                                ),
+                              child: Text(
+                                'Connection Details  ',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 30.0,
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                             ),
                           ),
@@ -141,7 +143,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                       alignment: const AlignmentDirectional(-1.0, -1.0),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            30.0, 0.0, 30.0, 20.0),
+                            30.0, 0.0, 30.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -161,10 +163,18 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                       decoration: InputDecoration(
                                         labelText: 'Client ID',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintText: '[clientId]',
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -203,7 +213,11 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                         ),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       validator: _model.textController1Validator
                                           .asValidator(context),
                                     ),
@@ -225,10 +239,18 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                     decoration: InputDecoration(
                                       labelText: 'Client Secret',
                                       labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       hintText: '[clientSecret]',
                                       hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
@@ -266,8 +288,12 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                             BorderRadius.circular(8.0),
                                       ),
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     validator: _model.textController2Validator
                                         .asValidator(context),
                                   ),
@@ -289,7 +315,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                 },
                                 text: 'Update',
                                 options: FFButtonOptions(
-                                  height: 40.0,
+                                  height: 30.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
                                   iconPadding: const EdgeInsetsDirectional.fromSTEB(
@@ -302,6 +328,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                         fontFamily: 'Readex Pro',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(
@@ -319,7 +346,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                       alignment: const AlignmentDirectional(-1.0, -1.0),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            30.0, 0.0, 30.0, 20.0),
+                            30.0, 0.0, 30.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -339,10 +366,18 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                       decoration: InputDecoration(
                                         labelText: 'Image Generation Token',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintText: 'Image Generation Token',
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -381,7 +416,11 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                         ),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       validator: _model.textController3Validator
                                           .asValidator(context),
                                     ),
@@ -390,17 +429,19 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                               ),
                             ),
                             if (FFAppState().imageGenerationToken !=
-                                _model.textController3.text)
+                                functions.trimAndCollapseSpaces(
+                                    _model.textController3.text))
                               FFButtonWidget(
                                 onPressed: () async {
                                   setState(() {
                                     FFAppState().imageGenerationToken =
-                                        _model.textController3.text;
+                                        functions.trimAndCollapseSpaces(
+                                            _model.textController3.text);
                                   });
                                 },
                                 text: 'Update',
                                 options: FFButtonOptions(
-                                  height: 40.0,
+                                  height: 30.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
                                   iconPadding: const EdgeInsetsDirectional.fromSTEB(
@@ -413,6 +454,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                         fontFamily: 'Readex Pro',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(
@@ -428,7 +470,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 20.0),
+                          const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -443,8 +485,10 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    fontSize: 40.0,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 30.0,
+                                    letterSpacing: 0.0,
                                   ),
                             ),
                           ),
@@ -454,7 +498,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                             },
                             text: 'Recheck',
                             options: FFButtonOptions(
-                              height: 40.0,
+                              height: 30.0,
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
@@ -467,6 +511,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                     fontFamily: 'Readex Pro',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
+                                    letterSpacing: 0.0,
                                   ),
                               elevation: 3.0,
                               borderSide: const BorderSide(
@@ -512,8 +557,12 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                   ),
                                   Text(
                                     ' Installed Emotiv Launcher',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                   ),
                                 ].divide(const SizedBox(width: 5.0)),
                               ),
@@ -540,8 +589,12 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                   ),
                                   Text(
                                     '   Logged In Emotiv Launcher',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                   ),
                                 ].divide(const SizedBox(width: 5.0)),
                               ),
@@ -568,8 +621,12 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                   ),
                                   Text(
                                     '   Have Access Right',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                   ),
                                 ].divide(const SizedBox(width: 5.0)),
                               ),
@@ -596,8 +653,12 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                   ),
                                   Text(
                                     ' Device Connected',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                   ),
                                 ].divide(const SizedBox(width: 5.0)),
                               ),
@@ -605,12 +666,18 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                           ),
                           if (FFAppState().connectionStatus.condition == 2)
                             FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
+                              onPressed: () async {
+                                _model.requestAccessResult =
+                                    await actions.cRequestAccess(
+                                  FFAppState().clientId,
+                                  FFAppState().clientSecret,
+                                );
+
+                                setState(() {});
                               },
                               text: 'Request Access',
                               options: FFButtonOptions(
-                                height: 40.0,
+                                height: 30.0,
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
                                 iconPadding: const EdgeInsetsDirectional.fromSTEB(
@@ -623,6 +690,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                       fontFamily: 'Readex Pro',
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
+                                      letterSpacing: 0.0,
                                     ),
                                 elevation: 3.0,
                                 borderSide: const BorderSide(
@@ -636,8 +704,8 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          30.0, 30.0, 30.0, 25.0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -649,8 +717,10 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    fontSize: 40.0,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 30.0,
+                                    letterSpacing: 0.0,
                                   ),
                             ),
                           ),
@@ -677,7 +747,12 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                       Text(
                                         headsetItem,
                                         style: FlutterFlowTheme.of(context)
-                                            .headlineLarge,
+                                            .headlineLarge
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              fontSize: 22.0,
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
@@ -691,7 +766,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                             ? 'Default'
                                             : 'Set Default',
                                         options: FFButtonOptions(
-                                          height: 40.0,
+                                          height: 30.0,
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 0.0, 24.0, 0.0),
@@ -716,6 +791,7 @@ class _BciSetttingsWidgetState extends State<BciSetttingsWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
+                                                letterSpacing: 0.0,
                                               ),
                                           elevation: 3.0,
                                           borderSide: const BorderSide(

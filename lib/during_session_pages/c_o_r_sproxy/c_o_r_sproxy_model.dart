@@ -1,0 +1,33 @@
+import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'c_o_r_sproxy_widget.dart' show CORSproxyWidget;
+import 'package:flutter/material.dart';
+
+class CORSproxyModel extends FlutterFlowModel<CORSproxyWidget> {
+  ///  Local state fields for this page.
+
+  String image =
+      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/eep0xg5cq6pa/Screenshot_2023-11-28_150737.png';
+
+  String postResult = 'No Result Yet';
+
+  String getResult = 'No Result Yet';
+
+  String imageId = 'no Id Yet';
+
+  ///  State fields for stateful widgets in this page.
+
+  final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (Request image id Cors)] action in Button widget.
+  ApiCallResponse? postAPiResult;
+  // Stores action output result for [Backend Call - API (Get image path CORS)] action in Button widget.
+  ApiCallResponse? getAPiResult;
+
+  @override
+  void initState(BuildContext context) {}
+
+  @override
+  void dispose() {
+    unfocusNode.dispose();
+  }
+}

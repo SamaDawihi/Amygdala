@@ -6,10 +6,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -117,7 +119,24 @@ class _SessionWidgetState extends State<SessionWidget> {
                   confirmText: 'Check Connection Settings',
                   cancelText: 'Continue With Random Emotion',
                   confirmAction: () async {
-                    context.goNamed('BciSetttings');
+                    if (widget.createdSession != null) {
+                      unawaited(
+                        () async {
+                          await widget.createdSession!
+                              .update(createSessionRecordData(
+                            status: 'Canceled due no available headsets',
+                          ));
+                        }(),
+                      );
+
+                      context.goNamed('BciSetttings');
+
+                      return;
+                    } else {
+                      context.goNamed('BciSetttings');
+
+                      return;
+                    }
                   },
                   cancelAction: () async {
                     Navigator.pop(context);
@@ -147,6 +166,7 @@ class _SessionWidgetState extends State<SessionWidget> {
             });
           } else {
             await showDialog(
+              barrierDismissible: false,
               context: context,
               builder: (dialogContext) {
                 return Dialog(
@@ -166,7 +186,35 @@ class _SessionWidgetState extends State<SessionWidget> {
                           'Try Adjusting the headset set and check the accuracy through Emotiv Launcher App.',
                       confirmText: 'BCI Settings',
                       confirmAction: () async {
-                        context.goNamed('BciSetttings');
+                        var shouldSetState = false;
+                        if (widget.createdSession != null) {
+                          _model.lowAccuracySession =
+                              await SessionRecord.getDocumentOnce(
+                                  widget.createdSession!);
+                          shouldSetState = true;
+                          if (functions.getNumberOfEmotions(
+                                  _model.lowAccuracySession!) >
+                              0) {
+                            await widget.createdSession!
+                                .update(createSessionRecordData(
+                              endAt: getCurrentTimestamp,
+                            ));
+
+                            context.goNamed('BciSetttings');
+
+                            return;
+                          } else {
+                            await widget.createdSession!.delete();
+
+                            context.goNamed('BciSetttings');
+
+                            return;
+                          }
+                        } else {
+                          context.goNamed('BciSetttings');
+
+                          return;
+                        }
                       },
                     ),
                   ),
@@ -209,7 +257,8 @@ class _SessionWidgetState extends State<SessionWidget> {
             _model.displayEmotion = _model.predictedEmotion;
           });
         }
-        _model.getImageIdApi = await ReplicateImageCall.call(
+        _model.getImageIdApi = await RequestImageIdCorsCall.call(
+          token: FFAppState().imageGenerationToken,
           prompt: functions.createImageDescription(
               _model.predictedEmotion!, widget.disabledProfile),
         );
@@ -220,22 +269,23 @@ class _SessionWidgetState extends State<SessionWidget> {
           });
           _model.timerController.onStartTimer();
           await Future.delayed(const Duration(milliseconds: 30000));
-          _model.getImageApiCall = await GetImageCall.call(
-            id: ReplicateImageCall.id(
+          _model.getImageApiCall = await GetImagePathCORSCall.call(
+            token: FFAppState().imageGenerationToken,
+            id: RequestImageIdCorsCall.id(
               (_model.getImageIdApi?.jsonBody ?? ''),
             ),
           );
           if ((_model.getImageApiCall?.succeeded ?? true)) {
-            if (GetImageCall.imagePath(
+            if (GetImagePathCORSCall.imagePath(
                       (_model.getImageApiCall?.jsonBody ?? ''),
                     ) !=
                     null &&
-                (GetImageCall.imagePath(
+                (GetImagePathCORSCall.imagePath(
                   (_model.getImageApiCall?.jsonBody ?? ''),
                 ))!
                     .isNotEmpty) {
               setState(() {
-                _model.addToImagePath(GetImageCall.imagePath(
+                _model.addToImagePath(GetImagePathCORSCall.imagePath(
                   (_model.getImageApiCall?.jsonBody ?? ''),
                 )!
                     .first);
@@ -290,101 +340,245 @@ class _SessionWidgetState extends State<SessionWidget> {
         onTap: () => _model.unfocusNode.canRequestFocus
             ? FocusScope.of(context).requestFocus(_model.unfocusNode)
             : FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          body: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: const AlignmentDirectional(-1.0, 0.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          'assets/images/image-removebg-preview.png',
-                          width: 80.0,
-                          height: 80.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: FlutterFlowTimer(
-                        initialTime: _model.timerMilliseconds,
-                        getDisplayTime: (value) =>
-                            StopWatchTimer.getDisplayTime(
-                          value,
-                          hours: false,
-                          milliSecond: false,
-                        ),
-                        controller: _model.timerController,
-                        updateStateInterval: const Duration(milliseconds: 1000),
-                        onChanged: (value, displayTime, shouldUpdate) {
-                          _model.timerMilliseconds = value;
-                          _model.timerValue = displayTime;
-                          if (shouldUpdate) setState(() {});
-                        },
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).headlineSmall,
-                      ),
-                    ),
-                    Align(
-                      alignment: const AlignmentDirectional(1.0, 0.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          setState(() {
-                            _model.terminated = false;
-                          });
-                          if (widget.createdSession != null) {
-                            await widget.createdSession!
-                                .update(createSessionRecordData(
-                              endAt: getCurrentTimestamp,
-                            ));
-                          }
-
-                          context.goNamed('Home');
-                        },
-                        text: 'Terminate',
-                        options: FFButtonOptions(
-                          height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).error,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Colors.white,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+        child: WillPopScope(
+          onWillPop: () async => false,
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            body: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: Align(
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              'assets/images/image-removebg-preview.png',
+                              width: 120.0,
+                              height: 50.0,
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
-                          hoverColor: const Color(0xFFDE1818),
                         ),
                       ),
-                    ),
-                  ]
-                      .addToStart(const SizedBox(width: 50.0))
-                      .addToEnd(const SizedBox(width: 100.0)),
+                      Flexible(
+                        flex: 1,
+                        child: FlutterFlowTimer(
+                          initialTime: _model.timerMilliseconds,
+                          getDisplayTime: (value) =>
+                              StopWatchTimer.getDisplayTime(
+                            value,
+                            hours: false,
+                            milliSecond: false,
+                          ),
+                          controller: _model.timerController,
+                          updateStateInterval: const Duration(milliseconds: 1000),
+                          onChanged: (value, displayTime, shouldUpdate) {
+                            _model.timerMilliseconds = value;
+                            _model.timerValue = displayTime;
+                            if (shouldUpdate) setState(() {});
+                          },
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
+                                fontFamily: 'Outfit',
+                                letterSpacing: 0.0,
+                              ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Align(
+                          alignment: const AlignmentDirectional(1.0, -1.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Text(
+                                    'more Info',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Switch.adaptive(
+                                    value: _model.switchValue ??=
+                                        _model.showMoreInfo,
+                                    onChanged: (newValue) async {
+                                      setState(
+                                          () => _model.switchValue = newValue);
+                                      if (newValue) {
+                                        setState(() {
+                                          _model.showMoreInfo = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          _model.showMoreInfo = false;
+                                        });
+                                      }
+                                    },
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    activeTrackColor:
+                                        FlutterFlowTheme.of(context).accent1,
+                                    inactiveTrackColor:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    inactiveThumbColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                  ),
+                                ],
+                              ),
+                              Align(
+                                alignment: const AlignmentDirectional(1.0, 0.0),
+                                child: FFButtonWidget(
+                                  key: const ValueKey('Button_b9nt'),
+                                  onPressed: () async {
+                                    var shouldSetState = false;
+                                    _model.terminated = true;
+                                    if (widget.createdSession != null) {
+                                      _model.session =
+                                          await SessionRecord.getDocumentOnce(
+                                              widget.createdSession!);
+                                      shouldSetState = true;
+                                      if (functions.getNumberOfEmotions(
+                                              _model.session!) >
+                                          0) {
+                                        await widget.createdSession!
+                                            .update(createSessionRecordData(
+                                          endAt: getCurrentTimestamp,
+                                          status: 'Completed',
+                                        ));
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Session terminated successfully',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                const Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+
+                                        context.goNamed('Home');
+                                      } else {
+                                        await widget.createdSession!
+                                            .update(createSessionRecordData(
+                                          endAt: getCurrentTimestamp,
+                                          status:
+                                              'Terminated Before Capturing Any Emotion',
+                                        ));
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Session terminated Before Capturing Any Emotion',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                const Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .warning,
+                                          ),
+                                        );
+
+                                        context.goNamed('Home');
+                                      }
+
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Session terminate. No records is saved for this session',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              const Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                      );
+
+                                      context.goNamed('Home');
+
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
+
+                                    if (shouldSetState) setState(() {});
+                                  },
+                                  text: 'Terminate',
+                                  options: FFButtonOptions(
+                                    width: 120.0,
+                                    height: 30.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).error,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                          letterSpacing: 0.0,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    hoverColor: const Color(0xFFDE1818),
+                                  ),
+                                ),
+                              ),
+                            ].divide(const SizedBox(width: 5.0)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                Expanded(
+                  child: Align(
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Builder(
                       builder: (context) {
                         if (!_model.doneCoditionChecking) {
@@ -416,6 +610,7 @@ class _SessionWidgetState extends State<SessionWidget> {
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       fontSize: 30.0,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.w800,
                                     ),
                               ),
@@ -429,6 +624,7 @@ class _SessionWidgetState extends State<SessionWidget> {
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         fontSize: 18.0,
+                                        letterSpacing: 0.0,
                                       ),
                                 ),
                               ),
@@ -456,8 +652,8 @@ class _SessionWidgetState extends State<SessionWidget> {
                                                           2],
                                                   'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/eep0xg5cq6pa/Screenshot_2023-11-28_150737.png',
                                                 ),
-                                                width: 500.0,
-                                                height: 500.0,
+                                                width: 400.0,
+                                                height: 400.0,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -465,7 +661,7 @@ class _SessionWidgetState extends State<SessionWidget> {
                                             Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      30.0, 30.0, 0.0, 0.0),
+                                                      15.0, 15.0, 0.0, 0.0),
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(20.0),
@@ -474,8 +670,8 @@ class _SessionWidgetState extends State<SessionWidget> {
                                                     _model.imagePath.last,
                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/1yxux439o1gv/Screenshot_2023-11-28_150600.png',
                                                   ),
-                                                  width: 500.0,
-                                                  height: 500.0,
+                                                  width: 400.0,
+                                                  height: 400.0,
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -514,6 +710,7 @@ class _SessionWidgetState extends State<SessionWidget> {
                                                 .override(
                                                   fontFamily: 'Readex Pro',
                                                   fontSize: 30.0,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w800,
                                                 ),
                                           ),
@@ -524,6 +721,7 @@ class _SessionWidgetState extends State<SessionWidget> {
                                                 .override(
                                                   fontFamily: 'Readex Pro',
                                                   fontSize: 18.0,
+                                                  letterSpacing: 0.0,
                                                 ),
                                           ),
                                         ].divide(const SizedBox(height: 15.0)),
@@ -531,50 +729,51 @@ class _SessionWidgetState extends State<SessionWidget> {
                                     }
                                   },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 30.0, 0.0, 0.0),
-                                  child: Text(
-                                    '${widget.disabledProfile != null ? widget.disabledProfile?.name : 'Tahani'} is ${_model.displayEmotion}',
+                                if (_model.displayEmotion != null &&
+                                    _model.displayEmotion != '')
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 20.0, 0.0, 0.0),
+                                    child: Text(
+                                      '${widget.disabledProfile != null ? widget.disabledProfile?.name : 'Tahani'} is ${_model.displayEmotion}',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 24.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                    ),
+                                  ),
+                                if (_model.showMoreInfo)
+                                  SelectionArea(
+                                      child: AutoSizeText(
+                                    'Status:${_model.imageApiStatus}'
+                                        .maybeHandleOverflow(maxChars: 200),
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Readex Pro',
-                                          fontSize: 30.0,
-                                          fontWeight: FontWeight.w800,
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.0,
                                         ),
-                                  ),
-                                ),
-                                if (false)
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 30.0, 0.0, 0.0),
-                                    child: SelectionArea(
-                                        child: Text(
-                                      'Status:${_model.imageApiStatus}',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontSize: 18.0,
-                                          ),
-                                    )),
-                                  ),
-                                if (false)
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 30.0, 0.0, 0.0),
-                                    child: SelectionArea(
-                                        child: Text(
-                                      'Met Object:${_model.met}',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontSize: 18.0,
-                                          ),
-                                    )),
-                                  ),
+                                    minFontSize: 8.0,
+                                  )),
+                                if (_model.showMoreInfo)
+                                  SelectionArea(
+                                      child: AutoSizeText(
+                                    'Met Object:${_model.met}'
+                                        .maybeHandleOverflow(maxChars: 200),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                    minFontSize: 8.0,
+                                  )),
                               ].divide(const SizedBox(height: 15.0)),
                             ),
                           );
@@ -583,8 +782,8 @@ class _SessionWidgetState extends State<SessionWidget> {
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

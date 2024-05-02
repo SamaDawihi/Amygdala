@@ -13,8 +13,6 @@ class AccountModel extends FlutterFlowModel<AccountWidget> {
   // Model for connectionStatus component.
   late ConnectionStatusModel connectionStatusModel;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     sideNavModel = createModel(context, () => SideNavModel());
@@ -27,8 +25,4 @@ class AccountModel extends FlutterFlowModel<AccountWidget> {
     sideNavModel.dispose();
     connectionStatusModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }
