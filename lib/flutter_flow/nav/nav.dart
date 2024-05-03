@@ -128,6 +128,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'HistoryRecord',
           path: '/historyRecord',
+          requireAuth: true,
           builder: (context, params) => HistoryRecordWidget(
             sessionId: params.getParam(
               'sessionId',
@@ -397,7 +398,7 @@ class FFRoute {
                   color: Colors.transparent,
                   child: Image.asset(
                     'assets/images/image-removebg-preview.png',
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.contain,
                   ),
                 )
               : page;
