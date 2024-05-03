@@ -59,7 +59,7 @@ class SessionModel extends FlutterFlowModel<SessionWidget> {
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
 
   // State field(s) for Switch widget.
-  bool? switchValue;
+  bool switchValue = true;
   // Stores action output result for [Backend Call - Read Document] action in Button widget.
   SessionRecord? session;
 

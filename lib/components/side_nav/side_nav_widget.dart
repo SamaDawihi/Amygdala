@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/components/confirmation_component/confirmation_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -441,11 +442,27 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    GoRouter.of(context).prepareAuthEvent();
-                    await authManager.signOut();
-                    GoRouter.of(context).clearRedirectLocation();
-
-                    context.goNamedAuth('Login', context.mounted);
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: ConfirmationComponentWidget(
+                            title: 'Log Out',
+                            message: 'Are you sure you want to log out?',
+                            confirmText: 'Yes',
+                            cancelText: 'Cancel',
+                            confirmAction: () async {},
+                            cancelAction: () async {
+                              context.safePop();
+                            },
+                          ),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
                   },
                   text: 'Logout',
                   options: FFButtonOptions(

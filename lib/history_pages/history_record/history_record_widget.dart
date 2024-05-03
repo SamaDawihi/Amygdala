@@ -491,7 +491,7 @@ class _HistoryRecordWidgetState extends State<HistoryRecordWidget>
                                                           ''
                                                   ? columnSessionRecord
                                                       .headsetId
-                                                  : 'No headset was used, emotions are random.',
+                                                  : 'No headset was used, emotions were random.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium

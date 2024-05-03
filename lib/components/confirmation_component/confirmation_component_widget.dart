@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'confirmation_component_model.dart';
 export 'confirmation_component_model.dart';
@@ -62,7 +63,7 @@ class _ConfirmationComponentWidgetState
       padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
       child: Container(
         width: 700.0,
-        height: 200.0,
+        height: 250.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: const [
@@ -89,7 +90,7 @@ class _ConfirmationComponentWidgetState
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    AutoSizeText(
                       widget.title,
                       style:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -97,6 +98,7 @@ class _ConfirmationComponentWidgetState
                                 color: FlutterFlowTheme.of(context).primary,
                                 letterSpacing: 0.0,
                               ),
+                      minFontSize: 28.0,
                     ),
                     Divider(
                       height: 16.0,
@@ -106,12 +108,14 @@ class _ConfirmationComponentWidgetState
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                      child: Text(
+                      child: AutoSizeText(
                         widget.message,
                         style: FlutterFlowTheme.of(context).labelLarge.override(
                               fontFamily: 'Readex Pro',
+                              fontSize: 24.0,
                               letterSpacing: 0.0,
                             ),
+                        minFontSize: 11.0,
                       ),
                     ),
                   ],

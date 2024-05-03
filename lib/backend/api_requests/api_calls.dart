@@ -11,7 +11,7 @@ class RequestImageIdCall {
   static Future<ApiCallResponse> call({
     String? prompt =
         'Capture a realistic portrayal of a 21-year-old Arabian woman with medium-toned skin, black hair, and dark eyes. Depict her looking directly at the camera. Her expression should convey genuine sadness, with eyes appearing downturned and lips slightly downturned at the corners. Aim for a lifelike photo resembling a photograph, evoking authentic emotions from viewers. Emphasize natural lighting to enhance realism, with subdued colors to evoke a somber mood. Frame the subject centrally to draw focus and intensity',
-    String? token = 'Token r8_P6zE7tUbMcDT8NkdhwLdZQaWtC747e71cTc1t',
+    String? token = 'Token r8_PJUlV2zQlN1mKXuwDJU2j8oq0nE4Yd61fLKwn',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -47,8 +47,8 @@ class RequestImageIdCall {
 
 class GetImagePathUsingIdCall {
   static Future<ApiCallResponse> call({
-    String? token = 'Token r8_P6zE7tUbMcDT8NkdhwLdZQaWtC747e71cTc1t',
-    String? id = '5wcqqgr3gdrgg0cf6k3bm70q4c',
+    String? token = 'token r8_PJUlV2zQlN1mKXuwDJU2j8oq0nE4Yd61fLKwn',
+    String? id = 'gffmcxywpdrgp0cf760vvs8nj4',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'get image path using id',
@@ -70,7 +70,7 @@ class GetImagePathUsingIdCall {
 
 class GetImagePathCORSCall {
   static Future<ApiCallResponse> call({
-    String? token = 'Token r8_P6zE7tUbMcDT8NkdhwLdZQaWtC747e71cTc1t',
+    String? token = 'token r8_PJUlV2zQlN1mKXuwDJU2j8oq0nE4Yd61fLKwn',
     String? id = 'esynjddbvm7oodj7toq7cggim4',
   }) async {
     final ffApiRequestBody = '''
@@ -115,7 +115,7 @@ class GetImagePathCORSCall {
 
 class RequestImageIdCorsCall {
   static Future<ApiCallResponse> call({
-    String? token = 'Token r8_P6zE7tUbMcDT8NkdhwLdZQaWtC747e71cTc1t',
+    String? token = 'token r8_PJUlV2zQlN1mKXuwDJU2j8oq0nE4Yd61fLKwn',
     String? prompt = 'Girl',
   }) async {
     final ffApiRequestBody = '''

@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'editaccount_model.dart';
@@ -533,8 +534,11 @@ class _EditaccountWidgetState extends State<EditaccountWidget> {
                                                 await currentUserReference!
                                                     .update(
                                                         createUsersRecordData(
-                                                  displayName: _model
-                                                      .nameTextController.text,
+                                                  displayName: functions
+                                                      .trimAndCollapseSpaces(
+                                                          _model
+                                                              .nameTextController
+                                                              .text),
                                                 ));
 
                                                 context.pushNamed('Account');

@@ -140,6 +140,12 @@ class _DisabledProfileListViewWidgetState
                     width: 40.0,
                     height: 40.0,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      'assets/images/error_image.png',
+                      width: 40.0,
+                      height: 40.0,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Expanded(

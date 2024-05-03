@@ -1,4 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/components/confirmation_component/confirmation_component_widget.dart';
 import '/components/connection_status/connection_status_widget.dart';
 import '/components/side_nav/side_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -233,35 +235,170 @@ class _AccountWidgetState extends State<AccountWidget> {
                               .divide(const SizedBox(height: 40.0))
                               .around(const SizedBox(height: 40.0)),
                         ),
-                        FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('Editaccount');
-                          },
-                          text: 'Edit Account',
-                          options: FFButtonOptions(
-                            width: 300.0,
-                            height: 40.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  letterSpacing: 0.0,
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Builder(
+                              builder: (context) => FFButtonWidget(
+                                onPressed: () async {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: ConfirmationComponentWidget(
+                                            title: 'Delete Caregiver Account',
+                                            message:
+                                                'Are you sure you want to delete your account, proceeding means deleting all disbaled profiles and their sessions.',
+                                            confirmText: 'Delete Account',
+                                            cancelText: 'Cancel',
+                                            confirmAction: () async {
+                                              _model.profilesToBeDeleted =
+                                                  await queryDisabledProfileRecordOnce(
+                                                queryBuilder:
+                                                    (disabledProfileRecord) =>
+                                                        disabledProfileRecord
+                                                            .where(
+                                                  'caregiverID',
+                                                  isEqualTo:
+                                                      currentUserReference,
+                                                ),
+                                              );
+                                              while (_model.deleteProfilesLoop <
+                                                  valueOrDefault<int>(
+                                                    _model.profilesToBeDeleted
+                                                        ?.length,
+                                                    0,
+                                                  )) {
+                                                _model.sessionsToBeDeleted =
+                                                    await querySessionRecordOnce(
+                                                  queryBuilder:
+                                                      (sessionRecord) =>
+                                                          sessionRecord.where(
+                                                    'disabledProfile',
+                                                    isEqualTo: _model
+                                                        .profilesToBeDeleted?[_model
+                                                            .deleteProfilesLoop]
+                                                        .reference,
+                                                  ),
+                                                );
+                                                while (
+                                                    _model.deleteSessionsLoop <
+                                                        valueOrDefault<int>(
+                                                          _model
+                                                              .sessionsToBeDeleted
+                                                              ?.length,
+                                                          0,
+                                                        )) {
+                                                  await _model
+                                                      .sessionsToBeDeleted![_model
+                                                          .deleteSessionsLoop]
+                                                      .reference
+                                                      .delete();
+                                                  setState(() {
+                                                    _model.deleteSessionsLoop =
+                                                        _model.deleteSessionsLoop +
+                                                            1;
+                                                  });
+                                                }
+                                                setState(() {
+                                                  _model.deleteSessionsLoop = 0;
+                                                });
+                                                await _model
+                                                    .profilesToBeDeleted![_model
+                                                        .deleteProfilesLoop]
+                                                    .reference
+                                                    .delete();
+                                                setState(() {
+                                                  _model.deleteProfilesLoop =
+                                                      _model.deleteProfilesLoop +
+                                                          1;
+                                                });
+                                              }
+                                            },
+                                            cancelAction: () async {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => setState(() {}));
+
+                                  setState(() {});
+                                },
+                                text: 'Delete Account',
+                                options: FFButtonOptions(
+                                  width: 300.0,
+                                  height: 40.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).error,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        letterSpacing: 0.0,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
-                            elevation: 3.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
+                            FFButtonWidget(
+                              onPressed: () async {
+                                context.pushNamed('Editaccount');
+                              },
+                              text: 'Edit Account',
+                              options: FFButtonOptions(
+                                width: 300.0,
+                                height: 40.0,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      letterSpacing: 0.0,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: const BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ].divide(const SizedBox(width: 10.0)),
                         ),
                       ].divide(const SizedBox(height: 20.0)),
                     ),

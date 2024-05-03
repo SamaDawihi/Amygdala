@@ -375,6 +375,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amygdala-c3do0w/assets/nwtsmnmcy3g7/female_avatar.jpeg',
                                                   ),
                                                   fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                          stackTrace) =>
+                                                      Image.asset(
+                                                    'assets/images/error_image.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
                                             ),
